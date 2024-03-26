@@ -8,9 +8,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.canvas.GraphicsContext;
 
 public class UserInterface extends Application {
 
@@ -25,9 +28,10 @@ public class UserInterface extends Application {
 
         VBox vbox1 = new VBox();
         vbox1.setAlignment(Pos.CENTER);
-        TextArea textArea1 = new TextArea();
-        VBox.setVgrow(textArea1, Priority.ALWAYS);
+        //TextArea textArea1 = new TextArea();
+        //VBox.setVgrow(textArea1, Priority.ALWAYS);
 
+        /*
         MenuBar menuBar1 = new MenuBar();
         Menu mFile = new Menu("File");
 
@@ -57,11 +61,44 @@ public class UserInterface extends Application {
 
         mFile.getItems().addAll(mNewFile,mOpenFile,mSaveFile,SQuit,mQuit);
         menuBar1.getMenus().addAll(mFile,mHelp);
+         */
+
+        //Label Hbox.
+        HBox hBox1 = new HBox();
+        hBox1.setAlignment(Pos.TOP_CENTER);
+        Label labelBookShook = new Label("BOOKSHOOK");
+
+        Font labelFont = new Font(75);
+        labelBookShook.setFont(labelFont);
+        labelBookShook.setLayoutY(10);
+
+        hBox1.getChildren().addAll(labelBookShook);
 
 
+        //SearchBar and HelpButton Hbox.
+        HBox hBox2 = new HBox();
 
-        vbox1.getChildren().addAll(menuBar1,textArea1);
-        Scene scene = new Scene(vbox1, 600, 600);
+        TextField searchBar = new TextField("===>  Book Name, Author, ISBN etc. ");
+        searchBar.setPrefSize(1000,50);
+        Button helpButton = new Button("?");
+        helpButton.setPrefSize(50,50);
+
+        hBox2.setAlignment(Pos.CENTER);
+        hBox2.getChildren().addAll(searchBar,helpButton);
+
+        //
+        HBox hBox3 = new HBox();
+        Button searchButton = new Button("SEARCH");
+        Button addButton = new Button("ADD");
+        searchButton.setPrefSize(150,50);
+        addButton.setPrefSize(150,50);
+        hBox3.getChildren().addAll(searchButton,addButton);
+        hBox3.setAlignment(Pos.CENTER);
+
+
+        vbox1.getChildren().addAll(hBox1,hBox2,hBox3);
+
+        Scene scene = new Scene(vbox1, 1200, 800);
         stage.setScene(scene);
         stage.show();
 
