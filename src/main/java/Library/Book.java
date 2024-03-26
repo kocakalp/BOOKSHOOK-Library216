@@ -1,8 +1,12 @@
 package Library;
+import javafx.scene.control.TableRow;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Book implements Comparable<Book>  {
 
+    public Scanner sc = new Scanner(System.in);
     private String title;
     private String author;
     private String publisher;
@@ -83,19 +87,35 @@ public class Book implements Comparable<Book>  {
     public void setTranslators(ArrayList<String> translators) {this.translators = translators;}
     public void setTags(ArrayList<String> tags) {this.tags = tags;}
 
-   /* public void setBook(Book book) {
-        this.book = book;
-    }*/
+
     //Edit Methods.
+   public String isValidTitle(String input) {
+        if (input == null || input.isBlank()) {
+            while (input == null || input.isBlank()) {
+                System.out.println("input is null enter a valid input : ");
+                input = sc.nextLine();
+                //
+            }
+        }
+        return input;
+   }
+    //public boolean isValidAuthor(String input) {}
+    //public boolean isValidPublisher(String input) {}
+    //public boolean isValidPublicationYear(String input) {}
+    //public boolean isValidEdition(String input) {}
+    //public boolean isValidTranslators(String input) {}
+    //public boolean isValidTags(String input) {}
+
+
 
     // "               " boşluk ve null kontorlu yapılmalı.
-    public void editTitle(String titleNew) {setTitle(titleNew);}
+    public void editTitle(String titleNew) {setTitle(isValidTitle(titleNew));}
     public void editAuthor(String authorNew) {setAuthor(authorNew);}
     public void editPublisher(String publisherNew) {setPublisher(publisherNew);}
     public void editPublicationYear(String publicationYearNew){setPublicationYear(publicationYearNew);}
     public void editISBN(String isbnNew) {setIsbn(isbnNew);}
     public void editEdition(String editionNew) {setEdition(editionNew);}
-    //public void editBook(Book bookNew) {setBook(bookNew);}
+
 
     //Prototype -- çalışırmı bilemedim yorgun kafa ile yazıyorum.
     public void editTranslators(ArrayList<String> translatorsNew) {

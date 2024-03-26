@@ -2,10 +2,14 @@ package Library;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         //Test
+        /*
         ArrayList <String> arrayList=  new ArrayList<>();
         arrayList.add("aoafoa");
         arrayList.add("Alp");
@@ -25,7 +29,12 @@ public class Main {
         for (Book book : books) {
             System.out.println(book.getTitle());
         }
+         */
 
+        Book book1 = new Book("PKitap","Yazar","basımcı");
+        System.out.println("ENTER :" );
+        String title = sc.nextLine();
+        book1.editTitle(title);
 
 
 
