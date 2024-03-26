@@ -15,7 +15,6 @@ public class Book implements Comparable<Book>  {
     private String edition;
     private ArrayList<String> translators;
     private ArrayList<String> tags = new ArrayList<>();
-    private ArrayList<Book> book = new ArrayList<>();
 
     //For Test.
     public Book(String title, String author, String publisher) {
@@ -23,7 +22,6 @@ public class Book implements Comparable<Book>  {
         this.author = author;
         this.publisher = publisher;
     }
-
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition, ArrayList<String> translators) {
 
         this.title = title;
@@ -35,13 +33,153 @@ public class Book implements Comparable<Book>  {
         this.translators = translators;
     }
 
-    /* Method allInformation adinda yeni bir string arraylisti olusturarak butun kitap bilgilerini for-each loop da translartor arraylistinden değerleri alıp birlestirir ve allInformation'i returnler */
+
+
+    //Getters
+    public String getTitle() {return title;}
+    public String getAuthor() {return author;}
+    public String getPublisher() {return publisher;}
+    public String getPublicationYear() {return publicationYear;}
+    public String getIsbn() {return isbn;}
+    public String getEdition() {return edition;}
+    public ArrayList<String> getTranslators() {return translators;}
+    public ArrayList<String> getTags() {return tags;}
+
+    //make functions that adds arrays
+    public void addTag(String tag) {if(isValidTags(tag))tags.add(tag);}
+    public void addTranslator(String translator) {if(isValidTranslators(translator))translators.add(translator);}
+
+    public void removeTag(String tag) {tags.remove(tag);}
+    public void removeTranslator(String translator) {translators.remove(translator);}
+
+    //Setters
+    public void setTitle(String title) {
+        if(isValidTitle(title)){
+            this.title = title;
+        } else {
+            System.out.println("invalid title");
+            setTitle(edit());
+        }
+    }
+    public void setAuthor(String author) {
+        if(isValidAuthor(author)){
+            this.author = author;
+        } else {
+            System.out.println("invalid author");
+            setAuthor(edit());
+        }
+    }
+    public void setPublisher(String publisher) {
+        if(isValidPublisher(publisher)){
+            this.publisher = publisher;
+        } else {
+            System.out.println("invalid publisher");
+            setPublisher(edit());
+        }
+    }
+    public void setPublicationYear(String publicationYear) {
+        if(isValidPublicationYear(publicationYear)){
+            this.publicationYear = publicationYear;
+        } else {
+            System.out.println("invalid publication year");
+            setPublicationYear(edit());
+        }
+    }
+    public void setIsbn(String isbn) {
+        if(isValidISBN(isbn)){
+            this.isbn = isbn;
+        } else {
+            System.out.println("invalid isbn");
+            setIsbn(edit());
+        }
+    }
+    public void setEdition(String edition) {
+        if(isValidEdition(edition))this.edition = edition;}
+
+    // unfinished
+    public void setTranslators(ArrayList<String> translators) {this.translators = translators;}
+    public void setTags(ArrayList<String> tags) {this.tags = tags;}
+
+
+    //Edit Methods.
+    public Boolean isValidTitle(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+    public Boolean isValidAuthor(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+    public boolean isValidPublisher(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+    public boolean isValidPublicationYear(String input) {
+        try{
+            int i = Integer.parseInt(input);
+            return !input.isBlank() && i > 0;
+        } catch(Exception E) {
+            return false;
+        }
+    }
+    public boolean isValidISBN(String input) {
+        try{
+            Integer.parseInt(input);
+            return !input.isBlank() && (input.length() == 13 || input.length() ==10);
+        } catch(Exception E) {
+            return false;
+        }
+    }
+    public boolean isValidEdition(String input) {
+        try{
+            int i = Integer.parseInt(input);
+            return !input.isBlank() && i > 0;
+        } catch(Exception E) {
+            return false;
+        }
+    }
+    public boolean isValidTranslators(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+    public boolean isValidTags(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+    public String edit(){return sc.nextLine();}
+
     @Override
     public String toString() {
-        for(String a: getTranslators()){
-            return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTranslators();
+        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString()+", "+getTagsAsString();
+    }
+    private String getTranslatorAsString(){
+        StringBuilder translatorAsString = new StringBuilder();
+        for (String i : translators) {
+            translatorAsString.append(", ").append(i);
         }
-        return null;
+        return translatorAsString.toString();
+    }
+    private String getTagsAsString(){
+        StringBuilder tagsAsString = new StringBuilder();
+        for (String i : translators) {
+            tagsAsString.append(", ").append(i);
+        }
+        return tagsAsString.toString();
     }
 
     @Override
@@ -58,78 +196,4 @@ public class Book implements Comparable<Book>  {
 
         return compareResult;
     }
-
-
-
-
-    //Getters
-    public void addTag(String tag) {tags.add(tag);}
-    public String getTitle() {return title;}
-    public String getAuthor() {return author;}
-    public String getPublisher() {return publisher;}
-    public String getPublicationYear() {return publicationYear;}
-    public String getIsbn() {return isbn;}
-    public String getEdition() {return edition;}
-    public ArrayList<String> getTranslators() {return translators;}
-    public ArrayList<String> getTags() {return tags;}
-
-    public ArrayList<Book> getBook() {
-        return book;
-    }
-
-    //Setters
-    public void setTitle(String title) {this.title = title;}
-    public void setAuthor(String author) {this.author = author;}
-    public void setPublisher(String publisher) {this.publisher = publisher;}
-    public void setPublicationYear(String publicationYear) {this.publicationYear = publicationYear;}
-    public void setIsbn(String isbn) {this.isbn = isbn;}
-    public void setEdition(String edition) {this.edition = edition;}
-    public void setTranslators(ArrayList<String> translators) {this.translators = translators;}
-    public void setTags(ArrayList<String> tags) {this.tags = tags;}
-
-
-    //Edit Methods.
-   public String isValidTitle(String input) {
-        if (input == null || input.isBlank()) {
-            while (input == null || input.isBlank()) {
-                System.out.println("input is null enter a valid input : ");
-                input = sc.nextLine();
-                //
-            }
-        }
-        return input;
-   }
-    //public boolean isValidAuthor(String input) {}
-    //public boolean isValidPublisher(String input) {}
-    //public boolean isValidPublicationYear(String input) {}
-    //public boolean isValidEdition(String input) {}
-    //public boolean isValidTranslators(String input) {}
-    //public boolean isValidTags(String input) {}
-
-
-
-    // "               " boşluk ve null kontorlu yapılmalı.
-    public void editTitle(String titleNew) {setTitle(isValidTitle(titleNew));}
-    public void editAuthor(String authorNew) {setAuthor(authorNew);}
-    public void editPublisher(String publisherNew) {setPublisher(publisherNew);}
-    public void editPublicationYear(String publicationYearNew){setPublicationYear(publicationYearNew);}
-    public void editISBN(String isbnNew) {setIsbn(isbnNew);}
-    public void editEdition(String editionNew) {setEdition(editionNew);}
-
-
-    //Prototype -- çalışırmı bilemedim yorgun kafa ile yazıyorum.
-    public void editTranslators(ArrayList<String> translatorsNew) {
-        translators.clear();
-        for (int i = 0 ; i < translatorsNew.size() ; i++) {
-            translators.add(translatorsNew.get(i).toString());
-        }
-    }
-    public void  editTags(ArrayList<String> tagsNew) {
-        tags.clear();;
-        for (int i = 0 ; i < tagsNew.size() ; i++) {
-            tags.add(tagsNew.get(i));
-        }
-    }
-
-
 }
