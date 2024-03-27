@@ -1,13 +1,13 @@
 package com.example.bookshooklibrary216;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -67,6 +67,9 @@ public class UserInterface extends Application {
         HBox hBox1 = new HBox();
         hBox1.setAlignment(Pos.TOP_CENTER);
         Label labelBookShook = new Label("BOOKSHOOK");
+        labelBookShook.setWrapText(true);
+        labelBookShook.setTextFill(Color.rgb(87,22,95));
+        hBox1.setPadding(new Insets(-100, 0, 100, 0)); // Sağa 10 birim boşluk ekle
 
         Font labelFont = new Font(75);
         labelBookShook.setFont(labelFont);
@@ -80,29 +83,74 @@ public class UserInterface extends Application {
 
         TextField searchBar = new TextField("===>  Book Name, Author, ISBN etc. ");
         searchBar.setPrefSize(1000,50);
+
+        Region spacer1 = new Region();
+        spacer1.setPrefWidth(20); // 20 birim genişlikte bir boşluk ekleyin
+
         Button helpButton = new Button("?");
-        helpButton.setPrefSize(50,50);
+        helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc;");
+        helpButton.setPrefSize(50,50);//Bu satır işe yarıyormu bilmiyorum. kontrol edeceğim,
+        //helpButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        helpButton.setTextFill(Color.rgb(214,55,55));
+        helpButton.setOnAction(e -> HelpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
-        hBox2.getChildren().addAll(searchBar,helpButton);
+        hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
+        hBox2.setPadding(new Insets(0, 0, 100, 0));
+
 
         //
         HBox hBox3 = new HBox();
         Button searchButton = new Button("SEARCH");
+        searchButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         Button addButton = new Button("ADD");
+        addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         searchButton.setPrefSize(150,50);
         addButton.setPrefSize(150,50);
-        hBox3.getChildren().addAll(searchButton,addButton);
+        Region spacer2 = new Region();
+        spacer2.setPrefWidth(250); // 100 birim genişlikte bir boşluk ekleyin
+        hBox3.getChildren().addAll(searchButton,spacer2,addButton);
         hBox3.setAlignment(Pos.CENTER);
 
 
         vbox1.getChildren().addAll(hBox1,hBox2,hBox3);
 
         Scene scene = new Scene(vbox1, 1200, 800);
+
         stage.setScene(scene);
+        stage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
         stage.show();
 
 
+    }
+
+
+    public static void HelpMenu() {
+        //Vbox opened
+        Stage helpStage1 = new Stage();
+        VBox vHelp1= new VBox();
+        vHelp1.setAlignment(Pos.CENTER);
+
+        //Hbox
+        HBox hHelp = new HBox();
+        hHelp.setAlignment(Pos.CENTER);
+
+
+
+        //Lab için yazdığım programdan aldım özelleştiricem
+        Text text = new Text("For Save file press save or Ctrl+S\n" +
+                "For Open file press Open or Ctrl+O\n" +
+                "For Quit  press Quit or Ctrl+Q\n");
+
+
+        hHelp.getChildren().addAll(text);
+        vHelp1.getChildren().addAll(text);
+
+        Scene helpScene1 = new Scene(vHelp1,600,600);
+        //setOnAction
+        helpStage1.setScene(helpScene1);
+        helpStage1.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        helpStage1.show();
     }
 
     public static void openFile(String fileName) {
