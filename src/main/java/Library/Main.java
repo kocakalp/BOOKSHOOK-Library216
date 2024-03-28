@@ -34,7 +34,7 @@ public class Main {
         Book book1 = new Book("PKitap","Yazar","basımcı");
         System.out.println("ENTER :" );
         String title = sc.nextLine();
-        //book1.editTitle(title);
+       // book1.editTitle(title);
 
 
 
