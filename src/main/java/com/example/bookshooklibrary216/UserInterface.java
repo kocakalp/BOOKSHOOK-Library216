@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import javafx.scene.canvas.GraphicsContext;
 
+
+//gson failed
 public class UserInterface extends Application {
 
     public static void main(String[] args) {
