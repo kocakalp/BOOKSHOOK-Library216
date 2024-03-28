@@ -1,11 +1,16 @@
 package Library;
 
-
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
+
+
+    public static void main(String[] args) {
+        Gson gson = new Gson();
+    }
     private ArrayList<Book> books = new ArrayList<Book>();
 
     void searchBook(){
