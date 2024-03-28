@@ -1,10 +1,10 @@
-module com.example.bookshooklibrary216 {
+module Library {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires com.dlsc.formsfx;
     requires com.google.gson;
 
-    opens com.example.bookshooklibrary216 to javafx.fxml;
-    exports com.example.bookshooklibrary216;
+    opens Library to javafx.fxml;
+    exports Library;
 }

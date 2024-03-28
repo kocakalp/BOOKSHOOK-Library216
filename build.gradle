@@ -25,8 +25,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.example.bookshooklibrary216'
-    mainClass = 'com.example.bookshooklibrary216.HelloApplication'
+    mainModule = 'Library'
+    mainClass = 'Library.UserInterface'
 }
 
 javafx {
