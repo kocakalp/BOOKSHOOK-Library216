@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -13,16 +12,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import javafx.scene.canvas.GraphicsContext;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UserInterface extends Application {
 
     public static void main(String[] args) {
         launch();
-    }
-    public static void newFile() {
 
     }
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -87,19 +85,21 @@ public class UserInterface extends Application {
         Region spacer1 = new Region();
         spacer1.setPrefWidth(20); // 20 birim genişlikte bir boşluk ekleyin
 
+        //Help Button
         Button helpButton = new Button("?");
         helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc;");
         helpButton.setPrefSize(50,50);//Bu satır işe yarıyormu bilmiyorum. kontrol edeceğim,
         //helpButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         helpButton.setTextFill(Color.rgb(214,55,55));
-        helpButton.setOnAction(e -> HelpMenu());
+        //Boolean isHelpOpen = false;
+        helpButton.setOnAction(e -> helpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
         hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
         hBox2.setPadding(new Insets(0, 0, 100, 0));
 
 
-        //
+        //ADD And Search Buttons
         HBox hBox3 = new HBox();
         Button searchButton = new Button("SEARCH");
         searchButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
@@ -117,6 +117,7 @@ public class UserInterface extends Application {
 
         Scene scene = new Scene(vbox1, 1200, 800);
 
+        stage.setTitle("BOOKSHOOK");//Sekmenin ismi.
         stage.setScene(scene);
         stage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
         stage.show();
@@ -125,11 +126,17 @@ public class UserInterface extends Application {
     }
 
 
-    public static void HelpMenu() {
+    public static void addScreen() {
+        Stage addStage = new Stage();
+        Tab tab = new Tab("Deneme");
+    }
+
+    public static void helpMenu() {
+
+        Stage helpStage = new Stage();
         //Vbox opened
-        Stage helpStage1 = new Stage();
-        VBox vHelp1= new VBox();
-        vHelp1.setAlignment(Pos.CENTER);
+        VBox vHelp= new VBox();
+        vHelp.setAlignment(Pos.CENTER);
 
         //Hbox
         HBox hHelp = new HBox();
@@ -144,13 +151,13 @@ public class UserInterface extends Application {
 
 
         hHelp.getChildren().addAll(text);
-        vHelp1.getChildren().addAll(text);
+        vHelp.getChildren().addAll(text);
 
-        Scene helpScene1 = new Scene(vHelp1,600,600);
+        Scene helpScene1 = new Scene(vHelp,600,600);
         //setOnAction
-        helpStage1.setScene(helpScene1);
-        helpStage1.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
-        helpStage1.show();
+        helpStage.setScene(helpScene1);
+        helpStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        helpStage.show();
     }
 
     public static void openFile(String fileName) {
@@ -171,5 +178,4 @@ public class UserInterface extends Application {
         oStage1.setScene(oScene1);
         oStage1.show();
     }
-
 }
