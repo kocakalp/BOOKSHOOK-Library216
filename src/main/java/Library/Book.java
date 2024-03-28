@@ -13,7 +13,7 @@ public class Book implements Comparable<Book>  {
     private String publicationYear;
     private String isbn;
     private String edition;
-    private ArrayList<String> translators;
+    private ArrayList<String> translators = new ArrayList<>();
     private ArrayList<String> tags = new ArrayList<>();
 
     //For Test.
@@ -22,17 +22,15 @@ public class Book implements Comparable<Book>  {
         this.author = author;
         this.publisher = publisher;
     }
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition, ArrayList<String> translators) {
+    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
 
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
-        this.translators = translators;
+        setTitle(title);
+        setAuthor(author);
+        setPublisher(publisher);
+        setPublicationYear(publicationYear);
+        setIsbn(isbn);
+        setEdition(edition);
     }
-
 
 
     //Getters
@@ -47,7 +45,17 @@ public class Book implements Comparable<Book>  {
 
     //make functions that adds arrays
     public void addTag(String tag) {if(isValidTags(tag))tags.add(tag);}
+    public void addTag(ArrayList<String> tags) {
+        for (String i : tags) {
+            addTag(i);
+        }
+    }
     public void addTranslator(String translator) {if(isValidTranslators(translator))translators.add(translator);}
+    public void addTranslator(ArrayList<String> translators) {
+        for (String i : translators) {
+            addTranslator(i);
+        }
+    }
 
     public void removeTag(String tag) {tags.remove(tag);}
     public void removeTranslator(String translator) {translators.remove(translator);}
@@ -94,11 +102,13 @@ public class Book implements Comparable<Book>  {
         }
     }
     public void setEdition(String edition) {
-        if(isValidEdition(edition))this.edition = edition;}
-
-    // unfinished
-    public void setTranslators(ArrayList<String> translators) {this.translators = translators;}
-    public void setTags(ArrayList<String> tags) {this.tags = tags;}
+        if(isValidEdition(edition)) {
+            this.edition = edition;
+        } else {
+            System.out.println("invalid edition");
+            setEdition(edition);
+        }
+    }
 
 
     //Edit Methods.
