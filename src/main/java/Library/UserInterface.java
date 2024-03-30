@@ -1,6 +1,8 @@
 package Library;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,14 +18,14 @@ import java.io.IOException;
 import javafx.scene.canvas.GraphicsContext;
 
 
-//gson failed
 public class UserInterface extends Application {
+
+    private Stage helpStage = new Stage();
+    private Stage listStage = new Stage();
+    private Stage addStage = new Stage();
 
     public static void main(String[] args) {
         launch();
-    }
-    public static void newFile() {
-
     }
     @Override
     public void start(Stage stage) throws IOException {
@@ -94,21 +96,28 @@ public class UserInterface extends Application {
         helpButton.setPrefSize(50,50);//Bu satır işe yarıyormu bilmiyorum. kontrol edeceğim,
         //helpButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         helpButton.setTextFill(Color.rgb(214,55,55));
-        helpButton.setOnAction(e -> HelpMenu());
+        helpButton.setOnAction(e -> helpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
         hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
         hBox2.setPadding(new Insets(0, 0, 100, 0));
 
 
-        //
+        //SearchButton And AddButton
         HBox hBox3 = new HBox();
+
+        //SEARCH
         Button searchButton = new Button("SEARCH");
         searchButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        searchButton.setOnAction(e -> listTab());
+        searchButton.setPrefSize(150,50);
+
+        //ADD
         Button addButton = new Button("ADD");
         addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        searchButton.setPrefSize(150,50);
+        addButton.setOnAction(e -> addTab());
         addButton.setPrefSize(150,50);
+
         Region spacer2 = new Region();
         spacer2.setPrefWidth(250); // 100 birim genişlikte bir boşluk ekleyin
         hBox3.getChildren().addAll(searchButton,spacer2,addButton);
@@ -121,23 +130,20 @@ public class UserInterface extends Application {
 
         stage.setScene(scene);
         stage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        stage.setTitle("BOOKSHOOK");
         stage.show();
-
 
     }
 
 
-    public static void HelpMenu() {
+    public void helpMenu() {
         //Vbox opened
-        Stage helpStage1 = new Stage();
-        VBox vHelp1= new VBox();
+        VBox vHelp1 = new VBox();
         vHelp1.setAlignment(Pos.CENTER);
 
         //Hbox
         HBox hHelp = new HBox();
         hHelp.setAlignment(Pos.CENTER);
-
-
 
         //Lab için yazdığım programdan aldım özelleştiricem
         Text text = new Text("For Save file press save or Ctrl+S\n" +
@@ -148,11 +154,131 @@ public class UserInterface extends Application {
         hHelp.getChildren().addAll(text);
         vHelp1.getChildren().addAll(text);
 
-        Scene helpScene1 = new Scene(vHelp1,600,600);
+        Scene helpScene = new Scene(vHelp1, 600, 600);
+
         //setOnAction
-        helpStage1.setScene(helpScene1);
-        helpStage1.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
-        helpStage1.show();
+        helpStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        helpStage.setScene(helpScene);
+        helpStage.setTitle("Help Menu");
+
+        //sekmenin açıklık kontrolü, açıksa en üste çıkartır.
+        if (helpStage.isShowing()){
+            helpStage.toFront();
+        }
+        else {
+            helpStage.show();
+        }
+    }
+
+    public void listTab() {
+
+         class XCell extends ListCell<String> {
+            HBox hbox = new HBox();
+            Label label = new Label("");
+            Pane pane = new Pane(); //boşluk
+            Button delButton = new Button("Del");
+            Button editButton = new Button("Edt");
+
+            public XCell() {
+                super();
+
+                hbox.getChildren().addAll(label,pane,delButton,editButton);
+                HBox.setHgrow(pane, Priority.ALWAYS);
+                delButton.setOnAction(event -> getListView().getItems().remove(getItem()));
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(null);
+                setGraphic(null);
+
+                if (item != null && !empty) {
+                    label.setText(item);
+                    setGraphic(hbox);
+                }
+            }
+        }
+
+
+
+        StackPane listPane = new StackPane();
+        Scene scene = new Scene(listPane, 1000, 750);
+        listStage.setScene(scene);
+        ObservableList<String> list = FXCollections.observableArrayList(
+                "Item 1", "Item 2", "Item 3", "Item 4","Item 5", "Item 6", "Item 7", "Item 8");
+        ListView<String> lv = new ListView<>(list);
+        lv.setCellFactory(param -> new XCell());
+        listPane.getChildren().add(lv);
+        listStage.setTitle("Book List");
+        listStage.show();
+
+        /*
+        //Vbox opened
+        VBox vList = new VBox();
+        vList.setAlignment(Pos.CENTER);
+
+        //Hbox
+        HBox hList = new HBox();
+        hList.setAlignment(Pos.CENTER);
+
+        ObservableList<String> items = FXCollections.observableArrayList(
+                "Öğe 1", "Öğe 2", "Öğe 3", "Öğe 4", "Öğe 5"
+        );
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll(items);
+
+        hList.getChildren().addAll(listView);
+        vList.getChildren().addAll(hList);
+
+        Scene listScene = new Scene(vList, 1000, 800);
+
+        //setOnAction
+        listStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        listStage.setScene(listScene);
+        listStage.setTitle("Book List");
+
+        //sekmenin açıklık kontrolü, açıksa en üste çıkartır.
+        //(search stage açık iken add stage yi açtırmamayıda ekleyebiliriz.)
+        if (listStage.isShowing()){
+            listStage.toFront();
+        }
+        else {
+            listStage.show();
+        }
+
+         */
+    }
+
+
+    public void addTab() {
+        //Vbox opened
+        VBox vAdd = new VBox();
+        vAdd.setAlignment(Pos.CENTER);
+
+        //Hbox
+        HBox hAdd = new HBox();
+        hAdd.setAlignment(Pos.CENTER);
+
+        ListView listView = new ListView<>();
+
+        hAdd.getChildren().addAll(listView);
+        vAdd.getChildren().addAll(hAdd);
+
+        Scene listScene = new Scene(vAdd, 600, 600);
+
+        //setOnAction
+        addStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        addStage.setScene(listScene);
+        addStage.setTitle("ADD MENU");
+
+        //sekmenin açıklık kontrolü, açıksa en üste çıkartır.
+        if (addStage.isShowing()){
+            addStage.toFront();
+        }
+        else {
+            addStage.show();
+        }
     }
 
     public static void openFile(String fileName) {
