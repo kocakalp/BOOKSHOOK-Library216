@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -188,8 +189,28 @@ public class UserInterface extends Application {
                 hbox.getChildren().addAll(label,pane,delButton,editButton);
                 HBox.setHgrow(pane, Priority.ALWAYS);
                 delButton.setOnAction(event -> getListView().getItems().remove(getItem()));
-            }
+                editButton.setOnAction(event -> {
+                    String currentItem = getItem();
+                    TextField textField = new TextField(currentItem);
+                    textField.positionCaret(currentItem.length());
+                    hbox.getChildren().set(0, textField);
+                    textField.requestFocus();
 
+                    textField.setOnAction(actionEvent -> updateItem(textField.getText()));
+                    textField.setOnMouseClicked(mouseEvent -> updateItem(textField.getText()));
+                    textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                        if (!newValue) {
+                            updateItem(textField.getText());
+                        }
+                    });
+                });
+
+
+            }
+             private void updateItem(String newText) {
+                 getListView().getItems().set(getIndex(), newText);
+                 hbox.getChildren().set(0, label);
+             }
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
