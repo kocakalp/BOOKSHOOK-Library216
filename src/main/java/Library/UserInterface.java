@@ -85,8 +85,11 @@ public class UserInterface extends Application {
         //SearchBar and HelpButton Hbox.
         HBox hBox2 = new HBox();
 
-        TextField searchBar = new TextField("===>  Book Name, Author, ISBN etc. ");
+        TextField searchBar = new TextField();
+        searchBar.setPromptText("===>  Book Name, Author, ISBN etc.");
         searchBar.setPrefSize(1000,50);
+        searchBar.setFocusTraversable(false);
+
 
         Region spacer1 = new Region();
         spacer1.setPrefWidth(20); // 20 birim genişlikte bir boşluk ekleyin
