@@ -278,17 +278,26 @@ public class UserInterface extends Application {
     public void addTab() {
         //Vbox opened
         VBox vAdd = new VBox();
-        vAdd.setAlignment(Pos.CENTER);
+        vAdd.setPadding(new Insets(10));
+        vAdd.setSpacing(10);
 
-        //Hbox
-        HBox hAdd = new HBox();
-        hAdd.setAlignment(Pos.CENTER);
+        String[] labels = {"Book Name:", "Tags:", "Author:", "Publication Date:", "ISBN:", "Translator:"};
 
-        ListView listView = new ListView<>();
+        for (String labelText : labels) {
+            Label label = new Label(labelText);
+            TextField textField = new TextField();
 
-        hAdd.getChildren().addAll(listView);
-        vAdd.getChildren().addAll(hAdd);
+            HBox hbox = new HBox();
+            hbox.getChildren().addAll(label, textField);
+            vAdd.getChildren().add(hbox);
+        }
 
+        Button addButton = new Button("ADD");
+        addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addButton.setOnAction(e -> addTab());
+        addButton.setPrefSize(150,50);
+
+        vAdd.getChildren().add(addButton);
         Scene listScene = new Scene(vAdd, 600, 600);
 
         //setOnAction
