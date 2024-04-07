@@ -186,9 +186,9 @@ public class UserInterface extends Application {
     private ObservableList<Book> getBookData() {
         ObservableList<Book> data = FXCollections.observableArrayList();
         // Kitap verilerinizi buraya ekleyin
-        data.add(new Book("Kitap Başlığı","Yazar Adı","publisher"));
-        data.add(new Book("sevAL kİTAP","Yazar","basımcı1","1994", "1000", "new"));
-        data.add(new Book("eNreDİZKitap","Yazar","basımcı2","1994", "1000", "new"));
+        data.add(new Book("Kitap Başlığı","Yazarr","publisher"));
+        data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
+        data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
 
 
         // Daha fazla kitap ekleyin
@@ -239,31 +239,37 @@ public class UserInterface extends Application {
         ObservableList<Book> data = getBookData();
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
+        titleColumn.setPrefWidth(150);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
+        tagColumn.setPrefWidth(100);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
 
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
+        authorColumn.setPrefWidth(100);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
 
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
+        publisherColumn.setPrefWidth(100);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
+        dateColumn.setPrefWidth(150);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
 
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
+        isbnColumn.setPrefWidth(100);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
 
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
+        translatorColumn.setPrefWidth(100);
+        translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
 
         Button delButton = new Button("Del");
         Button editButton = new Button("Edt");
 
-
-
+        table.set
         table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,translatorColumn);
         addButtonToTable();
         table.setItems(data);
@@ -271,9 +277,9 @@ public class UserInterface extends Application {
 
 
         VBox vbox = new VBox(table);
+        vbox.setVgrow(table,Priority.ALWAYS);
 
         Scene scene = new Scene(vbox,1000,750);
-
         listStage.setScene(scene);
         listStage.setTitle("Book List");
 
