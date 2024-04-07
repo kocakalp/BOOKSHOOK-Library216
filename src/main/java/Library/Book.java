@@ -33,6 +33,17 @@ public class Book implements Comparable<Book>  {
         this.translators = translators;
     }
 
+    //For listView test
+    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
+
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationYear = publicationYear;
+        this.isbn = isbn;
+        this.edition = edition;
+    }
+
 
 
     //Getters

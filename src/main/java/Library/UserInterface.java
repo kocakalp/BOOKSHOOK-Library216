@@ -3,11 +3,13 @@ package Library;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
@@ -18,11 +20,15 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 
 public class UserInterface extends Application {
+
+    private final TableView<Book> table = new TableView<>();
 
     private Stage helpStage = new Stage();
     private Stage listStage = new Stage();
@@ -177,8 +183,111 @@ public class UserInterface extends Application {
         }
     }
 
+    private ObservableList<Book> getBookData() {
+        ObservableList<Book> data = FXCollections.observableArrayList();
+        // Kitap verilerinizi buraya ekleyin
+        data.add(new Book("Kitap Başlığı","Yazar Adı","publisher"));
+        data.add(new Book("sevAL kİTAP","Yazar","basımcı1","1994", "1000", "new"));
+        data.add(new Book("eNreDİZKitap","Yazar","basımcı2","1994", "1000", "new"));
+
+
+        // Daha fazla kitap ekleyin
+        return data;
+    }
+
+    private void addButtonToTable() {
+        TableColumn<Book, Void> delButtonColumn = new TableColumn("D");
+        TableColumn<Book, Void> edtButtonColumn = new TableColumn("E");
+
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
+            @Override
+            public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
+                final TableCell<Book, Void> cell = new TableCell<Book, Void>() {
+
+                    private final Button delButton = new Button("Del");
+                    private final Button edtButton = new Button("Edt");
+
+                    {
+                        delButton.setOnAction((ActionEvent event) -> {
+                            getTableView().getItems().remove(getIndex());
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(delButton);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        delButtonColumn.setCellFactory(cellFactory);
+        edtButtonColumn.setCellFactory(cellFactory);
+
+        table.getColumns().add(delButtonColumn);
+        table.getColumns().add(edtButtonColumn);
+
+    }
     public void listTab() {
 
+        ObservableList<Book> data = getBookData();
+
+        TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
+        TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
+        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
+
+        TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+
+        TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
+        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+
+        TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
+
+        TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
+        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+
+        TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
+
+        Button delButton = new Button("Del");
+        Button editButton = new Button("Edt");
+
+
+
+        table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,translatorColumn);
+        addButtonToTable();
+        table.setItems(data);
+
+
+
+        VBox vbox = new VBox(table);
+
+        Scene scene = new Scene(vbox,1000,750);
+
+        listStage.setScene(scene);
+        listStage.setTitle("Book List");
+
+        if (listStage.isShowing()){
+            listStage.toFront();
+        }
+        else {
+            listStage.show();
+        }
+
+
+
+
+        /*
          class XCell extends ListCell<String> {
             HBox hbox = new HBox();
             Label label = new Label("");
@@ -240,41 +349,8 @@ public class UserInterface extends Application {
         listStage.setTitle("Book List");
         listStage.show();
 
-        /*
-        //Vbox opened
-        VBox vList = new VBox();
-        vList.setAlignment(Pos.CENTER);
-
-        //Hbox
-        HBox hList = new HBox();
-        hList.setAlignment(Pos.CENTER);
-
-        ObservableList<String> items = FXCollections.observableArrayList(
-                "Öğe 1", "Öğe 2", "Öğe 3", "Öğe 4", "Öğe 5"
-        );
-        ListView<String> listView = new ListView<>();
-        listView.getItems().addAll(items);
-
-        hList.getChildren().addAll(listView);
-        vList.getChildren().addAll(hList);
-
-        Scene listScene = new Scene(vList, 1000, 800);
-
-        //setOnAction
-        listStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
-        listStage.setScene(listScene);
-        listStage.setTitle("Book List");
-
-        //sekmenin açıklık kontrolü, açıksa en üste çıkartır.
-        //(search stage açık iken add stage yi açtırmamayıda ekleyebiliriz.)
-        if (listStage.isShowing()){
-            listStage.toFront();
-        }
-        else {
-            listStage.show();
-        }
-
          */
+
     }
 
 
