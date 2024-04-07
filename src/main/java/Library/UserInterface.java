@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -16,6 +17,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Duration;
 
@@ -284,10 +287,10 @@ public class UserInterface extends Application {
 
         String[] labels = {"Book Name:", "Tags:", "Author:", "Publication Date:", "ISBN:", "Translator:"};
 
-        boolean textFieldEmpty = false; // will chek if textfields are empty or not
+        ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
         for (String labelText : labels) {
-            if(labelText.equals("Translator:")) { continue; }
+            if(labelText.equals("Translator:")) { continue; } // continues the translator's text field because it can be empty
             Label label = new Label(labelText);
             TextField textField = new TextField();
             Label hover = new Label("*");
@@ -301,27 +304,34 @@ public class UserInterface extends Application {
             Tooltip.install(hover, tooltip);
 
 
+            textFieldArrayList.add(textField);
+
             HBox hbox = new HBox();
             hbox.getChildren().addAll(label, textField, hover);
             vAdd.getChildren().add(hbox);
-
-            if(textField.getText().isEmpty() || textField.getText().isBlank()) {
-                textFieldEmpty = true; /// cheks if text field is empty or not
-            }
         }
 
-        if(textFieldEmpty) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill in all fields.");
-            alert.showAndWait();
-
-        }
+        Label translatorLaber = new Label("Translator:");
+        TextField translatorTextField = new TextField();
+        HBox translatorHBox = new HBox();
+        translatorHBox.getChildren().addAll(translatorLaber, translatorTextField);
+        vAdd.getChildren().add(translatorHBox);
 
         Button addButton = new Button("ADD");
         addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        addButton.setOnAction(e -> addTab());
+        addButton.setOnAction(e ->  { // when add button is pressed its cheks all the text fields excepts translator's textfield by adding them into a arraylist
+            for (TextField tf : textFieldArrayList) {
+                if(tf.getText().isEmpty() || tf.getText().isBlank()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please fill in all fields.");
+                    alert.showAndWait();
+                    break;
+                }
+            }
+            addTab();
+                });
         addButton.setPrefSize(150,50);
 
         vAdd.getChildren().add(addButton);
