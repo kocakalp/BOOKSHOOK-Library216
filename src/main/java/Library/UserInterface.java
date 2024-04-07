@@ -268,8 +268,7 @@ public class UserInterface extends Application {
 
         Button delButton = new Button("Del");
         Button editButton = new Button("Edt");
-
-        table.set
+        
         table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,translatorColumn);
         addButtonToTable();
         table.setItems(data);
