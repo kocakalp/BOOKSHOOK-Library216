@@ -284,16 +284,19 @@ public class UserInterface extends Application {
 
         String[] labels = {"Book Name:", "Tags:", "Author:", "Publication Date:", "ISBN:", "Translator:"};
 
+        boolean textFieldEmpty = false; // will chek if textfields are empty or not
+
         for (String labelText : labels) {
+            if(labelText.equals("Translator:")) { continue; }
             Label label = new Label(labelText);
             TextField textField = new TextField();
             Label hover = new Label("*");
-            Font hoverFont = new Font(28);
+            Font hoverFont = new Font(22);
             hover.setFont(hoverFont);
             hover.setTextFill(Color.rgb(208, 90 ,90));
             Tooltip tooltip = new Tooltip("this area needs to be filled");
             tooltip.setShowDelay(Duration.millis(3));
-            Font tooltipFont = new Font(14);
+            Font tooltipFont = new Font(10);
             tooltip.setFont(tooltipFont);
             Tooltip.install(hover, tooltip);
 
@@ -301,6 +304,19 @@ public class UserInterface extends Application {
             HBox hbox = new HBox();
             hbox.getChildren().addAll(label, textField, hover);
             vAdd.getChildren().add(hbox);
+
+            if(textField.getText().isEmpty() || textField.getText().isBlank()) {
+                textFieldEmpty = true; /// cheks if text field is empty or not
+            }
+        }
+
+        if(textFieldEmpty) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields.");
+            alert.showAndWait();
+
         }
 
         Button addButton = new Button("ADD");
