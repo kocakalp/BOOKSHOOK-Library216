@@ -1,18 +1,47 @@
 package Library;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Paths;
 
 public class Library {
+    private ArrayList<Book> books = new ArrayList<Book>();
+    private GsonBuilder builder = new GsonBuilder();
+    private Gson gson = builder.create();
+    private static final Type BookType= new TypeToken<List<Book>>() {
+    }.getType();
 
+    public void addBook(String filePath) {
+        try {
+            JsonReader reader = new JsonReader(new FileReader(filePath));
+            books.add(gson.fromJson(reader,BookType.getClass()));
+            books.get(books.size() - 1).setPath(filePath);
+        } catch (Exception e) {
 
-    public static void main(String[] args) {
+        }
+    }
+
+    public void remoweBook(Book b) {
+        try {
+            books.remove(b);
+            Formatter f = new Formatter(b.getPath());
+            f.format(gson.toJson(books));
+        } catch (Exception e) {
+
+        }
+    }
+    /*public static void main(String[] args) {
         Gson gson = new Gson();
     }
-    private ArrayList<Book> books = new ArrayList<Book>();
-
     void searchBook(){
         ArrayList <String> arrayList=  new ArrayList<>();
 
@@ -43,7 +72,5 @@ public class Library {
         if(!isFound){
             System.out.println("Book can not found!");//hjgh
         }
-    }
-
-
+    }*/
 }
