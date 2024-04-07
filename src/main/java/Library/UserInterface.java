@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.util.Duration;
 
 
 public class UserInterface extends Application {
@@ -286,9 +287,19 @@ public class UserInterface extends Application {
         for (String labelText : labels) {
             Label label = new Label(labelText);
             TextField textField = new TextField();
+            Label hover = new Label("*");
+            Font hoverFont = new Font(28);
+            hover.setFont(hoverFont);
+            hover.setTextFill(Color.rgb(208, 90 ,90));
+            Tooltip tooltip = new Tooltip("this area needs to be filled");
+            tooltip.setShowDelay(Duration.millis(3));
+            Font tooltipFont = new Font(14);
+            tooltip.setFont(tooltipFont);
+            Tooltip.install(hover, tooltip);
+
 
             HBox hbox = new HBox();
-            hbox.getChildren().addAll(label, textField);
+            hbox.getChildren().addAll(label, textField, hover);
             vAdd.getChildren().add(hbox);
         }
 
