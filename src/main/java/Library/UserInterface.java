@@ -213,7 +213,8 @@ public class UserInterface extends Application {
     }
 
     public void listTab() {
-
+        table.getColumns().clear(); // it S clears all the raws and collumns inside of the listTab before items are added
+        table.getItems().clear(); // this way we will not see double items and columns
         ObservableList<Book> data = getBookData();
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
