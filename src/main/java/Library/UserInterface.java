@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
@@ -166,11 +168,12 @@ public class UserInterface extends Application {
         TableColumn<Book, Void> edtButtonColumn = new TableColumn<>("E");
 
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
-            private final Button delButton = new Button("Del");
+            private final Button delButton = new Button();
 
             {
                 delButton.setOnAction(event -> {
                     getTableView().getItems().remove(getIndex());
+
                 });
             }
 
@@ -180,13 +183,17 @@ public class UserInterface extends Application {
                 if (empty) {
                     setGraphic(null);
                 } else {
+                    ImageView delView = new ImageView(new Image("delete.png"));
+                    delView.setFitWidth(25);
+                    delView.setFitHeight(30);
+                    delButton.setGraphic(delView);
                     setGraphic(delButton);
                 }
             }
         };
 
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> edtCellFactory = param -> new TableCell<Book, Void>() {
-            private final Button edtButton = new Button("Edt");
+            private final Button edtButton = new Button();
 
             {
                 edtButton.setOnAction(event -> {
@@ -200,6 +207,10 @@ public class UserInterface extends Application {
                 if (empty) {
                     setGraphic(null);
                 } else {
+                    ImageView edtView = new ImageView(new Image("edit.png"));
+                    edtView.setFitWidth(25);
+                    edtView.setFitHeight(30);
+                    edtButton.setGraphic(edtView);
                     setGraphic(edtButton);
                 }
             }
