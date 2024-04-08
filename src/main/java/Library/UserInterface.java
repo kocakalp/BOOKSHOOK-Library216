@@ -42,40 +42,6 @@ public class UserInterface extends Application {
 
         VBox vbox1 = new VBox();
         vbox1.setAlignment(Pos.CENTER);
-        //TextArea textArea1 = new TextArea();
-        //VBox.setVgrow(textArea1, Priority.ALWAYS);
-
-        /*
-        MenuBar menuBar1 = new MenuBar();
-        Menu mFile = new Menu("File");
-
-
-        //NEW
-        MenuItem mNewFile = new MenuItem("New");
-        mNewFile.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
-        mNewFile.setOnAction(e -> newFile());
-
-        //OPEN
-        MenuItem mOpenFile = new MenuItem("Open");
-        mOpenFile.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
-        mOpenFile.setOnAction(e ->openFile("wasd") );
-
-        //SAVE
-        MenuItem mSaveFile = new MenuItem("Save");
-        mSaveFile.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
-
-        //QUIT
-        SeparatorMenuItem SQuit = new SeparatorMenuItem();
-        MenuItem mQuit = new MenuItem("Quit");
-        mQuit.setOnAction(e -> System.exit(0));
-
-        Menu mHelp = new Menu("Help");
-
-
-
-        mFile.getItems().addAll(mNewFile,mOpenFile,mSaveFile,SQuit,mQuit);
-        menuBar1.getMenus().addAll(mFile,mHelp);
-         */
 
         //Label Hbox.
         HBox hBox1 = new HBox();
@@ -429,25 +395,6 @@ public class UserInterface extends Application {
         else {
             addStage.show();
         }
-    }
-
-    public static void openFile(String fileName) {
-        File fileOpened = new File(fileName + ".txt");
-
-        //Vbox opened
-        Stage oStage1 = new Stage();
-
-        VBox vOpen1 = new VBox();
-        vOpen1.setAlignment(Pos.CENTER);
-        HBox hOpen = new HBox();
-        hOpen.setAlignment(Pos.CENTER);
-        vOpen1.getChildren().addAll(hOpen);
-        Button addButton = new Button("KİTAPEKLE.EXE");
-        addButton.setAlignment(Pos.CENTER);
-        hOpen.getChildren().addAll(addButton);
-        Scene oScene1 = new Scene(vOpen1,600,600);
-        oStage1.setScene(oScene1);
-        oStage1.show();
     }
 
 }
