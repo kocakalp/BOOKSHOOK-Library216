@@ -15,7 +15,7 @@ public class Book implements Comparable<Book>  {
     private String edition;
     private ArrayList<String> translators;
     private ArrayList<String> tags = new ArrayList<>();
-    private String path;
+    //private String path;
 
     //For Test.
     public Book(String title, String author, String publisher) {
@@ -56,7 +56,7 @@ public class Book implements Comparable<Book>  {
     public String getEdition() {return edition;}
     public ArrayList<String> getTranslators() {return translators;}
     public ArrayList<String> getTags() {return tags;}
-    public String getPath() {return path;}
+    //public String getPath() {return path;}
 
     //make functions that adds arrays
     public void addTag(String tag) {if(isValidTags(tag))tags.add(tag);}
@@ -112,7 +112,7 @@ public class Book implements Comparable<Book>  {
     // unfinished
     public void setTranslators(ArrayList<String> translators) {this.translators = translators;}
     public void setTags(ArrayList<String> tags) {this.tags = tags;}
-    public void setPath(String path) {this.path = path;}
+    //public void setPath(String path) {this.path = path;}
 
     //Edit Methods.
     public Boolean isValidTitle(String input) {

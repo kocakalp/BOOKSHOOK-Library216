@@ -11,38 +11,15 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
-import java.nio.file.Paths;
 
 public class Library {
-    private ArrayList<Book> books = new ArrayList<Book>();
-    private GsonBuilder builder = new GsonBuilder();
-    private Gson gson = builder.create();
-    private static final Type BookType= new TypeToken<List<Book>>() {
-    }.getType();
 
-    public void addBook(String filePath) {
-        try {
-            JsonReader reader = new JsonReader(new FileReader(filePath));
-            books.add(gson.fromJson(reader,BookType.getClass()));
-            books.get(books.size() - 1).setPath(filePath);
-        } catch (Exception e) {
 
-        }
-    }
-
-    public void remoweBook(Book b) {
-        try {
-            books.remove(b);
-            Formatter f = new Formatter(b.getPath());
-            f.format(gson.toJson(books));
-        } catch (Exception e) {
-
-        }
-    }
     /*public static void main(String[] args) {
         Gson gson = new Gson();
+
     }
-    void searchBook(){
+    /*void searchBook(){
         ArrayList <String> arrayList=  new ArrayList<>();
 
         Book book1 = new Book("PKitap","Yazar","basımcı","1994", "1000", "new", arrayList );
@@ -57,6 +34,7 @@ public class Library {
         books.add(book2);
         books.add(book3);
         books.add(book4);
+        remoweBook(book1);
 
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter a book name that you wanna search from your library");
