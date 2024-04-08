@@ -170,9 +170,7 @@ public class UserInterface extends Application {
 
             {
                 delButton.setOnAction(event -> {
-                    Book book = getTableView().getItems().get(getIndex());
-                    // Perform delete operation on 'book'
-                    // For example: getTableView().getItems().remove(book);
+                    getTableView().getItems().remove(getIndex());
                 });
             }
 
