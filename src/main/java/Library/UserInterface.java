@@ -162,44 +162,58 @@ public class UserInterface extends Application {
     }
 
     private void addButtonToTable() {
-        TableColumn<Book, Void> delButtonColumn = new TableColumn("D");
-        TableColumn<Book, Void> edtButtonColumn = new TableColumn("E");
+        TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
+        TableColumn<Book, Void> edtButtonColumn = new TableColumn<>("E");
 
-        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> cellFactory = new Callback<TableColumn<Book, Void>, TableCell<Book, Void>>() {
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
+            private final Button delButton = new Button("Del");
+
+            {
+                delButton.setOnAction(event -> {
+                    Book book = getTableView().getItems().get(getIndex());
+                    // Perform delete operation on 'book'
+                    // For example: getTableView().getItems().remove(book);
+                });
+            }
+
             @Override
-            public TableCell<Book, Void> call(final TableColumn<Book, Void> param) {
-                final TableCell<Book, Void> cell = new TableCell<Book, Void>() {
-
-                    private final Button delButton = new Button("Del");
-                    private final Button edtButton = new Button("Edt");
-
-                    {
-                        delButton.setOnAction((ActionEvent event) -> {
-                            getTableView().getItems().remove(getIndex());
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(delButton);
-                        }
-                    }
-                };
-                return cell;
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(delButton);
+                }
             }
         };
 
-        delButtonColumn.setCellFactory(cellFactory);
-        edtButtonColumn.setCellFactory(cellFactory);
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> edtCellFactory = param -> new TableCell<Book, Void>() {
+            private final Button edtButton = new Button("Edt");
+
+            {
+                edtButton.setOnAction(event -> {
+                    // Logic to handle edit action
+                });
+            }
+
+            @Override
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(edtButton);
+                }
+            }
+        };
+
+        delButtonColumn.setCellFactory(delCellFactory);
+        edtButtonColumn.setCellFactory(edtCellFactory);
 
         table.getColumns().add(delButtonColumn);
         table.getColumns().add(edtButtonColumn);
-
     }
+
     public void listTab() {
 
         ObservableList<Book> data = getBookData();
