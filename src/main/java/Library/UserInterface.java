@@ -391,10 +391,10 @@ public class UserInterface extends Application {
             vAdd.getChildren().add(hbox);
         }
 
-        Label translatorLaber = new Label("Translator:");
+        Label translatorLabel = new Label("Translator:");
         TextField translatorTextField = new TextField();
         HBox translatorHBox = new HBox();
-        translatorHBox.getChildren().addAll(translatorLaber, translatorTextField);
+        translatorHBox.getChildren().addAll(translatorLabel, translatorTextField);
         vAdd.getChildren().add(translatorHBox);
 
         Button addButton = new Button("ADD");
