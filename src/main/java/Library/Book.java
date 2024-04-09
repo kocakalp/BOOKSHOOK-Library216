@@ -4,6 +4,7 @@ import javafx.scene.control.TableRow;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Book implements Comparable<Book>  {
 
     public Scanner sc = new Scanner(System.in);
