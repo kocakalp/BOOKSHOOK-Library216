@@ -154,7 +154,7 @@ public class UserInterface extends Application {
     private ObservableList<Book> getBookData() {
         ObservableList<Book> data = FXCollections.observableArrayList();
         // Kitap verilerinizi buraya ekleyin
-        data.add(new Book("Kitap Başlığı","Yazarr","publisher"));
+        //data.add(new Book("Kitap Başlığı","Yazarr","publisher"));
         data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
 
@@ -258,7 +258,7 @@ public class UserInterface extends Application {
 
         Button delButton = new Button("Del");
         Button editButton = new Button("Edt");
-        
+
         table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,translatorColumn);
         addButtonToTable();
         table.setItems(data);
@@ -381,10 +381,10 @@ public class UserInterface extends Application {
             vAdd.getChildren().add(hbox);
         }
 
-        Label translatorLabel = new Label("Translator:");
+        Label translatorLaber = new Label("Translator:");
         TextField translatorTextField = new TextField();
         HBox translatorHBox = new HBox();
-        translatorHBox.getChildren().addAll(translatorLabel, translatorTextField);
+        translatorHBox.getChildren().addAll(translatorLaber, translatorTextField);
         vAdd.getChildren().add(translatorHBox);
 
         Button addButton = new Button("ADD");
@@ -401,7 +401,7 @@ public class UserInterface extends Application {
                 }
             }
             addTab();
-                });
+        });
         addButton.setPrefSize(150,50);
 
         vAdd.getChildren().add(addButton);
