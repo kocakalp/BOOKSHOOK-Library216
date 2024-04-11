@@ -26,6 +26,17 @@ public class Book implements Comparable<Book>  {
         addTranslators(translators);
     }
 
+    //for test remowe in th future
+    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
+
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationYear = publicationYear;
+        this.isbn = isbn;
+        this.edition = edition;
+    }
+
     //Getters
     public String getTitle() {return title;}
     public String getAuthor() {return author;}
