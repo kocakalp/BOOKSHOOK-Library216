@@ -50,7 +50,7 @@ public class Library {
     public void addTags(String input, Book edited) {
         if (books.contains(edited)) {
             if (!edited.getTags().contains(input)) {
-                edited.getTags().add(input);
+                edited.addTag(input);
                 JSON.updateJsonFile();
             }
         }
@@ -58,7 +58,7 @@ public class Library {
     public void remoweTags(String input, Book edited) {
         if (books.contains(edited)) {
             if (edited.getTags().contains(input)) {
-                edited.getTags().remove(input);
+                edited.removeTag(input);
                 JSON.updateJsonFile();
             }
         }
@@ -66,7 +66,7 @@ public class Library {
     public void addTranslator(String input, Book edited) {
         if (books.contains(edited)) {
             if (!edited.getTranslators().contains(input)) {
-                edited.getTranslators().add(input);
+                edited.addTranslator(input);
                 JSON.updateJsonFile();
             }
         }
@@ -74,7 +74,7 @@ public class Library {
     public void removeTranslator(String input, Book edited) {
         if (books.contains(edited)) {
             if (!edited.getTranslators().contains(input)) {
-                edited.getTranslators().remove(input);
+                edited.removeTranslator(input);
                 JSON.updateJsonFile();
             }
         }
