@@ -1,51 +1,29 @@
 package Library;
-import javafx.scene.control.TableRow;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Book implements Comparable<Book>  {
-
-    public Scanner sc = new Scanner(System.in);
     private String title;
     private String author;
     private String publisher;
     private String publicationYear;
     private String isbn;
     private String edition;
-    private ArrayList<String> translators;
+    private ArrayList<String> translators = new ArrayList<>();;
     private ArrayList<String> tags = new ArrayList<>();
-    //private String path;
 
-    //For Test.
-    public Book(String title, String author, String publisher) {
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
+    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators) {
+
+        setTitle(title);
+        setAuthor(author);
+        setPublisher(publisher);
+        setPublicationYear(publicationYear);
+        setIsbn(isbn);
+        setEdition(edition);
+        addTags(tags);
+        addTranslators(translators);
     }
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition, ArrayList<String> translators) {
-
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
-        this.translators = translators;
-    }
-
-    //For listView test
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
-
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
-    }
-
-
 
     //Getters
     public String getTitle() {return title;}
@@ -56,13 +34,21 @@ public class Book implements Comparable<Book>  {
     public String getEdition() {return edition;}
     public ArrayList<String> getTranslators() {return translators;}
     public ArrayList<String> getTags() {return tags;}
-    //public String getPath() {return path;}
 
-    //make functions that adds arrays
+    //Handling Arrays
     public void addTag(String tag) {if(isValidTags(tag))tags.add(tag);}
-    public void addTranslator(String translator) {if(isValidTranslators(translator))translators.add(translator);}
-
+    public void addTags(ArrayList<String> tags) {
+        for (String tag : tags) {
+            addTag(tag);
+        }
+    }
     public void removeTag(String tag) {tags.remove(tag);}
+    public void addTranslator(String translator) {if(isValidTranslators(translator))translators.add(translator);}
+    public void addTranslators(ArrayList<String> translators) {
+        for (String translator : translators) {
+            addTranslator(translator);
+        }
+    }
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Setters
@@ -107,14 +93,15 @@ public class Book implements Comparable<Book>  {
         }
     }
     public void setEdition(String edition) {
-        if(isValidEdition(edition))this.edition = edition;}
+        if(isValidEdition(edition)){
+            this.edition = edition;
+        } else {
+            System.out.println("invalid edition");
+            setEdition(edit());
+        }
+    }
 
-    // unfinished
-    public void setTranslators(ArrayList<String> translators) {this.translators = translators;}
-    public void setTags(ArrayList<String> tags) {this.tags = tags;}
-    //public void setPath(String path) {this.path = path;}
-
-    //Edit Methods.
+    //Validation Methods.
     public Boolean isValidTitle(String input) {
         try {
             return input != null && !input.isBlank();
@@ -174,8 +161,9 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public String edit(){return sc.nextLine();}
+    public String edit(){Scanner sc = new Scanner(System.in);return sc.nextLine();}
 
+    //toString
     @Override
     public String toString() {
         return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString()+", "+getTagsAsString();
@@ -195,6 +183,7 @@ public class Book implements Comparable<Book>  {
         return tagsAsString.toString();
     }
 
+    //bi ara kontrol et
     @Override
     public int compareTo(Book book) {
         String thisTitle = this.title.toLowerCase();
