@@ -16,11 +16,15 @@ public class JSON {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
     private static final String filePath = "mainJson";
 
+    // bu iki metod direk libary classına taşınabilir.
     public static void addBook(String filePath) {
         Type t = new TypeToken<Collection<Book>>(){}.getType();
         try {
             JsonReader reader = new JsonReader(new FileReader(filePath));
-            books.addAll(gson.fromJson(reader, t));
+            ArrayList<Book> books1 = gson.fromJson(reader, t);
+            for(Book b : books1) {
+                if(!books.contains(b))books.add(b);
+            }
             updateJsonFile();
         } catch (Exception e) {
             System.out.println(e);
@@ -34,6 +38,7 @@ public class JSON {
             System.out.println("e");
         }
     }
+
     public static void updateJsonFile() {
         try (FileWriter f = new FileWriter(filePath)) {
             f.write(gson.toJson(books));
@@ -41,7 +46,6 @@ public class JSON {
             System.out.println(e);
         }
     }
-
     public static ArrayList<Book> getBooks() {
         return books;
     }

@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Library {
     private ArrayList<Book> books = JSON.getBooks();
 
+    // editers.
     public void editTitle(String input, Book edited) {
         if (books.contains(edited)) {
             edited.setTitle(input);
@@ -45,6 +46,7 @@ public class Library {
         }
     }
 
+    // can be improved
     public void addTags(String input, Book edited) {
         if (books.contains(edited)) {
             if (!edited.getTags().contains(input)) {
@@ -77,6 +79,15 @@ public class Library {
             }
         }
     }
+
+    //JSON classındaki addbook ve remowe book metodları buraya direk taşınabilir.
+    public void addBooks(String jsonFilePath) {
+        JSON.addBook(jsonFilePath);
+    }
+    public void remoweBook(Book remowed) {
+        JSON.remoweBook(remowed);
+    }
+
     //şevval seachbarı static class yap bence daha temiz durur.
     {/*public static void main(String[] args) {
         Gson gson = new Gson();
