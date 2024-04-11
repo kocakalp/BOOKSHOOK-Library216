@@ -1,6 +1,8 @@
 package Library;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -154,10 +157,9 @@ public class UserInterface extends Application {
     private ObservableList<Book> getBookData() {
         ObservableList<Book> data = FXCollections.observableArrayList();
         // Kitap verilerinizi buraya ekleyin
-        /*data.add(new Book("Kitap Başlığı","Yazarr","publisher"));
+        data.add(new Book("Kitap Başlığı","Yazarr","publisher","basmacı","aaaa","aadfa"));
         data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
-        */
 
         // Daha fazla kitap ekleyin
         return data;
@@ -192,14 +194,9 @@ public class UserInterface extends Application {
             }
         };
 
+
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> edtCellFactory = param -> new TableCell<Book, Void>() {
             private final Button edtButton = new Button();
-
-            {
-                edtButton.setOnAction(event -> {
-                    // Logic to handle edit action
-                });
-            }
 
             @Override
             public void updateItem(Void item, boolean empty) {
@@ -212,6 +209,12 @@ public class UserInterface extends Application {
                     edtView.setFitHeight(30);
                     edtButton.setGraphic(edtView);
                     setGraphic(edtButton);
+
+                    edtButton.setOnAction(event -> {
+                        Book book = getTableView().getItems().get(getIndex());
+                        // Bu satırdaki tüm hücreleri düzenlenebilir hale getir
+                        table.edit(getIndex(),  table.getColumns().get(0));
+                    });
                 }
             }
         };
@@ -224,6 +227,7 @@ public class UserInterface extends Application {
     }
 
     public void listTab() {
+        table.setEditable(true);
         table.getColumns().clear(); // it S clears all the raws and collumns inside of the listTab before items are added
         table.getItems().clear(); // this way we will not see double items and columns
         ObservableList<Book> data = getBookData();
@@ -231,33 +235,91 @@ public class UserInterface extends Application {
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        titleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTitle()));
+        titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        titleColumn.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTitle(event.getNewValue());
+        });
 
+
+        //Arraylist alıyor nasıl yapacaımı bilemedim.
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(100);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
 
+
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(100);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
+        authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        authorColumn.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setAuthor(event.getNewValue());
+        });
 
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(100);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
+        publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        publisherColumn.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setPublisher(event.getNewValue());
+        });
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
         dateColumn.setPrefWidth(150);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
+        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublicationYear()));
+        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        dateColumn.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setPublicationYear(event.getNewValue());
+        });
 
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
         isbnColumn.setPrefWidth(100);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        isbnColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getIsbn()));
+        isbnColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        isbnColumn.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setIsbn(event.getNewValue());
+        });
 
+        //Arraylist alıyor nasıl yapacaımı bilemedim.
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
 
-        Button delButton = new Button("Del");
-        Button editButton = new Button("Edt");
+
+
+        //EDIT buttonu için deneme.
+        /*
+        // Düzenleme butonunu içeren kolon
+        TableColumn<Book, Boolean> editCol = new TableColumn<>("Edit");
+        editCol.setCellValueFactory(data1 -> new SimpleBooleanProperty(true));
+        editCol.setCellFactory(col -> {
+            Button editButton = new Button("Edit");
+            TableCell<Book, Boolean> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(Boolean item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(editButton);
+                        editButton.setOnAction(event -> {
+                            Book book = getTableView().getItems().get(getIndex());
+                            // Bu satırdaki tüm hücreleri düzenlenebilir hale getir
+                            table.edit(getIndex(),  table.getColumns().get(0));
+                            table.edit(getIndex(), table.getColumns().get(2));
+                            table.edit(getIndex(), table.getColumns().get(3));
+
+                        });
+                    }
+                }
+            };
+            return cell;
+        });
+         */
 
         table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,translatorColumn);
         addButtonToTable();
@@ -278,6 +340,7 @@ public class UserInterface extends Application {
         else {
             listStage.show();
         }
+
 
 
 
