@@ -46,10 +46,36 @@ public class Library {
     }
 
     public void addTags(String input, Book edited) {
-
+        if (books.contains(edited)) {
+            if (!edited.getTags().contains(input)) {
+                edited.getTags().add(input);
+                JSON.updateJsonFile();
+            }
+        }
+    }
+    public void remoweTags(String input, Book edited) {
+        if (books.contains(edited)) {
+            if (edited.getTags().contains(input)) {
+                edited.getTags().remove(input);
+                JSON.updateJsonFile();
+            }
+        }
     }
     public void addTranslator(String input, Book edited) {
-
+        if (books.contains(edited)) {
+            if (!edited.getTranslators().contains(input)) {
+                edited.getTranslators().add(input);
+                JSON.updateJsonFile();
+            }
+        }
+    }
+    public void removeTranslator(String input, Book edited) {
+        if (books.contains(edited)) {
+            if (!edited.getTranslators().contains(input)) {
+                edited.getTranslators().remove(input);
+                JSON.updateJsonFile();
+            }
+        }
     }
     //şevval seachbarı static class yap bence daha temiz durur.
     {/*public static void main(String[] args) {
