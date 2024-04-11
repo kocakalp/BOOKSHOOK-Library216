@@ -154,10 +154,10 @@ public class UserInterface extends Application {
     private ObservableList<Book> getBookData() {
         ObservableList<Book> data = FXCollections.observableArrayList();
         // Kitap verilerinizi buraya ekleyin
-        //data.add(new Book("Kitap Başlığı","Yazarr","publisher"));
+        /*data.add(new Book("Kitap Başlığı","Yazarr","publisher"));
         data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
-
+        */
 
         // Daha fazla kitap ekleyin
         return data;

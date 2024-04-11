@@ -26,8 +26,17 @@ public class Book implements Comparable<Book>  {
         addTranslators(translators);
     }
 
+    public Book() {
+        setTitle("title");
+        setAuthor("author");
+        setPublisher("publisher");
+        setPublicationYear("1");
+        setIsbn("0000000000");
+        setEdition("1");
+    }
+
     //for test remowe in th future
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
+   /* public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
 
         this.title = title;
         this.author = author;
@@ -43,7 +52,7 @@ public class Book implements Comparable<Book>  {
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.edition = edition;
-    }
+    }*/
 
     //Getters
     public String getTitle() {return title;}
@@ -72,12 +81,13 @@ public class Book implements Comparable<Book>  {
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Setters
+    //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
         } else {
             System.out.println("invalid title");
-            setTitle(edit());
+            setTitle("title");
         }
     }
     public void setAuthor(String author) {
@@ -85,7 +95,7 @@ public class Book implements Comparable<Book>  {
             this.author = author;
         } else {
             System.out.println("invalid author");
-            setAuthor(edit());
+            setAuthor("author");
         }
     }
     public void setPublisher(String publisher) {
@@ -93,7 +103,7 @@ public class Book implements Comparable<Book>  {
             this.publisher = publisher;
         } else {
             System.out.println("invalid publisher");
-            setPublisher(edit());
+            setPublisher("publisher");
         }
     }
     public void setPublicationYear(String publicationYear) {
@@ -101,7 +111,7 @@ public class Book implements Comparable<Book>  {
             this.publicationYear = publicationYear;
         } else {
             System.out.println("invalid publication year");
-            setPublicationYear(edit());
+            setPublicationYear("0");
         }
     }
     public void setIsbn(String isbn) {
@@ -109,7 +119,7 @@ public class Book implements Comparable<Book>  {
             this.isbn = isbn;
         } else {
             System.out.println("invalid isbn");
-            setIsbn(edit());
+            setIsbn("0000000000");
         }
     }
     public void setEdition(String edition) {
@@ -117,7 +127,7 @@ public class Book implements Comparable<Book>  {
             this.edition = edition;
         } else {
             System.out.println("invalid edition");
-            setEdition(edit());
+            setEdition("0");
         }
     }
 
