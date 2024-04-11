@@ -5,6 +5,6 @@ module Library {
     requires com.dlsc.formsfx;
     requires com.google.gson;
 
-    opens Library to javafx.fxml,com.google.gson;
+    opens Library to javafx.fxml;
     exports Library;
 }
