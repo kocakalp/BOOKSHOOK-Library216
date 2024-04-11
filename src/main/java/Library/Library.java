@@ -6,16 +6,59 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
+    private ArrayList<Book> books = JSON.getBooks();
 
+    public void editTitle(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setTitle(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public void editAuthor(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setAuthor(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public void editPublisher(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setPublisher(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public void editPublicationYear(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setPublicationYear(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public void editIsbn(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setIsbn(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public void editEdition(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setEdition(input);
+            JSON.updateJsonFile();
+        }
+    }
 
-    public static void main(String[] args) {
+    public void addTags(String input, Book edited) {
+
+    }
+    public void addTranslator(String input, Book edited) {
+
+    }
+    //şevval seachbarı static class yap bence daha temiz durur.
+    {/*public static void main(String[] args) {
         Gson gson = new Gson();
     }
     private ArrayList<Book> books = new ArrayList<Book>();
-
     void searchBook(){
         ArrayList <String> arrayList=  new ArrayList<>();
-
+        /*
         Book book1 = new Book("PKitap","Yazar","basımcı","1994", "1000", "new", arrayList );
 
 
@@ -43,7 +86,5 @@ public class Library {
         if(!isFound){
             System.out.println("Book can not found!");//hjgh
         }
-    }
-
-
+    }*/}
 }

@@ -34,12 +34,16 @@ public class JSON {
             System.out.println("e");
         }
     }
-    private static void updateJsonFile() {
+    public static void updateJsonFile() {
         try (FileWriter f = new FileWriter(filePath)) {
             f.write(gson.toJson(books));
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public static ArrayList<Book> getBooks() {
+        return books;
     }
 
     /*//test
