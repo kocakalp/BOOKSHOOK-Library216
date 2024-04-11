@@ -17,6 +17,7 @@ public class JSON {
     private static final String filePath = "mainJson";
 
     // bu iki metod direk libary classına taşınabilir.
+    //finaly ve cath kısımları eksik
     public static void addBook(String filePath) {
         Type t = new TypeToken<Collection<Book>>(){}.getType();
         try {
