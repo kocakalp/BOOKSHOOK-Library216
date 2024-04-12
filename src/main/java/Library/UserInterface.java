@@ -437,7 +437,7 @@ public class UserInterface extends Application {
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-        String[] labels = {"Book Name:", "Tags:", "Author:", "Publication Date:", "ISBN:", "Translator:"};
+        String[] labels = {"Book Title:", "Author:", "Publisher:", "Publication Date:", "Edition:", "Translator:", "Tags:"};
 
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
@@ -482,6 +482,11 @@ public class UserInterface extends Application {
                     break;
                 }
             }
+            ArrayList tags = new ArrayList<>();
+            ArrayList trans = new ArrayList<>();
+            Book book = new Book("af","sfsf","sfsf","34","1000000000","24224",tags,trans);
+            JSON.getBooks().add(book);
+            JSON.updateJsonFile();
             addTab();
         });
         addButton.setPrefSize(150,50);
