@@ -211,19 +211,20 @@ public class Book implements Comparable<Book>  {
     //toString
     @Override
     public String toString() {
-        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString()+", "+getTagsAsString();
+        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+getTagsAsString() +getTranslatorAsString();
     }
     private String getTranslatorAsString(){
         StringBuilder translatorAsString = new StringBuilder();
         for (String i : translators) {
-            translatorAsString.append(", ").append(i);
+            translatorAsString.append(i).append(", ");
         }
         return translatorAsString.toString();
     }
     private String getTagsAsString(){
         StringBuilder tagsAsString = new StringBuilder();
-        for (String i : translators) {
-            tagsAsString.append(", ").append(i);
+
+        for (String i : tags) {
+            tagsAsString.append(i).append(", ");
         }
         return tagsAsString.toString();
     }
