@@ -48,9 +48,6 @@ public class JSON {
         } finally {
             updateJsonFile();
         }
-        finally {
-            updateJsonFile();
-        }
     }
     public static void removeBook(Book b) {
         try {
