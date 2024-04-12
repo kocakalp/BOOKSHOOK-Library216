@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class JSON {
-    private static ArrayList<Book> books = new ArrayList<Book>();
+    private static final ArrayList<Book> books = new ArrayList<>();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
     private static final String filePath = "mainJson";
 
@@ -31,7 +31,7 @@ public class JSON {
             System.out.println(e);
         }
     }
-    public static void remoweBook(Book b) {
+    public static void removeBook(Book b) {
         try {
             books.remove(b);
             updateJsonFile();
