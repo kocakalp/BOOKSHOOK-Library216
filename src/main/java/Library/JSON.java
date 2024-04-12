@@ -28,13 +28,14 @@ public class JSON {
             for(Book b : books1) {
                 if(!books.contains(b))books.add(b);
             }
-            updateJsonFile();
         } catch (JsonSyntaxException | ClassCastException e) {
             addBook(filePath);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (Exception e) {
             System.out.println(e);
+        } finally {
+            updateJsonFile();
         }
     }
     public static void addBook(String filePath) {
@@ -42,17 +43,21 @@ public class JSON {
         try {
             JsonReader reader = new JsonReader(new FileReader(filePath));
             books.add(gson.fromJson(reader, t));
-            updateJsonFile();
         } catch (Exception e) {
             System.out.println("An error occurred while adding a book!!");
+        }
+        finally {
+            updateJsonFile();
         }
     }
     public static void removeBook(Book b) {
         try {
             books.remove(b);
-            updateJsonFile();
         } catch (Exception e) {
             System.out.println("An error occurred while removing a book!!");
+        }
+        finally {
+            updateJsonFile();
         }
     }
 
