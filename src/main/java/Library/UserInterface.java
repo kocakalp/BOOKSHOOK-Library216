@@ -156,10 +156,16 @@ public class UserInterface extends Application {
 
     private ObservableList<Book> getBookData() {
         ObservableList<Book> data = FXCollections.observableArrayList();
+        JSON.addBooks("mainJson");
         // Kitap verilerinizi buraya ekleyin
+        /*
         data.add(new Book("Kitap Başlığı","Yazarr","publisher","basmacı","aaaa","aadfa"));
         data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
+         */
+        for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
+            data.add(JSON.getBooks().get(i));
+        }
 
         // Daha fazla kitap ekleyin
         return data;
@@ -174,7 +180,8 @@ public class UserInterface extends Application {
 
             {
                 delButton.setOnAction(event -> {
-                    getTableView().getItems().remove(getIndex());
+                    //getTableView().getItems().remove(getIndex());
+                    JSON.removeBook(getTableView().getItems().remove(getIndex()));
 
                 });
             }
