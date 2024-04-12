@@ -25,15 +25,11 @@ public class Book implements Comparable<Book>  {
         setEdition(edition);
         addTags(tags);
         addTranslators(translators);
+        JSON.updateJsonFile();
     }
 
     public Book() {
-        setTitle("title");
-        setAuthor("author");
-        setPublisher("publisher");
-        setPublicationYear("1");
-        setIsbn("0000000000");
-        setEdition("1");
+        this("title","author","publisher","1","0000000000","1",new ArrayList<>(), new ArrayList<>());
     }
 
     //for test remove in th future
@@ -66,23 +62,36 @@ public class Book implements Comparable<Book>  {
     public ArrayList<String> getTags() {return tags;}
 
     //Handling Arrays
-    public void addTag(String tag) {if(isValidTags(tag))tags.add(tag);}
+    public void addTag(String tag) {
+        if(isValidTags(tag))tags.add(tag);
+        JSON.updateJsonFile();
+    }
     public void addTags(ArrayList<String> tags) {
         for (String tag : tags) {
             addTag(tag);
         }
     }
-    public void removeTag(String tag) {tags.remove(tag);}
-    public void addTranslator(String translator) {if(isValidTranslators(translator))translators.add(translator);}
+    public void removeTag(String tag) {
+        tags.remove(tag);
+        JSON.updateJsonFile();
+    }
+    public void addTranslator(String translator) {
+        if(isValidTranslators(translator))translators.add(translator);
+        JSON.updateJsonFile();
+    }
     public void addTranslators(ArrayList<String> translators) {
         for (String translator : translators) {
             addTranslator(translator);
         }
     }
-    public void removeTranslator(String translator) {translators.remove(translator);}
+    public void removeTranslator(String translator) {
+        translators.remove(translator);
+        JSON.updateJsonFile();
+    }
 
     //Setters
     //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
+    //json update ilerde taşınabilir.
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
@@ -90,6 +99,7 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid title");
             setTitle("title");
         }
+        JSON.updateJsonFile();
     }
     public void setAuthor(String author) {
         if(isValidAuthor(author)){
@@ -98,6 +108,7 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid author");
             setAuthor("author");
         }
+        JSON.updateJsonFile();
     }
     public void setPublisher(String publisher) {
         if(isValidPublisher(publisher)){
@@ -114,6 +125,7 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid publication year");
             setPublicationYear("0");
         }
+        JSON.updateJsonFile();
     }
     public void setIsbn(String isbn) {
         if(isValidISBN(isbn)){
@@ -131,6 +143,7 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid edition");
             setEdition("0");
         }
+        JSON.updateJsonFile();
     }
 
     //Validation Methods.
