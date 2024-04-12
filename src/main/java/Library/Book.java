@@ -146,6 +146,24 @@ public class Book implements Comparable<Book>  {
         JSON.updateJsonFile();
     }
 
+    public void setTags(String in) {
+        String[] tags = in.split(",");
+        if (tags.length > 0) {
+            this.tags.clear();
+            for (String t : tags) {
+                addTag(t);
+            }
+        }
+    }
+    public void setTranslators(String in) {
+        String[] translator = in.split(",");
+        if (translator.length > 0) {
+            this.translators.clear();
+            for (String t : tags) {
+                addTag(t);
+            }
+        }
+    }
     //Validation Methods.
     public Boolean isValidTitle(String input) {
         try {

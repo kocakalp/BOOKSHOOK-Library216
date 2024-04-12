@@ -78,8 +78,8 @@ public class JSON {
         Book book2 = new Book("sevAL kİTAP","Yazar","basımcı","1994", "1000000000", "3",new ArrayList<String>(),new ArrayList<String>());
         Book book3 = new Book("eNreDİZKitap","Yazar","basımcı","1994", "1000000000", "4",new ArrayList<String>(),new ArrayList<String>());
         Book book4 = new Book("pKitap","Yazar","basımcı","1994", "1000000000", "5",new ArrayList<String>(),new ArrayList<String>());
-        book4.addTag("adsa");
-        book4.addTag("3424");
+        book4.addTranslator("adsa");
+        book4.addTranslator("3424");
         book4.addTranslator("rarasdf");
         books.add(book1);
         books.add(book2);

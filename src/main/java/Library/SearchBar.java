@@ -108,4 +108,12 @@ public  class SearchBar {
             System.out.println("Book can not for the tag:"+tag);
         }
     }
+
+    public static ArrayList<Book> search(String in) {
+        ArrayList<Book> show = new ArrayList<>();
+        for (Book b : JSON.getBooks()) {
+            if(b.toString().contains(in)) show.add(b);
+        }
+        return show;
+    }
 }
