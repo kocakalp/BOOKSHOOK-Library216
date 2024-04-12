@@ -2,9 +2,11 @@ package Library;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
@@ -18,7 +20,7 @@ public class JSON {
 
     // bu iki metod direk libary classına taşınabilir.
     //finaly ve cath kısımları eksik
-    public static void addBook(String filePath) {
+    public static void addBooks(String filePath) {
         Type t = new TypeToken<Collection<Book>>(){}.getType();
         try {
             JsonReader reader = new JsonReader(new FileReader(filePath));
@@ -26,6 +28,20 @@ public class JSON {
             for(Book b : books1) {
                 if(!books.contains(b))books.add(b);
             }
+            updateJsonFile();
+        } catch (JsonSyntaxException | ClassCastException e) {
+            addBook(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public static void addBook(String filePath) {
+        Type t = new TypeToken<Book>(){}.getType();
+        try {
+            JsonReader reader = new JsonReader(new FileReader(filePath));
+            books.add(gson.fromJson(reader, t));
             updateJsonFile();
         } catch (Exception e) {
             System.out.println(e);
@@ -63,7 +79,7 @@ public class JSON {
         books.add(book3);
         books.add(book4);
         updateJsonFile();*/
-        addBook(filePath);
+        addBooks(filePath);
         for (Book b : books) {
             System.out.println(b);
         }

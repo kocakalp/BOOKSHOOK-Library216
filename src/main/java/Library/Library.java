@@ -79,7 +79,7 @@ public class Library {
 
     //JSON classındaki addbook ve remowe book metodları buraya direk taşınabilir.
     public static void addBooks(String jsonFilePath) {
-        JSON.addBook(jsonFilePath);
+        JSON.addBooks(jsonFilePath);
     }
     public static void removeBook(Book removed) {
         JSON.removeBook(removed);
