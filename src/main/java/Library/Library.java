@@ -84,7 +84,6 @@ public class Library {
     public static void removeBook(Book removed) {
         JSON.removeBook(removed);
     }
-
-    }
+}
 
 

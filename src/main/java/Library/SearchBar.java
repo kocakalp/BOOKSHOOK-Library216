@@ -108,6 +108,4 @@ public  class SearchBar {
             System.out.println("Book can not for the tag:"+tag);
         }
     }
-
-
 }

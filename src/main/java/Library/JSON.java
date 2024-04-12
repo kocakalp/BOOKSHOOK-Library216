@@ -35,6 +35,8 @@ public class JSON {
             System.out.println("File not found");
         } catch (Exception e) {
             System.out.println(e);
+        } finally {
+            updateJsonFile();
         }
     }
     public static void addBook(String filePath) {
@@ -45,6 +47,8 @@ public class JSON {
             updateJsonFile();
         } catch (Exception e) {
             System.out.println("An error occurred while adding a book!!");
+        } finally {
+            updateJsonFile();
         }
     }
     public static void removeBook(Book b) {
@@ -70,7 +74,7 @@ public class JSON {
     //test
     public static void main(String[] args) {
         System.out.println("START");
-        /*Book book1 = new Book("PKitap","Yazar","basımcı","1994", "1000000000", "2",new ArrayList<String>(),new ArrayList<String>());
+        Book book1 = new Book("PKitap","Yazar","basımcı","1994", "1000000000", "2",new ArrayList<String>(),new ArrayList<String>());
         Book book2 = new Book("sevAL kİTAP","Yazar","basımcı","1994", "1000000000", "3",new ArrayList<String>(),new ArrayList<String>());
         Book book3 = new Book("eNreDİZKitap","Yazar","basımcı","1994", "1000000000", "4",new ArrayList<String>(),new ArrayList<String>());
         Book book4 = new Book("pKitap","Yazar","basımcı","1994", "1000000000", "5",new ArrayList<String>(),new ArrayList<String>());
@@ -78,8 +82,8 @@ public class JSON {
         books.add(book2);
         books.add(book3);
         books.add(book4);
-        updateJsonFile();*/
-        addBooks(filePath);
+        updateJsonFile();
+        //addBooks(filePath);
         for (Book b : books) {
             System.out.println(b);
         }
