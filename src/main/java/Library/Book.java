@@ -116,13 +116,13 @@ public class Book implements Comparable<Book>  {
         }
     }
     public void setIsbn(String isbn) {
-        JSON.updateJsonFile();
         if(isValidISBN(isbn)){
             this.isbn = isbn;
         } else {
             System.out.println("invalid isbn");
             setIsbn("0000000000");
         }
+        JSON.updateJsonFile();
     }
     public void setEdition(String edition) {
         if(isValidEdition(edition)){
