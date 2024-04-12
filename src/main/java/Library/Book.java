@@ -12,8 +12,8 @@ public class Book implements Comparable<Book>  {
     private String publicationYear;
     private String isbn;
     private String edition;
-    private ArrayList<String> translators = new ArrayList<>();;
-    private ArrayList<String> tags = new ArrayList<>();
+    private final ArrayList<String> translators = new ArrayList<>();
+    private final ArrayList<String> tags = new ArrayList<>();
 
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators) {
 
@@ -36,7 +36,7 @@ public class Book implements Comparable<Book>  {
         setEdition("1");
     }
 
-    //for test remowe in th future
+    //for test remove in th future
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
 
         this.title = title;
