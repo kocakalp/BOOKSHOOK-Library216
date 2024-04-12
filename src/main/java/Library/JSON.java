@@ -28,7 +28,7 @@ public class JSON {
             }
             updateJsonFile();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("An error occurred while adding a book!!");
         }
     }
     public static void removeBook(Book b) {
@@ -36,7 +36,7 @@ public class JSON {
             books.remove(b);
             updateJsonFile();
         } catch (Exception e) {
-            System.out.println("e");
+            System.out.println("An error occurred while removing a book!!");
         }
     }
 
@@ -44,7 +44,7 @@ public class JSON {
         try (FileWriter f = new FileWriter(filePath)) {
             f.write(gson.toJson(books));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("An error occurred while updating JSON file!!");
         }
     }
     public static ArrayList<Book> getBooks() {
