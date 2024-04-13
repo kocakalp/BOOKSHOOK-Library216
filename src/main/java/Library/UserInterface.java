@@ -506,6 +506,25 @@ public class UserInterface extends Application {
         addButton.setPrefSize(150,50);
 
         vAdd.getChildren().add(addButton);
+
+        TextField pathField = new TextField();
+        Button addPathButton = new Button("ADD PATH");
+        addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addPathButton.setOnAction(e -> { // when add button is pressed its cheks all the text fields excepts translator's textfield by adding them into a arraylist
+
+            if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill in field.");
+                alert.showAndWait();
+            }
+            Library.addBooks(String.valueOf(pathField));
+            addTab();
+        });
+        vAdd.getChildren().add(pathField);
+        vAdd.getChildren().add(addPathButton);
+        
         Scene listScene = new Scene(vAdd, 600, 600);
 
         //setOnAction
