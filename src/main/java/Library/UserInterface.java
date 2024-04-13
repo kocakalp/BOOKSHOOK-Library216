@@ -257,7 +257,7 @@ public class UserInterface extends Application {
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tagColumn.setOnEditCommit(event -> {
             //add TAG değil setTag lazım
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).addTag(event.getNewValue());
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTags(event.getNewValue());
         });
 
 
@@ -305,7 +305,7 @@ public class UserInterface extends Application {
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         translatorColumn.setOnEditCommit(event -> {
             //add translator değil setTranslator lazım ve tam düzgün çalışmıyor
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).addTranslator(event.getNewValue());
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTranslators(event.getNewValue());
         });
 
 

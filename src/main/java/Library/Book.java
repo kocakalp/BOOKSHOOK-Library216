@@ -85,7 +85,7 @@ public class Book implements Comparable<Book>  {
             this.publicationYear = publicationYear;
         } else {
             System.out.println("invalid publication year");
-            setPublicationYear("0");
+            setPublicationYear("1");
         }
         JSON.updateJsonFile();
     }
@@ -103,7 +103,7 @@ public class Book implements Comparable<Book>  {
             this.edition = edition;
         } else {
             System.out.println("invalid edition");
-            setEdition("0");
+            setEdition("1");
         }
         JSON.updateJsonFile();
     }

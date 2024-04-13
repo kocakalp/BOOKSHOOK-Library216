@@ -85,6 +85,7 @@ public class JSON {
         books.add(book2);
         books.add(book3);
         books.add(book4);
+        books.add(new Book());
         updateJsonFile();
         //addBooks(filePath);
         for (Book b : books) {
