@@ -112,7 +112,7 @@ public  class SearchBar {
     public static ArrayList<Book> search(String in) {
         ArrayList<Book> show = new ArrayList<>();
         for (Book b : JSON.getBooks()) {
-            if(b.toString().contains(in)) show.add(b);
+            if(b.toString().toLowerCase().contains(in.toLowerCase())) show.add(b);
         }
         return show;
     }

@@ -93,7 +93,7 @@ public class UserInterface extends Application {
         //SEARCH
         Button searchButton = new Button("SEARCH");
         searchButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        searchButton.setOnAction(e -> listTab());
+        searchButton.setOnAction(e -> listTab(searchBar.getText()));
         searchButton.setPrefSize(150,50);
 
         //ADD
@@ -116,7 +116,6 @@ public class UserInterface extends Application {
         stage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
         stage.setTitle("BOOKSHOOK");
         stage.show();
-
     }
 
 
@@ -154,7 +153,7 @@ public class UserInterface extends Application {
         }
     }
 
-    private ObservableList<Book> getBookData() {
+    private ObservableList<Book> getBookData(String text) {
         ObservableList<Book> data = FXCollections.observableArrayList();
         JSON.addBooks("mainJson");
         // Kitap verilerinizi buraya ekleyin
@@ -164,7 +163,12 @@ public class UserInterface extends Application {
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
          */
         for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
-            data.add(SearchBar.search("").get(i));
+            try {
+                data.add(SearchBar.search(text).get(i));
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
 
         // Daha fazla kitap ekleyin
@@ -233,11 +237,11 @@ public class UserInterface extends Application {
         table.getColumns().add(edtButtonColumn);
     }
 
-    public void listTab() {
+    public void listTab(String text) {
         table.setEditable(true);
         table.getColumns().clear(); // it S clears all the raws and collumns inside of the listTab before items are added
         table.getItems().clear(); // this way we will not see double items and columns
-        ObservableList<Book> data = getBookData();
+        ObservableList<Book> data = getBookData(text);
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
