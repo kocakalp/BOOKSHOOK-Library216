@@ -7,6 +7,14 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Library.addBooks("mainJson");
+        JSON.addBooks("mainJson");
+        for (Book b : JSON.getBooks()) {
+            System.out.println(b);
+        }
+        ArrayList<Book> books = SearchBar.search("3");
+        System.out.println("Start");
+        for (Book b : books) {
+            System.out.println(b);
+        }
     }
 }
