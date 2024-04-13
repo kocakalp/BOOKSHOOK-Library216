@@ -42,38 +42,43 @@ public class Library {
             JSON.updateJsonFile();
         }
     }
+    public static  void editTags(String input,Book edited) {
+        if (books.contains(edited)) {
+            edited.setTags(input);
+            JSON.updateJsonFile();
+        }
+    }
+
+    public static  void editTranslators(String input,Book edited) {
+        if (books.contains(edited)) {
+            edited.setTranslators(input);
+            JSON.updateJsonFile();
+        }
+    }
 
     // can be improved
     public static void addTags(String input, Book edited) {
         if (books.contains(edited)) {
-            if (!edited.getTags().contains(input)) {
-                edited.addTag(input);
-                JSON.updateJsonFile();
-            }
+            edited.addTag(input);
+            JSON.updateJsonFile();
         }
     }
     public static void removeTags(String input, Book edited) {
         if (books.contains(edited)) {
-            if (edited.getTags().contains(input)) {
-                edited.removeTag(input);
-                JSON.updateJsonFile();
-            }
+            edited.removeTag(input);
+            JSON.updateJsonFile();
         }
     }
     public static void addTranslator(String input, Book edited) {
         if (books.contains(edited)) {
-            if (!edited.getTranslators().contains(input)) {
-                edited.addTranslator(input);
-                JSON.updateJsonFile();
-            }
+            edited.addTranslator(input);
+            JSON.updateJsonFile();
         }
     }
     public static void removeTranslator(String input, Book edited) {
         if (books.contains(edited)) {
-            if (!edited.getTranslators().contains(input)) {
-                edited.removeTranslator(input);
-                JSON.updateJsonFile();
-            }
+            edited.removeTranslator(input);
+            JSON.updateJsonFile();
         }
     }
 

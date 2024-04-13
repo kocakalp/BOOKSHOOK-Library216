@@ -164,7 +164,7 @@ public class UserInterface extends Application {
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
          */
         for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
-            data.add(JSON.getBooks().get(i));
+            data.add(SearchBar.search("").get(i));
         }
 
         // Daha fazla kitap ekleyin
@@ -245,7 +245,7 @@ public class UserInterface extends Application {
         titleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTitle()));
         titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         titleColumn.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTitle(event.getNewValue());
+            Library.editTitle(event.getNewValue(), event.getTableView().getItems().get(event.getTablePosition().getRow()) );
         });
 
 
@@ -257,7 +257,7 @@ public class UserInterface extends Application {
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tagColumn.setOnEditCommit(event -> {
             //add TAG değil setTag lazım
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTags(event.getNewValue());
+            Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
 
@@ -267,7 +267,7 @@ public class UserInterface extends Application {
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
         authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         authorColumn.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setAuthor(event.getNewValue());
+            Library.editAuthor(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
@@ -276,7 +276,7 @@ public class UserInterface extends Application {
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
         publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         publisherColumn.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setPublisher(event.getNewValue());
+            Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()) );
         });
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
@@ -285,7 +285,7 @@ public class UserInterface extends Application {
         dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublicationYear()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dateColumn.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setPublicationYear(event.getNewValue());
+            Library.editPublicationYear(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
@@ -294,7 +294,7 @@ public class UserInterface extends Application {
         isbnColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getIsbn()));
         isbnColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         isbnColumn.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setIsbn(event.getNewValue());
+            Library.editIsbn(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
         //Arraylist alıyor nasıl yapacaımı bilemedim.
@@ -305,7 +305,7 @@ public class UserInterface extends Application {
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         translatorColumn.setOnEditCommit(event -> {
             //add translator değil setTranslator lazım ve tam düzgün çalışmıyor
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTranslators(event.getNewValue());
+            Library.editTranslators(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
 
@@ -482,9 +482,11 @@ public class UserInterface extends Application {
                     break;
                 }
             }
-            ArrayList tags = new ArrayList<>();
-            ArrayList trans = new ArrayList<>();
-            Book book = new Book("af","sfsf","sfsf","34","1000000000","24224",tags,trans);
+            ArrayList<String> tags = new ArrayList<>();
+            ArrayList<String> trans = new ArrayList<>();
+            Book book = new Book(textFieldArrayList.get(0).getText(),textFieldArrayList.get(1).getText(),textFieldArrayList.get(2).getText(),textFieldArrayList.get(3).getText(),textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans);
+            //book.setTags(textFieldArrayList.get(6).getText());
+            //book.setTranslators(textFieldArrayList.get(7).getText());
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
