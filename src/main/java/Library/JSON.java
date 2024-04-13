@@ -71,8 +71,11 @@ public class JSON {
         return books;
     }
 
-    //test
+
+    /*
+    //MAIN TEST AMAÇLIDIR.
     public static void main(String[] args) {
+
         System.out.println("START");
         Book book1 = new Book("PKitap","Yazar","basımcı","1994", "1000000000", "2",new ArrayList<String>(),new ArrayList<String>());
         Book book2 = new Book("sevAL kİTAP","Yazar","basımcı","1994", "1000000000", "3",new ArrayList<String>(),new ArrayList<String>());
@@ -92,4 +95,5 @@ public class JSON {
             System.out.println(b);
         }
     }
+     */
 }
