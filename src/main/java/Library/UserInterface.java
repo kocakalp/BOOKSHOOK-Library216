@@ -402,26 +402,32 @@ public class UserInterface extends Application {
 
         vAdd.getChildren().add(addButton);
 
-        //TextField pathField = new TextField();
-        Button addPathButton = new Button("ADD PATH");
-        addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        addPathButton.setOnAction(e -> { // when add button is pressed its cheks all the text fields excepts translator's textfield by adding them into a arraylist
+
+        Button selecthPathButton = new Button("SELECTH PATH");
+        selecthPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        selecthPathButton.setOnAction(e -> {
             FileChooser fc = new FileChooser();
             fc.setTitle("Select File to open");
             File f = fc.showOpenDialog(addStage);
             Library.addBooks(String.valueOf(f.toPath()));
         });
-            /*if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
+        vAdd.getChildren().add(selecthPathButton);
+
+        TextField pathField = new TextField();
+        Button addPathButton = new Button("ADD PATH");
+        addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addPathButton.setOnAction(e -> {
+            if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
                 alert.setContentText("Please fill in field.");
                 alert.showAndWait();
             }
-            Library.addBooks(String.valueOf(pathField));
+            Library.addBooks(pathField.getText());
             addTab();
         });
-        vAdd.getChildren().add(pathField);*/
+        vAdd.getChildren().add(pathField);
 
         vAdd.getChildren().add(addPathButton);
 
