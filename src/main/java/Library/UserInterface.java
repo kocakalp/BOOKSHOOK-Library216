@@ -163,8 +163,8 @@ public class UserInterface extends Application {
         data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
         data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
          */
-        for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
-            data.add(SearchBar.search("").get(i));
+        for (int i = 0 ; i < SearchBar.search("").size() ; i++ ) {
+            data.add(JSON.getBooks().get(i));
         }
 
         // Daha fazla kitap ekleyin
