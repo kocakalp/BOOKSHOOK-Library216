@@ -35,20 +35,10 @@ public class Book implements Comparable<Book>  {
     //for test remove in th future
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
 
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
+        this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), translators);
     }
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
+        this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), new ArrayList<>());
     }
 
     //Getters
@@ -60,34 +50,6 @@ public class Book implements Comparable<Book>  {
     public String getEdition() {return edition;}
     public ArrayList<String> getTranslators() {return translators;}
     public ArrayList<String> getTags() {return tags;}
-
-    //Handling Arrays
-    public void addTag(String tag) {
-        if(isValidTags(tag))tags.add(tag);
-        JSON.updateJsonFile();
-    }
-    public void addTags(ArrayList<String> tags) {
-        for (String tag : tags) {
-            addTag(tag);
-        }
-    }
-    public void removeTag(String tag) {
-        tags.remove(tag);
-        JSON.updateJsonFile();
-    }
-    public void addTranslator(String translator) {
-        if(isValidTranslators(translator))translators.add(translator);
-        JSON.updateJsonFile();
-    }
-    public void addTranslators(ArrayList<String> translators) {
-        for (String translator : translators) {
-            addTranslator(translator);
-        }
-    }
-    public void removeTranslator(String translator) {
-        translators.remove(translator);
-        JSON.updateJsonFile();
-    }
 
     //Setters
     //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
@@ -146,24 +108,50 @@ public class Book implements Comparable<Book>  {
         JSON.updateJsonFile();
     }
 
+    //Handling Arrays
     public void setTags(String in) {
         String[] tags = in.split(",");
-        if (tags.length > 0) {
-            this.tags.clear();
-            for (String t : tags) {
-                addTag(t);
-            }
+        if(!in.isBlank() && tags.length == 0) return;
+        this.tags.clear();
+        for (String t : tags) {
+            addTag(t);
         }
     }
     public void setTranslators(String in) {
-        String[] translator = in.split(",");
-        if (translator.length > 0) {
-            this.translators.clear();
-            for (String t : tags) {
-                addTag(t);
-            }
+        String[] translators = in.split(",");
+        if(!in.isBlank() && translators.length == 0) return;
+        this.translators.clear();
+        for (String t : translators) {
+            addTranslator(t);
         }
     }
+    public void addTag(String tag) {
+        if(isValidTags(tag))tags.add(tag);
+        JSON.updateJsonFile();
+    }
+    public void addTags(ArrayList<String> tags) {
+        for (String tag : tags) {
+            addTag(tag);
+        }
+    }
+    public void removeTag(String tag) {
+        tags.remove(tag);
+        JSON.updateJsonFile();
+    }
+    public void addTranslator(String translator) {
+        if(isValidTranslators(translator))translators.add(translator);
+        JSON.updateJsonFile();
+    }
+    public void addTranslators(ArrayList<String> translators) {
+        for (String translator : translators) {
+            addTranslator(translator);
+        }
+    }
+    public void removeTranslator(String translator) {
+        translators.remove(translator);
+        JSON.updateJsonFile();
+    }
+
     //Validation Methods.
     public Boolean isValidTitle(String input) {
         try {
