@@ -48,7 +48,6 @@ public class Library {
             JSON.updateJsonFile();
         }
     }
-
     public static  void editTranslators(String input,Book edited) {
         if (books.contains(edited)) {
             edited.setTranslators(input);
@@ -57,6 +56,7 @@ public class Library {
     }
 
     // can be improved
+    //might be useless
     public static void addTags(String input, Book edited) {
         if (books.contains(edited)) {
             edited.addTag(input);
