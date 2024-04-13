@@ -31,7 +31,7 @@ public class BookAdapter extends TypeAdapter {
             out.value(tag);
         }
         out.endArray();
-        out.name("translator");
+        out.name("translators");
         out.beginArray();
         for (String translator: book.getTranslators()) {
             out.value(translator);
@@ -43,68 +43,53 @@ public class BookAdapter extends TypeAdapter {
     //GPTle yazdın bi ara çalış.
     @Override
     public Book read(JsonReader in) throws IOException {
-        String title = null;
-        String author = null;
-        String publisher = null;
-        String publicationYear = null;
-        String isbn = null;
-        String edition = null;
-        ArrayList<String> translators = new ArrayList<>();
-        ArrayList<String> tags = new ArrayList<>();
-
+        Book book = new Book();
         in.beginObject();
         while (in.hasNext()) {
             String name = in.nextName();
-            if (name.equals("title")) {
-                title = in.nextString();
-            } else if (name.equals("author")) {
-                author = in.nextString();
-            } else if (name.equals("publisher")) {
-                publisher = in.nextString();
-            } else if (name.equals("publicationYear")) {
-                publicationYear = in.nextString();
-            } else if (name.equals("isbn")) {
-                isbn = in.nextString();
-            } else if (name.equals("edition")) {
-                edition = in.nextString();
-            } else if (name.equals("translators")) {
-                if (in.peek() == JsonToken.BEGIN_ARRAY) {
+            switch (name) {
+                case "title":
+                    book.setTitle(in.nextString());
+                    break;
+                case "author":
+                    book.setAuthor(in.nextString());
+                    break;
+                case "publisher":
+                    book.setPublisher(in.nextString());
+                    break;
+                case "publicationYear":
+                    book.setPublicationYear(in.nextString());
+                    break;
+                case "isbn":
+                    book.setIsbn(in.nextString());
+                    break;
+                case "edition":
+                    book.setEdition(in.nextString());
+                    break;
+                case "tags":
                     in.beginArray();
-                    while (in.hasNext()) {
-                        translators.add(in.nextString());
-                    }
-                    in.endArray();
-                } else {
-                    // Handle the case where 'translators' is not an array
-                    translators.add(in.nextString());
-                }
-            } else if (name.equals("tags")) {
-                if (in.peek() == JsonToken.BEGIN_ARRAY) {
-                    in.beginArray();
+                    ArrayList<String> tags = new ArrayList<>();
                     while (in.hasNext()) {
                         tags.add(in.nextString());
                     }
                     in.endArray();
-                } else {
-                    // Handle the case where 'tags' is not an array
-                    tags.add(in.nextString());
-                }
-            } else {
-                in.skipValue(); // Ignore unknown fields
+                    book.addTags(tags);
+                    break;
+                case "translators":
+                    in.beginArray();
+                    ArrayList<String> translators = new ArrayList<>();
+                    while (in.hasNext()) {
+                        translators.add(in.nextString());
+                    }
+                    in.endArray();
+                    book.addTranslators(translators);
+                    break;
+                default:
+                    in.skipValue(); // Ignore unrecognized fields
+                    break;
             }
         }
         in.endObject();
-
-        Book book = new Book();
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPublisher(publisher);
-        book.setPublicationYear(publicationYear);
-        book.setIsbn(isbn);
-        book.setEdition(edition);
-        book.addTranslators(translators);
-        book.addTags(tags);
-
         return book;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 
-public class Book implements Comparable<Book>  {
+public class Book implements Comparable<Book> {
     private String title;
     private String author;
     private String publisher;
@@ -49,12 +49,12 @@ public class Book implements Comparable<Book>  {
     public String getPublicationYear() {return publicationYear;}
     public String getIsbn() {return isbn;}
     public String getEdition() {return edition;}
-    public ArrayList<String> getTranslators() {return translators;}
     public ArrayList<String> getTags() {return tags;}
+    public ArrayList<String> getTranslators() {return translators;}
+
 
     //Setters
     //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
-    //json update ilerde taşınabilir.
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
@@ -122,18 +122,19 @@ public class Book implements Comparable<Book>  {
         }
     }
     public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
+    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
+
     public void addTags(ArrayList<String> tags) {
         for (String tag : tags) {
             addTag(tag);
         }
     }
-    public void removeTag(String tag) {tags.remove(tag);}
-    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
     public void addTranslators(ArrayList<String> translators) {
         for (String translator : translators) {
             addTranslator(translator);
         }
     }
+    public void removeTag(String tag) {tags.remove(tag);}
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
@@ -182,13 +183,6 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidTranslators(String input) {
-        try {
-            return input != null && !input.isBlank();
-        } catch(Exception E){
-            return false;
-        }
-    }
     public boolean isValidTags(String input) {
         try {
             return input != null && !input.isBlank();
@@ -196,28 +190,46 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
+    public boolean isValidTranslators(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+
     public String edit(){Scanner sc = new Scanner(System.in);return sc.nextLine();}
 
     //toString
     @Override
     public String toString() {
-        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+getTagsAsString() +getTranslatorAsString();
-    }
-    private String getTranslatorAsString(){
-        StringBuilder translatorAsString = new StringBuilder();
-        for (String i : translators) {
-            translatorAsString.append(i).append(", ");
-        }
-        return translatorAsString.toString();
-    }
-    private String getTagsAsString(){
-        StringBuilder tagsAsString = new StringBuilder();
+        if (translators.isEmpty() && tags.isEmpty())return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition();
 
-        for (String i : tags) {
-            tagsAsString.append(i).append(", ");
+        if (translators.isEmpty())return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+ ", "+ getTagsAsString();
+
+        if (tags.isEmpty())return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+ ", "+getTranslatorAsString();
+
+        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+ ", "+ getTagsAsString() +", " +getTranslatorAsString();
+    }
+    public String getTagsAsString(){
+        if(tags.isEmpty()) return "";
+        StringBuilder tagsAsString = new StringBuilder();
+        for (int i = 0; i < tags.size() - 1 ;i++) {
+            tagsAsString.append(tags.get(i)).append(", ");
         }
+        tagsAsString.append(tags.get(tags.size() - 1));
         return tagsAsString.toString();
     }
+    public String getTranslatorAsString(){
+        if(translators.isEmpty()) return "";
+        StringBuilder translatorAsString = new StringBuilder();
+        for (int i = 0; i < translators.size() - 1 ;i++) {
+            translatorAsString.append(translators.get(i)).append(", ");
+        }
+        translatorAsString.append(translators.get(translators.size() - 1));
+        return translatorAsString.toString();
+    }
+
 
     //bi ara kontrol et
     @Override

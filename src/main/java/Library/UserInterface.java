@@ -253,7 +253,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(100);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
-        tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTags().toString()));
+        tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tagColumn.setOnEditCommit(event -> {
             //add TAG değil setTag lazım
@@ -301,7 +301,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
-        translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslators().toString()));
+        translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         translatorColumn.setOnEditCommit(event -> {
             //add translator değil setTranslator lazım ve tam düzgün çalışmıyor
