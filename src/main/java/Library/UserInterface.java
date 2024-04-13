@@ -297,6 +297,15 @@ public class UserInterface extends Application {
             Library.editIsbn(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
+        TableColumn<Book, String> editionColumn = new TableColumn<>("Edition");
+        editionColumn.setPrefWidth(85);
+        editionColumn.setCellValueFactory(new PropertyValueFactory<>("edition"));
+        editionColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getEdition()));
+        editionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        editionColumn.setOnEditCommit(event -> {
+            Library.editEdition(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+        });
+
         //Arraylist alıyor nasıl yapacaımı bilemedim.
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
@@ -340,7 +349,7 @@ public class UserInterface extends Application {
         });
          */
 
-        table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,translatorColumn);
+        table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,translatorColumn);
         addButtonToTable();
         table.setItems(data);
 
