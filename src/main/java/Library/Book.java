@@ -12,8 +12,9 @@ public class Book implements Comparable<Book>  {
     private String publicationYear;
     private String isbn;
     private String edition;
-    private final ArrayList<String> translators = new ArrayList<>();
     private final ArrayList<String> tags = new ArrayList<>();
+    private final ArrayList<String> translators = new ArrayList<>();
+
 
     //JSON.updateJsonFile(); işlevsiz olabilir test et.
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators) {
@@ -49,12 +50,12 @@ public class Book implements Comparable<Book>  {
     public String getPublicationYear() {return publicationYear;}
     public String getIsbn() {return isbn;}
     public String getEdition() {return edition;}
-    public ArrayList<String> getTranslators() {return translators;}
     public ArrayList<String> getTags() {return tags;}
+
+    public ArrayList<String> getTranslators() {return translators;}
 
     //Setters
     //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
-    //json update ilerde taşınabilir.
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
@@ -122,18 +123,18 @@ public class Book implements Comparable<Book>  {
         }
     }
     public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
+    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
     public void addTags(ArrayList<String> tags) {
         for (String tag : tags) {
             addTag(tag);
         }
     }
-    public void removeTag(String tag) {tags.remove(tag);}
-    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
     public void addTranslators(ArrayList<String> translators) {
         for (String translator : translators) {
             addTranslator(translator);
         }
     }
+    public void removeTag(String tag) {tags.remove(tag);}
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
@@ -201,22 +202,26 @@ public class Book implements Comparable<Book>  {
     //toString
     @Override
     public String toString() {
-        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+getTagsAsString() +getTranslatorAsString();
+        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition();
+        if(tags.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString();
+        if(translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTagsAsString();
+        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+","+getTagsAsString()+", "+getTranslatorAsString();
     }
-    private String getTranslatorAsString(){
-        StringBuilder translatorAsString = new StringBuilder();
-        for (String i : translators) {
-            translatorAsString.append(i).append(", ");
-        }
-        return translatorAsString.toString();
-    }
-    private String getTagsAsString(){
+    public String getTagsAsString(){
+        if (tags.isEmpty()) return "";
         StringBuilder tagsAsString = new StringBuilder();
-
-        for (String i : tags) {
-            tagsAsString.append(i).append(", ");
+        for (int i = 0; i < tags.size() - 1; i++) {
+            tagsAsString.append(tags.get(i)).append(", ");
         }
-        return tagsAsString.toString();
+        return tagsAsString.append(tags.size()-1).toString();
+    }
+    public String getTranslatorAsString(){
+        if (translators.isEmpty()) return "";
+        StringBuilder translatorAsString = new StringBuilder();
+        for (int i = 0; i < translators.size() - 1; i++) {
+            translatorAsString.append(translators.get(i)).append(", ");
+        }
+        return translatorAsString.append(translators.size()-1).toString();
     }
 
     //bi ara kontrol et
