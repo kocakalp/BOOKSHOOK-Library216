@@ -213,7 +213,7 @@ public class Book implements Comparable<Book>  {
         for (int i = 0; i < tags.size() - 1; i++) {
             tagsAsString.append(tags.get(i)).append(", ");
         }
-        return tagsAsString.append(tags.size()-1).toString();
+        return tagsAsString.append(tags.get(tags.size()-1)).toString();
     }
     public String getTranslatorAsString(){
         if (translators.isEmpty()) return "";
@@ -221,7 +221,7 @@ public class Book implements Comparable<Book>  {
         for (int i = 0; i < translators.size() - 1; i++) {
             translatorAsString.append(translators.get(i)).append(", ");
         }
-        return translatorAsString.append(translators.size()-1).toString();
+        return translatorAsString.append(translators.get(translators.size()-1)).toString();
     }
 
     //bi ara kontrol et
