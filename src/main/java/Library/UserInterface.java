@@ -21,6 +21,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -401,12 +402,16 @@ public class UserInterface extends Application {
 
         vAdd.getChildren().add(addButton);
 
-        TextField pathField = new TextField();
+        //TextField pathField = new TextField();
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         addPathButton.setOnAction(e -> { // when add button is pressed its cheks all the text fields excepts translator's textfield by adding them into a arraylist
-
-            if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Select File to open");
+            File f = fc.showOpenDialog(addStage);
+            Library.addBooks(String.valueOf(f.toPath()));
+        });
+            /*if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
@@ -416,9 +421,10 @@ public class UserInterface extends Application {
             Library.addBooks(String.valueOf(pathField));
             addTab();
         });
-        vAdd.getChildren().add(pathField);
+        vAdd.getChildren().add(pathField);*/
+
         vAdd.getChildren().add(addPathButton);
-        
+
         Scene listScene = new Scene(vAdd, 600, 600);
 
         //setOnAction
