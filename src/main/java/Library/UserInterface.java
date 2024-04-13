@@ -437,8 +437,7 @@ public class UserInterface extends Application {
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-        String[] labels = {"Book Title:", "Author:", "Publisher:", "Publication Date:", "Edition:", "Translator:", "Tags:"};
-
+        String[] labels = {"Book Title:", "Author:", "Publisher:", "Publication Date:", "ISBN", "Edition:", "Translator:", "Tags:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
         for (String labelText : labels) {
@@ -449,7 +448,7 @@ public class UserInterface extends Application {
             Font hoverFont = new Font(22);
             hover.setFont(hoverFont);
             hover.setTextFill(Color.rgb(208, 90 ,90));
-            Tooltip tooltip = new Tooltip("this area needs to be filled");
+            Tooltip tooltip = new Tooltip("This field is required");
             tooltip.setShowDelay(Duration.millis(3));
             Font tooltipFont = new Font(10);
             tooltip.setFont(tooltipFont);
@@ -483,10 +482,10 @@ public class UserInterface extends Application {
                 }
             }
             ArrayList<String> tags = new ArrayList<>();
+            tags.add(textFieldArrayList.get(6).getText());
             ArrayList<String> trans = new ArrayList<>();
-            Book book = new Book(textFieldArrayList.get(0).getText(),textFieldArrayList.get(1).getText(),textFieldArrayList.get(2).getText(),textFieldArrayList.get(3).getText(),textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans);
-            //book.setTags(textFieldArrayList.get(6).getText());
-            //book.setTranslators(textFieldArrayList.get(7).getText());
+            trans.add(translatorTextField.getText());
+            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans);
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
