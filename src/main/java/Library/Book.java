@@ -15,6 +15,7 @@ public class Book implements Comparable<Book>  {
     private final ArrayList<String> translators = new ArrayList<>();
     private final ArrayList<String> tags = new ArrayList<>();
 
+    //JSON.updateJsonFile(); işlevsiz olabilir test et.
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators) {
 
         setTitle(title);
@@ -35,20 +36,10 @@ public class Book implements Comparable<Book>  {
     //for test remove in th future
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
 
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
+        this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), translators);
     }
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.edition = edition;
+        this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), new ArrayList<>());
     }
 
     //Getters
@@ -61,34 +52,6 @@ public class Book implements Comparable<Book>  {
     public ArrayList<String> getTranslators() {return translators;}
     public ArrayList<String> getTags() {return tags;}
 
-    //Handling Arrays
-    public void addTag(String tag) {
-        if(isValidTags(tag))tags.add(tag);
-        JSON.updateJsonFile();
-    }
-    public void addTags(ArrayList<String> tags) {
-        for (String tag : tags) {
-            addTag(tag);
-        }
-    }
-    public void removeTag(String tag) {
-        tags.remove(tag);
-        JSON.updateJsonFile();
-    }
-    public void addTranslator(String translator) {
-        if(isValidTranslators(translator))translators.add(translator);
-        JSON.updateJsonFile();
-    }
-    public void addTranslators(ArrayList<String> translators) {
-        for (String translator : translators) {
-            addTranslator(translator);
-        }
-    }
-    public void removeTranslator(String translator) {
-        translators.remove(translator);
-        JSON.updateJsonFile();
-    }
-
     //Setters
     //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
     //json update ilerde taşınabilir.
@@ -99,7 +62,6 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid title");
             setTitle("title");
         }
-        JSON.updateJsonFile();
     }
     public void setAuthor(String author) {
         if(isValidAuthor(author)){
@@ -108,7 +70,6 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid author");
             setAuthor("author");
         }
-        JSON.updateJsonFile();
     }
     public void setPublisher(String publisher) {
         if(isValidPublisher(publisher)){
@@ -123,9 +84,8 @@ public class Book implements Comparable<Book>  {
             this.publicationYear = publicationYear;
         } else {
             System.out.println("invalid publication year");
-            setPublicationYear("0");
+            setPublicationYear("1");
         }
-        JSON.updateJsonFile();
     }
     public void setIsbn(String isbn) {
         if(isValidISBN(isbn)){
@@ -134,17 +94,47 @@ public class Book implements Comparable<Book>  {
             System.out.println("invalid isbn");
             setIsbn("0000000000");
         }
-        JSON.updateJsonFile();
     }
     public void setEdition(String edition) {
         if(isValidEdition(edition)){
             this.edition = edition;
         } else {
             System.out.println("invalid edition");
-            setEdition("0");
+            setEdition("1");
         }
-        JSON.updateJsonFile();
     }
+
+    //Handling Arrays
+    public void setTags(String in) {
+        String[] tags = in.split(",");
+        if(!in.isBlank() && tags.length == 0) return;
+        this.tags.clear();
+        for (String t : tags) {
+            addTag(t);
+        }
+    }
+    public void setTranslators(String in) {
+        String[] translators = in.split(",");
+        if(!in.isBlank() && translators.length == 0) return;
+        this.translators.clear();
+        for (String t : translators) {
+            addTranslator(t);
+        }
+    }
+    public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
+    public void addTags(ArrayList<String> tags) {
+        for (String tag : tags) {
+            addTag(tag);
+        }
+    }
+    public void removeTag(String tag) {tags.remove(tag);}
+    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
+    public void addTranslators(ArrayList<String> translators) {
+        for (String translator : translators) {
+            addTranslator(translator);
+        }
+    }
+    public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
     public Boolean isValidTitle(String input) {
