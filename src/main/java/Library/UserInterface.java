@@ -156,12 +156,6 @@ public class UserInterface extends Application {
     private ObservableList<Book> getBookData(String text) {
         ObservableList<Book> data = FXCollections.observableArrayList();
         JSON.addBooks("mainJson");
-        // Kitap verilerinizi buraya ekleyin
-        /*
-        data.add(new Book("Kitap Başlığı","Yazarr","publisher","basmacı","aaaa","aadfa"));
-        data.add(new Book("sevAL kİTAP","Yazar2","basımcı1","1994", "1000", "new"));
-        data.add(new Book("eNreDİZKitap","Yazar1","basımcı2","1994", "1000", "new"));
-         */
         for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
             try {
                 data.add(SearchBar.search(text).get(i));
@@ -321,38 +315,6 @@ public class UserInterface extends Application {
             Library.editTranslators(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
-
-
-        //EDIT buttonu için deneme.
-        /*
-        // Düzenleme butonunu içeren kolon
-        TableColumn<Book, Boolean> editCol = new TableColumn<>("Edit");
-        editCol.setCellValueFactory(data1 -> new SimpleBooleanProperty(true));
-        editCol.setCellFactory(col -> {
-            Button editButton = new Button("Edit");
-            TableCell<Book, Boolean> cell = new TableCell<>() {
-                @Override
-                protected void updateItem(Boolean item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(editButton);
-                        editButton.setOnAction(event -> {
-                            Book book = getTableView().getItems().get(getIndex());
-                            // Bu satırdaki tüm hücreleri düzenlenebilir hale getir
-                            table.edit(getIndex(),  table.getColumns().get(0));
-                            table.edit(getIndex(), table.getColumns().get(2));
-                            table.edit(getIndex(), table.getColumns().get(3));
-
-                        });
-                    }
-                }
-            };
-            return cell;
-        });
-         */
-
         table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,translatorColumn);
         addButtonToTable();
         table.setItems(data);
@@ -372,74 +334,6 @@ public class UserInterface extends Application {
         else {
             listStage.show();
         }
-
-
-
-
-
-        /*
-         class XCell extends ListCell<String> {
-            HBox hbox = new HBox();
-            Label label = new Label("");
-            Pane pane = new Pane(); //boşluk
-            Button delButton = new Button("Del");
-            Button editButton = new Button("Edt");
-
-            public XCell() {
-                super();
-
-                hbox.getChildren().addAll(label,pane,delButton,editButton);
-                HBox.setHgrow(pane, Priority.ALWAYS);
-                delButton.setOnAction(event -> getListView().getItems().remove(getItem()));
-                editButton.setOnAction(event -> {
-                    String currentItem = getItem();
-                    TextField textField = new TextField(currentItem);
-                    textField.positionCaret(currentItem.length());
-                    hbox.getChildren().set(0, textField);
-                    textField.requestFocus();
-
-                    textField.setOnAction(actionEvent -> updateItem(textField.getText()));
-                    textField.setOnMouseClicked(mouseEvent -> updateItem(textField.getText()));
-                    textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                        if (!newValue) {
-                            updateItem(textField.getText());
-                        }
-                    });
-                });
-
-
-            }
-             private void updateItem(String newText) {
-                 getListView().getItems().set(getIndex(), newText);
-                 hbox.getChildren().set(0, label);
-             }
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(null);
-                setGraphic(null);
-
-                if (item != null && !empty) {
-                    label.setText(item);
-                    setGraphic(hbox);
-                }
-            }
-        }
-
-
-
-        StackPane listPane = new StackPane();
-        Scene scene = new Scene(listPane, 1000, 750);
-        listStage.setScene(scene);
-        ObservableList<String> list = FXCollections.observableArrayList(
-                "Item 1", "Item 2", "Item 3", "Item 4","Item 5", "Item 6", "Item 7", "Item 8");
-        ListView<String> lv = new ListView<>(list);
-        lv.setCellFactory(param -> new XCell());
-        listPane.getChildren().add(lv);
-        listStage.setTitle("Book List");
-        listStage.show();
-
-         */
 
     }
 
