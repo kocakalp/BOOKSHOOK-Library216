@@ -405,7 +405,7 @@ public class UserInterface extends Application {
 
         Button selecthPathButton = new Button("SELECTH PATH");
         selecthPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        selecthPathButton.setOnAction(e -> {
+        selecthPathButton.setOnAction(e -> { // when add button is pressed its opens file explorer
             FileChooser fc = new FileChooser();
             fc.setTitle("Select File to open");
             File f = fc.showOpenDialog(addStage);
@@ -416,7 +416,7 @@ public class UserInterface extends Application {
         TextField pathField = new TextField();
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        addPathButton.setOnAction(e -> {
+        addPathButton.setOnAction(e -> { // when add button is pressed its  the text field for a path if its emty its show a warning
             if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
