@@ -78,6 +78,8 @@ public class UserInterface extends Application {
 
         Button helpButton = new Button("?");
         helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc;");
+        helpButton.setOnMouseEntered(e -> helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #a5d9be"));
+        helpButton.setOnMouseExited(e -> helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc"));
         helpButton.setPrefSize(50,50);//Bu satır işe yarıyormu bilmiyorum. kontrol edeceğim,
         //helpButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         helpButton.setTextFill(Color.rgb(214,55,55));
@@ -94,12 +96,16 @@ public class UserInterface extends Application {
         //SEARCH
         Button searchButton = new Button("SEARCH");
         searchButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        searchButton.setOnMouseEntered(e -> searchButton.setStyle("-fx-background-color: #a5d9be"));
+        searchButton.setOnMouseExited(e -> searchButton.setStyle("-fx-background-color: #c4d5fc"));
         searchButton.setOnAction(e -> listTab(searchBar.getText()));
         searchButton.setPrefSize(150,50);
 
         //ADD
         Button addButton = new Button("ADD");
         addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addButton.setOnMouseEntered(e -> addButton.setStyle("-fx-background-color: #a5d9be"));
+        addButton.setOnMouseExited(e -> addButton.setStyle("-fx-background-color: #c4d5fc"));
         addButton.setOnAction(e -> addTab());
         addButton.setPrefSize(150,50);
 
@@ -378,6 +384,8 @@ public class UserInterface extends Application {
 
         Button addButton = new Button("ADD");
         addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addButton.setOnMouseEntered(e -> addButton.setStyle("-fx-background-color: #a5d9be"));
+        addButton.setOnMouseExited(e -> addButton.setStyle("-fx-background-color: #c4d5fc"));
         addButton.setOnAction(e ->  { // when add button is pressed its cheks all the text fields excepts translator's textfield by adding them into a arraylist
             for (TextField tf : textFieldArrayList) {
                 if(tf.getText().isEmpty() || tf.getText().isBlank()) {
@@ -405,6 +413,8 @@ public class UserInterface extends Application {
 
         Button selecthPathButton = new Button("SELECTH PATH");
         selecthPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        selecthPathButton.setOnMouseEntered(e -> selecthPathButton.setStyle("-fx-background-color: #a5d9be"));
+        selecthPathButton.setOnMouseExited(e -> selecthPathButton.setStyle("-fx-background-color: #c4d5fc"));
         selecthPathButton.setOnAction(e -> { // when add button is pressed its opens file explorer
             FileChooser fc = new FileChooser();
             fc.setTitle("Select File to open");
@@ -416,6 +426,9 @@ public class UserInterface extends Application {
         TextField pathField = new TextField();
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
+        addPathButton.setOnMouseExited(e -> addPathButton.setStyle("-fx-background-color: #c4d5fc"));
+
         addPathButton.setOnAction(e -> { // when add button is pressed its  the text field for a path if its emty its show a warning
             if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
