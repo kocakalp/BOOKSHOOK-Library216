@@ -277,7 +277,7 @@ public class UserInterface extends Application {
 
 
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
-        tagColumn.setPrefWidth(100);
+        tagColumn.setPrefWidth(150);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
         tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -287,7 +287,7 @@ public class UserInterface extends Application {
 
 
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
-        authorColumn.setPrefWidth(100);
+        authorColumn.setPrefWidth(110);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
         authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -307,7 +307,7 @@ public class UserInterface extends Application {
 
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
-        dateColumn.setPrefWidth(150);
+        dateColumn.setPrefWidth(110);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
         dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublicationYear()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -317,7 +317,7 @@ public class UserInterface extends Application {
 
 
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
-        isbnColumn.setPrefWidth(100);
+        isbnColumn.setPrefWidth(80);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         isbnColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getIsbn()));
         isbnColumn.setCellFactory(TextFieldTableCell.forTableColumn());
