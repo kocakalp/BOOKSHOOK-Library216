@@ -1,22 +1,17 @@
 package Library;
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -26,8 +21,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -49,13 +42,13 @@ public class UserInterface extends Application {
         VBox vbox1 = new VBox();
         vbox1.setAlignment(Pos.CENTER);
 
-        //Label Hbox.
+        //Label H-box.
         HBox hBox1 = new HBox();
         hBox1.setAlignment(Pos.TOP_CENTER);
         Label labelBookShook = new Label("BOOKSHOOK");
         labelBookShook.setWrapText(true);
         labelBookShook.setTextFill(Color.rgb(87,22,95));
-        hBox1.setPadding(new Insets(-100, 0, 100, 0)); // Sağa 10 birim boşluk ekle
+        hBox1.setPadding(new Insets(-100, 0, 100, 0)); //Add 10 units of space to the right.
 
         Font labelFont = new Font(75);
         labelBookShook.setFont(labelFont);
@@ -64,7 +57,7 @@ public class UserInterface extends Application {
         hBox1.getChildren().addAll(labelBookShook);
 
 
-        //SearchBar and HelpButton Hbox.
+        //SearchBar and HelpButton H-box.
         HBox hBox2 = new HBox();
 
         TextField searchBar = new TextField();
@@ -74,15 +67,14 @@ public class UserInterface extends Application {
 
 
         Region spacer1 = new Region();
-        spacer1.setPrefWidth(20); // 20 birim genişlikte bir boşluk ekleyin
+        spacer1.setPrefWidth(20); //Add a space 20 units wide
 
         Button helpButton = new Button("?");
         helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc;");
         helpButton.setOnMouseEntered(e -> helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #a5d9be"));
         helpButton.setOnMouseExited(e -> helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc"));
-        helpButton.setPrefSize(50,50);//Bu satır işe yarıyormu bilmiyorum. kontrol edeceğim,
-        //helpButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
-        helpButton.setTextFill(Color.rgb(214,55,55));
+        helpButton.setPrefSize(50,50);
+        helpButton.setTextFill(Color.rgb(214,55,55)); //Set background color.
         helpButton.setOnAction(e -> helpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
@@ -95,7 +87,7 @@ public class UserInterface extends Application {
 
         //SEARCH
         Button searchButton = new Button("SEARCH");
-        searchButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        searchButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         searchButton.setOnMouseEntered(e -> searchButton.setStyle("-fx-background-color: #a5d9be"));
         searchButton.setOnMouseExited(e -> searchButton.setStyle("-fx-background-color: #c4d5fc"));
         searchButton.setOnAction(e -> listTab(searchBar.getText()));
@@ -103,14 +95,14 @@ public class UserInterface extends Application {
 
         //ADD
         Button addButton = new Button("ADD");
-        addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         addButton.setOnMouseEntered(e -> addButton.setStyle("-fx-background-color: #a5d9be"));
         addButton.setOnMouseExited(e -> addButton.setStyle("-fx-background-color: #c4d5fc"));
         addButton.setOnAction(e -> addTab());
         addButton.setPrefSize(150,50);
 
         Region spacer2 = new Region();
-        spacer2.setPrefWidth(250); // 100 birim genişlikte bir boşluk ekleyin
+        spacer2.setPrefWidth(250); //Add a space 100 units wide.
         hBox3.getChildren().addAll(searchButton,spacer2,addButton);
         hBox3.setAlignment(Pos.CENTER);
 
@@ -120,22 +112,22 @@ public class UserInterface extends Application {
         Scene scene = new Scene(vbox1, 1200, 800);
 
         stage.setScene(scene);
-        stage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        stage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         stage.setTitle("BOOKSHOOK");
         stage.show();
     }
 
 
     public void helpMenu() {
-        //Vbox opened
+        //V-box opened
         VBox vHelp1 = new VBox();
         vHelp1.setAlignment(Pos.CENTER);
 
-        //Hbox
+        //H-box
         HBox hHelp = new HBox();
         hHelp.setAlignment(Pos.CENTER);
 
-        //Lab için yazdığım programdan aldım özelleştiricem
+        //Needs to be customized according to the project.
         Text text = new Text("For Save file press save or Ctrl+S\n" +
                 "For Open file press Open or Ctrl+O\n" +
                 "For Quit  press Quit or Ctrl+Q\n");
@@ -147,11 +139,11 @@ public class UserInterface extends Application {
         Scene helpScene = new Scene(vHelp1, 600, 600);
 
         //setOnAction
-        helpStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        helpStage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         helpStage.setScene(helpScene);
         helpStage.setTitle("Help Menu");
 
-        //sekmenin açıklık kontrolü, açıksa en üste çıkartır.
+        //The tab's openness control raises it to the top if it's open.
         if (helpStage.isShowing()){
             helpStage.toFront();
         }
@@ -160,6 +152,7 @@ public class UserInterface extends Application {
         }
     }
 
+    //Method to take the data of the books required for the library from the json file and transfer it to the table.
     private ObservableList<Book> getBookData(String text) {
         ObservableList<Book> data = FXCollections.observableArrayList();
         JSON.addBooks("mainJson.json");
@@ -171,11 +164,10 @@ public class UserInterface extends Application {
                 System.out.println(e);
             }
         }
-
-        // Daha fazla kitap ekleyin
         return data;
     }
 
+    //It is the function unit where you add buttons to each row in the table and gain the functionality of the buttons.
     private void addButtonToTable() {
         TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
         TableColumn<Book, Void> edtButtonColumn = new TableColumn<>("E");
@@ -185,9 +177,7 @@ public class UserInterface extends Application {
 
             {
                 delButton.setOnAction(event -> {
-                    //getTableView().getItems().remove(getIndex());
                     JSON.removeBook(getTableView().getItems().remove(getIndex()));
-
                 });
             }
 
@@ -224,7 +214,7 @@ public class UserInterface extends Application {
 
                     edtButton.setOnAction(event -> {
                         Book book = getTableView().getItems().get(getIndex());
-                        // Bu satırdaki tüm hücreleri düzenlenebilir hale getir
+                        //Make all cells in this row editable.
                         table.edit(getIndex(),  table.getColumns().get(0));
                     });
                 }
@@ -238,11 +228,13 @@ public class UserInterface extends Application {
         table.getColumns().add(edtButtonColumn);
     }
 
+    //Function that provides a list view of books in a table.
     public void listTab(String text) {
         table.setEditable(true);
-        table.getColumns().clear(); // it S clears all the raws and collumns inside of the listTab before items are added
-        table.getItems().clear(); // this way we will not see double items and columns
+        table.getColumns().clear(); //it S clears all the rows and columns inside the listTab before items are added
+        table.getItems().clear(); //this way we will not see double items and columns
         ObservableList<Book> data = getBookData(text);
+
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
@@ -254,14 +246,12 @@ public class UserInterface extends Application {
         });
 
 
-        //Arraylist alıyor nasıl yapacaımı bilemedim.
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(100);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
         tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tagColumn.setOnEditCommit(event -> {
-            //add TAG değil setTag lazım
             Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
@@ -275,6 +265,7 @@ public class UserInterface extends Application {
             Library.editAuthor(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
+
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(100);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
@@ -283,6 +274,7 @@ public class UserInterface extends Application {
         publisherColumn.setOnEditCommit(event -> {
             Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()) );
         });
+
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
         dateColumn.setPrefWidth(150);
@@ -293,6 +285,7 @@ public class UserInterface extends Application {
             Library.editPublicationYear(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
+
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
         isbnColumn.setPrefWidth(100);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -301,6 +294,7 @@ public class UserInterface extends Application {
         isbnColumn.setOnEditCommit(event -> {
             Library.editIsbn(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
+
 
         TableColumn<Book, String> editionColumn = new TableColumn<>("Edition");
         editionColumn.setPrefWidth(85);
@@ -311,30 +305,31 @@ public class UserInterface extends Application {
             Library.editEdition(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
-        //Arraylist alıyor nasıl yapacaımı bilemedim.
+
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
         translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         translatorColumn.setOnEditCommit(event -> {
-            //add translator değil setTranslator lazım ve tam düzgün çalışmıyor
             Library.editTranslators(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
+
 
         table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,translatorColumn);
         addButtonToTable();
         table.setItems(data);
 
 
-
         VBox vbox = new VBox(table);
         vbox.setVgrow(table,Priority.ALWAYS);
+
 
         Scene scene = new Scene(vbox,1000,750);
         listStage.setScene(scene);
         listStage.setTitle("Book List");
 
+        //The tab's openness control raises it to the top if it's open.
         if (listStage.isShowing()){
             listStage.toFront();
         }
@@ -344,7 +339,7 @@ public class UserInterface extends Application {
 
     }
 
-
+    //A method that allows adding books to the library or transferring an entire library.
     public void addTab() {
         //Vbox opened
         VBox vAdd = new VBox();
@@ -361,7 +356,7 @@ public class UserInterface extends Application {
             Label hover = new Label("*");
             Font hoverFont = new Font(22);
             hover.setFont(hoverFont);
-            hover.setTextFill(Color.rgb(208, 90 ,90));
+            hover.setTextFill(Color.rgb(208, 90 ,90)); //Set background color.
             Tooltip tooltip = new Tooltip("This field is required");
             tooltip.setShowDelay(Duration.millis(3));
             Font tooltipFont = new Font(10);
@@ -376,17 +371,17 @@ public class UserInterface extends Application {
             vAdd.getChildren().add(hbox);
         }
 
-        Label translatorLaber = new Label("Translator:");
+        Label translatorLabeler = new Label("Translator:");
         TextField translatorTextField = new TextField();
         HBox translatorHBox = new HBox();
-        translatorHBox.getChildren().addAll(translatorLaber, translatorTextField);
+        translatorHBox.getChildren().addAll(translatorLabeler, translatorTextField);
         vAdd.getChildren().add(translatorHBox);
 
         Button addButton = new Button("CREATE BOOK");
-        addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         addButton.setOnMouseEntered(e -> addButton.setStyle("-fx-background-color: #a5d9be"));
         addButton.setOnMouseExited(e -> addButton.setStyle("-fx-background-color: #c4d5fc"));
-        addButton.setOnAction(e ->  { // when add button is pressed its cheks all the text fields excepts translator's textfield by adding them into a arraylist
+        addButton.setOnAction(e ->  { // when add button is pressed its checks all the text fields excepts translator's textField by adding them into arraylist.
             for (TextField tf : textFieldArrayList) {
                 if(tf.getText().isEmpty() || tf.getText().isBlank()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -411,8 +406,8 @@ public class UserInterface extends Application {
         vAdd.getChildren().add(addButton);
 
 
-        Button selecthPathButton = new Button("SELECTH PATH");
-        selecthPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        Button selecthPathButton = new Button("SELECT PATH");
+        selecthPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         selecthPathButton.setOnMouseEntered(e -> selecthPathButton.setStyle("-fx-background-color: #a5d9be"));
         selecthPathButton.setOnMouseExited(e -> selecthPathButton.setStyle("-fx-background-color: #c4d5fc"));
         selecthPathButton.setOnAction(e -> { // when add button is pressed its opens file explorer
@@ -424,13 +419,13 @@ public class UserInterface extends Application {
         vAdd.getChildren().add(selecthPathButton);
 
         TextField pathField = new TextField();
-        pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\Starman\"");
+        pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\Library.json\"");
         Button addPathButton = new Button("ADD PATH");
-        addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
+        addPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
         addPathButton.setOnMouseExited(e -> addPathButton.setStyle("-fx-background-color: #c4d5fc"));
 
-        addPathButton.setOnAction(e -> { // when add button is pressed its  the text field for a path if its emty its show a warning
+        addPathButton.setOnAction(e -> { // when add button is pressed it's  the text field for a path if its empty its show a warning.
             if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
@@ -448,11 +443,11 @@ public class UserInterface extends Application {
         Scene listScene = new Scene(vAdd, 600, 600);
 
         //setOnAction
-        addStage.alwaysOnTopProperty();//POPUP ı hep en üste çıkartacak.
+        addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
         addStage.setScene(listScene);
         addStage.setTitle("ADD MENU");
 
-        //sekmenin açıklık kontrolü, açıksa en üste çıkartır.
+        //The tab's openness control raises it to the top if it's open.
         if (addStage.isShowing()){
             addStage.toFront();
         }
