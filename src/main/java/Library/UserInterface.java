@@ -424,6 +424,7 @@ public class UserInterface extends Application {
         vAdd.getChildren().add(selecthPathButton);
 
         TextField pathField = new TextField();
+        pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\Starman\"");
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
