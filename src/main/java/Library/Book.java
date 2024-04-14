@@ -16,7 +16,7 @@ public class Book implements Comparable<Book>  {
     private final ArrayList<String> translators = new ArrayList<>();
 
 
-    //JSON.updateJsonFile(); işlevsiz olabilir test et.
+    //JSON.updateJsonFile(); Test it may be dysfunctional.
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators) {
 
         setTitle(title);
@@ -34,9 +34,8 @@ public class Book implements Comparable<Book>  {
         this("title","author","publisher","1","0000000000","1",new ArrayList<>(), new ArrayList<>());
     }
 
-    //for test remove in th future
+    //for remove test in future
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
-
         this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), translators);
     }
     public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
@@ -55,7 +54,8 @@ public class Book implements Comparable<Book>  {
     public ArrayList<String> getTranslators() {return translators;}
 
     //Setters
-    //Else kısımları ilerde edit metodunu çağırcak şekilde değiştir.
+
+    //Change the Else parts to call the edit method in the future.(?)
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
@@ -224,16 +224,16 @@ public class Book implements Comparable<Book>  {
         return translatorAsString.append(translators.get(translators.size()-1)).toString();
     }
 
-    //bi ara kontrol et
+    //check it.
     @Override
     public int compareTo(Book book) {
         String thisTitle = this.title.toLowerCase();
         String otherTitle = book.getTitle().toLowerCase();
-        // Büyük harfler önce gelmeli
+        // Capital letters must come first
         int compareResult = thisTitle.compareTo(otherTitle);
 
         if (compareResult == 0) {
-            // Büyük harflerin aynı olduğu durumda, orijinal büyük/küçük harf sırasına göre karşılaştırma yap
+            // If the uppercase letters are the same, compare in original uppercase/lowercase order
             compareResult = this.title.compareTo(book.getTitle());
         }
 
