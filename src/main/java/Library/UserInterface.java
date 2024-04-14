@@ -47,7 +47,7 @@ public class UserInterface extends Application {
         hBox1.setAlignment(Pos.TOP_CENTER);
         Label labelBookShook = new Label("BOOKSHOOK");
         labelBookShook.setWrapText(true);
-        labelBookShook.setTextFill(Color.rgb(87,22,95));
+        labelBookShook.setTextFill(Color.rgb(87,22,95)); //Set RGB color.
         hBox1.setPadding(new Insets(-100, 0, 100, 0)); //Add 10 units of space to the right.
 
         Font labelFont = new Font(75);
@@ -74,7 +74,7 @@ public class UserInterface extends Application {
         helpButton.setOnMouseEntered(e -> helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #a5d9be"));
         helpButton.setOnMouseExited(e -> helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc"));
         helpButton.setPrefSize(50,50);
-        helpButton.setTextFill(Color.rgb(214,55,55)); //Set background color.
+        helpButton.setTextFill(Color.rgb(214,55,55)); //Set RGB color.
         helpButton.setOnAction(e -> helpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
@@ -118,6 +118,7 @@ public class UserInterface extends Application {
     }
 
 
+    //HelpMenu function for users to use the application without difficulty.
     public void helpMenu() {
         //V-box opened
         VBox vHelp1 = new VBox();
@@ -125,18 +126,47 @@ public class UserInterface extends Application {
 
         //H-box
         HBox hHelp = new HBox();
-        hHelp.setAlignment(Pos.CENTER);
+        hHelp.setAlignment(Pos.TOP_CENTER);
 
         //Needs to be customized according to the project.
-        Text text = new Text("For Save file press save or Ctrl+S\n" +
-                "For Open file press Open or Ctrl+O\n" +
-                "For Quit  press Quit or Ctrl+Q\n");
+        Text text = new Text("STAGE 1 - ADDING A LIBRARY OR BOOK\n\n" +
+
+                "There are two methods to integrate the library into the application.\n" +
+                "The first method involves selecting the desired library from the explorer tab,\n" +
+                "which appears upon clicking the 'SELECT PATH' button. Then, proceed by clicking the 'Open' button to import it.\n\n" +
+
+                "The second approach entails copying the path of the desired library and pasting it into the textField located above the 'ADD PATH' button.\n" +
+                "This textField includes an example path. Once pasted, click the 'ADD PATH' button to include the library in BOOKSHOOK.\n" +
+                "To add a book to the library, fill in the book requirements on the ADD Menu, then simply click the 'ADD' button.\n" +
+                "If you have already installed a library, the book you added will be registered within it.\n" +
+                "If not, the application will automatically create an empty library for you.\n\n\n" +
+
+
+                "STAGE 2 - SEARCHING, SORTING BOOKS\n\n" +
+
+                "After adding the library to BOOKSHOOK or creating a new one, finding a specific book is easy.\n" +
+                "Simply type one of the book attributes, such as Book Name, Tags, or Author Name, into the SearchBar.\n" +
+                "Then, press the 'SEARCH' button below the SearchBar. This allows you to quickly access the books you're looking for in your library.\n" +
+                "Once the Book List opens, you can sort the displayed books alphabetically, in reverse alphabetical order, numerically\n" +
+                "or vice versa by clicking on the column names at the top of the columns.\n\n\n" +
+
+
+                "STAGE 3 - EDITING, DELETING THE BOOKS\n\n" +
+
+                "After the books appear in your library, each book row is accompanied by two buttons at the end.\n" +
+                "Clicking the button with the trash can symbol deletes the corresponding book\n" +
+                "(Note: There's only one warning message upon deleting a book, so exercise caution).\n\n" +
+
+                "To edit the attributes of a book, you can either click the edit button of the desired book and modify the attribute you wish to change,\n" +
+                "or simply double-click on the attribute itself. This action opens an edit text field where you can make your changes,\n" +
+                "followed by pressing the 'Enter' button to confirm.\n");
 
 
         hHelp.getChildren().addAll(text);
+        HBox.setHgrow(hHelp,Priority.ALWAYS);
         vHelp1.getChildren().addAll(text);
 
-        Scene helpScene = new Scene(vHelp1, 600, 600);
+        Scene helpScene = new Scene(vHelp1, 900, 900);
 
         //setOnAction
         helpStage.alwaysOnTopProperty(); //It will always push POPUP to the top.
@@ -356,7 +386,7 @@ public class UserInterface extends Application {
             Label hover = new Label("*");
             Font hoverFont = new Font(22);
             hover.setFont(hoverFont);
-            hover.setTextFill(Color.rgb(208, 90 ,90)); //Set background color.
+            hover.setTextFill(Color.rgb(208, 90 ,90)); //Set RGB color.
             Tooltip tooltip = new Tooltip("This field is required");
             tooltip.setShowDelay(Duration.millis(3));
             Font tooltipFont = new Font(10);
