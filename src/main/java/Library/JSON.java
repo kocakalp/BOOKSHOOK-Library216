@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,8 +17,7 @@ public class JSON {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
     private static final String filePath = "mainJson.json";
 
-    // bu iki metod direk libary classına taşınabilir.
-    //finaly ve cath kısımları eksik
+    //These two methods can be moved directly to the library class.
     public static void addBooks(String filePath) {
         Type t = new TypeToken<Collection<Book>>(){}.getType();
         try {
@@ -33,11 +31,12 @@ public class JSON {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("An exception occurred");
         } finally {
             updateJsonFile();
         }
     }
+
     public static void addBook(String filePath) {
         Type t = new TypeToken<Book>(){}.getType();
         try {
@@ -49,6 +48,7 @@ public class JSON {
             updateJsonFile();
         }
     }
+
     public static void removeBook(Book b) {
         try {
             books.remove(b);
@@ -72,18 +72,19 @@ public class JSON {
     }
 
 
-/*
-    //MAIN TEST AMAÇLIDIR.
+
+    //THIS MAIN IS FOR TESTING PURPOSES.
+    /*
     public static void main(String[] args) {
 
         System.out.println("START");
-        Book book1 = new Book("PKitap","Yazar","basımcı","1994", "1000000000", "2",new ArrayList<String>(),new ArrayList<String>());
-        Book book2 = new Book("sevAL kİTAP","Yazar","basımcı","1994", "1000000000", "3",new ArrayList<String>(),new ArrayList<String>());
-        Book book3 = new Book("eNreDİZKitap","Yazar","basımcı","1994", "1000000000", "4",new ArrayList<String>(),new ArrayList<String>());
-        Book book4 = new Book("pKitap","Yazar","basımcı","1994", "1000000000", "5",new ArrayList<String>(),new ArrayList<String>());
-        book3.addTranslator("adsa");
+        Book book1 = new Book("PBook","AutHor","pUblIshEr","1994", "1000000000", "2",new ArrayList<String>(),new ArrayList<String>());
+        Book book2 = new Book("sevALB00k07","pUblIshErJava","bAsı_mcI","1994", "1000000000", "3",new ArrayList<String>(),new ArrayList<String>());
+        Book book3 = new Book("eNreDİZBook","AutHo772r","pUblIs_--78","1994", "1000000000", "4",new ArrayList<String>(),new ArrayList<String>());
+        Book book4 = new Book("Bo0Ok/}*\\","AutHorJFK","pUblIshEr77","1994", "1000000000", "5",new ArrayList<String>(),new ArrayList<String>());
+        book3.addTranslator("translateMan");
         book4.addTranslator("3424");
-        book4.addTranslator("rarasdf");
+        book4.addTranslator("Çe_vir_Man");
         books.add(book1);
         books.add(book2);
         books.add(book3);
@@ -95,5 +96,5 @@ public class JSON {
             System.out.println(b);
         }
     }
- */
+     */
 }
