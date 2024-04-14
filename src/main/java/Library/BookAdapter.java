@@ -2,7 +2,6 @@ package Library;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class BookAdapter extends TypeAdapter {
         out.endObject();
     }
 
-    //GPTle yazdın bi ara çalış.
+    //Check spelling, methods and verify functionality.
     @Override
     public Book read(JsonReader in) throws IOException {
         Book book = new Book();
