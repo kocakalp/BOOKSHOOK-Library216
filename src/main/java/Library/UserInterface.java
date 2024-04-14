@@ -382,7 +382,7 @@ public class UserInterface extends Application {
         translatorHBox.getChildren().addAll(translatorLaber, translatorTextField);
         vAdd.getChildren().add(translatorHBox);
 
-        Button addButton = new Button("ADD");
+        Button addButton = new Button("CREATE BOOK");
         addButton.setStyle("-fx-background-color: #c4d5fc"); // Arkaplan rengini ayarla.
         addButton.setOnMouseEntered(e -> addButton.setStyle("-fx-background-color: #a5d9be"));
         addButton.setOnMouseExited(e -> addButton.setStyle("-fx-background-color: #c4d5fc"));
