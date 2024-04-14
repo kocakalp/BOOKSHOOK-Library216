@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
 
-    // edit methods
+    //Edit methods
     public static void editTitle(String input, Book edited) {
         if (books.contains(edited)) {
             edited.setTitle(input);
@@ -55,7 +55,7 @@ public class Library {
         }
     }
 
-    // can be improved
+    //can be improved
     //might be useless
     public static void addTags(String input, Book edited) {
         if (books.contains(edited)) {
@@ -82,7 +82,7 @@ public class Library {
         }
     }
 
-    //JSON classındaki addbook ve remowe book metodları buraya direk taşınabilir.
+    //The addBook and remove book methods in the JSON class can be moved here directly.
     public static void addBooks(String jsonFilePath) {
         JSON.addBooks(jsonFilePath);
     }
