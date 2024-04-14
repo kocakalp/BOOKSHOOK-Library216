@@ -38,7 +38,7 @@ public class UserInterface extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-
+        JSON.addBooks("mainJson.json");
         VBox vbox1 = new VBox();
         vbox1.setAlignment(Pos.CENTER);
 
