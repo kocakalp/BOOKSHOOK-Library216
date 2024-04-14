@@ -162,7 +162,7 @@ public class UserInterface extends Application {
 
     private ObservableList<Book> getBookData(String text) {
         ObservableList<Book> data = FXCollections.observableArrayList();
-        JSON.addBooks("mainJson");
+        JSON.addBooks("mainJson.json");
         for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
             try {
                 data.add(SearchBar.search(text).get(i));

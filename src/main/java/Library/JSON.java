@@ -16,7 +16,7 @@ import java.util.Collection;
 public class JSON {
     private static final ArrayList<Book> books = new ArrayList<>();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
-    private static final String filePath = "mainJson";
+    private static final String filePath = "mainJson.json";
 
     // bu iki metod direk libary classına taşınabilir.
     //finaly ve cath kısımları eksik
@@ -72,7 +72,7 @@ public class JSON {
     }
 
 
-    /*
+/*
     //MAIN TEST AMAÇLIDIR.
     public static void main(String[] args) {
 
@@ -95,5 +95,5 @@ public class JSON {
             System.out.println(b);
         }
     }
-     */
+ */
 }
