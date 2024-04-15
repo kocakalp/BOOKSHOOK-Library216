@@ -27,7 +27,7 @@ public class Book implements Comparable<Book>  {
             this.coverPath = coverPath;
 
         } else {
-            System.out.println("invalid image path");
+            System.out.println("invalid Cover path");
             this.coverPath = "default";
         }
     }
