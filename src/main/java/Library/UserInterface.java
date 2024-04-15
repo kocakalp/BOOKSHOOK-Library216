@@ -90,14 +90,22 @@ public class UserInterface extends Application {
         searchButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         searchButton.setOnMouseEntered(e -> searchButton.setStyle("-fx-background-color: #a5d9be"));
         searchButton.setOnMouseExited(e -> searchButton.setStyle("-fx-background-color: #c4d5fc"));
-        searchButton.setOnAction(e -> listTab(searchBar.getText()));
+        searchButton.setOnAction(e -> {
+            searchAll = true;
+            listTab(searchBar.getText()); // Call the listTab method with the text from searchBar
+        });
         searchButton.setPrefSize(150,50);
 
+        //SEARCH BY TAG
         Button searchTag = new Button("SEARCH by TAG");
         searchTag.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         searchTag.setOnMouseEntered(e -> searchTag.setStyle("-fx-background-color: #a5d9be"));
         searchTag.setOnMouseExited(e -> searchTag.setStyle("-fx-background-color: #c4d5fc"));
-        searchTag.setOnAction(e -> listTab(searchBar.getText()));
+        searchTag.setOnAction(e -> {
+            searchAll = false;
+            listTab(searchBar.getText()); // Call the listTab method with the text from searchBar
+        });
+
         searchTag.setPrefSize(150,50);
 
         //ADD
