@@ -476,12 +476,12 @@ public class UserInterface extends Application {
                 }
             }
             ArrayList<String> tags = new ArrayList<>();
-            tags.add(textFieldArrayList.get(6).getText());
+            tags.add(textFieldArrayList.get(1).getText());
             ArrayList<String> trans = new ArrayList<>();
             trans.add(translatorTextField.getText());
-            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(),
-                    textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(),
-                    textFieldArrayList.get(7).getText(), textFieldArrayList.get(8).getText(), tags,null,null);
+            Book book = new Book(textFieldArrayList.get(0).getText(), tags, textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(),
+                    textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(), textFieldArrayList.get(7).getText(),
+                    textFieldArrayList.get(8).getText() , trans, textFieldArrayList.get(9).getText() ,"null");
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
