@@ -10,10 +10,13 @@ import java.util.Scanner;
 public class Book implements Comparable<Book>  {
     private String title;
     private String author;
+    private String subtitle;
     private String publisher;
     private String date;
     private String isbn;
     private String edition;
+    private String language;
+    private String rating;
     private final ArrayList<String> tags = new ArrayList<>();
     private final ArrayList<String> translators = new ArrayList<>();
     private String imagePath;
@@ -36,7 +39,7 @@ public class Book implements Comparable<Book>  {
     }
 
     //JSON.updateJsonFile(); Test it may be dysfunctional.
-    public Book(String title, String author, String publisher, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String imagePath) {
+    public Book(String title, String author, String publisher, String subtitle, String language, String rating, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String imagePath) {
 
         setTitle(title);
         setAuthor(author);
@@ -51,7 +54,7 @@ public class Book implements Comparable<Book>  {
     }
 
     public Book() {
-        this("title","author","publisher","1","0000000000","1",new ArrayList<>(), new ArrayList<>(), "");
+        this("title","author","publisher", "subtitle", "language", "1", "1" ,"0000000000","1",new ArrayList<>(), new ArrayList<>(), "");
     }
 
     //Getters
