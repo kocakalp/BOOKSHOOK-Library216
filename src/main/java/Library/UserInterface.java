@@ -32,7 +32,7 @@ public class UserInterface extends Application {
     private Stage helpStage = new Stage();
     private Stage listStage = new Stage();
     private Stage addStage = new Stage();
-
+    private boolean searchAll = true;
     public static void main(String[] args) {
         launch();
     }
@@ -186,15 +186,27 @@ public class UserInterface extends Application {
     private ObservableList<Book> getBookData(String text) {
         ObservableList<Book> data = FXCollections.observableArrayList();
         JSON.addBooks("mainJson.json");
-        for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
-            try {
-                data.add(SearchBar.search(text).get(i));
+        if(searchAll) {
+            for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
+                try {
+                    data.add(SearchBar.search(text).get(i));
 
-            } catch (Exception e) {
-                System.out.println(e);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
+            return data;
+        } else {
+            for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
+                try {
+                    data.add(SearchBar.searchByTag(text).get(i));
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+            return data;
         }
-        return data;
     }
 
     //It is the function unit where you add buttons to each row in the table and gain the functionality of the buttons.
