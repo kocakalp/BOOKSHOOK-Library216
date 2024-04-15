@@ -1,5 +1,7 @@
 package Library;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -14,10 +16,27 @@ public class Book implements Comparable<Book>  {
     private String edition;
     private final ArrayList<String> tags = new ArrayList<>();
     private final ArrayList<String> translators = new ArrayList<>();
+    private String imagePath;
+    private Image image;
 
+    public void setImagePath(String imagePath) {
+        if (isValidImagePath()) {
+            this.imagePath = imagePath;
+
+        } else {
+            System.out.println("invalid image path");
+            this.imagePath = "default";
+        }
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
+    public boolean isValidImagePath() {
+        return true;
+    }
 
     //JSON.updateJsonFile(); Test it may be dysfunctional.
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators) {
+    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String imagePath) {
 
         setTitle(title);
         setAuthor(author);
@@ -27,19 +46,12 @@ public class Book implements Comparable<Book>  {
         setEdition(edition);
         addTags(tags);
         addTranslators(translators);
+        setImagePath(imagePath);
         JSON.updateJsonFile();
     }
 
     public Book() {
-        this("title","author","publisher","1","0000000000","1",new ArrayList<>(), new ArrayList<>());
-    }
-
-    //for remove test in future
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> translators) {
-        this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), translators);
-    }
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition) {
-        this(title,author,publisher,publicationYear,isbn,edition,new ArrayList<>(), new ArrayList<>());
+        this("title","author","publisher","1","0000000000","1",new ArrayList<>(), new ArrayList<>(), "");
     }
 
     //Getters

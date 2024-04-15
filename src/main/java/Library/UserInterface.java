@@ -426,7 +426,7 @@ public class UserInterface extends Application {
             tags.add(textFieldArrayList.get(6).getText());
             ArrayList<String> trans = new ArrayList<>();
             trans.add(translatorTextField.getText());
-            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans);
+            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans,"");
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
