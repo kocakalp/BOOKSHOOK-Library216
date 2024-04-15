@@ -201,7 +201,7 @@ public class UserInterface extends Application {
     private void addButtonToTable() {
         TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
         TableColumn<Book, Void> edtButtonColumn = new TableColumn<>("E");
-
+        TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
 
@@ -256,16 +256,33 @@ public class UserInterface extends Application {
 
         table.getColumns().add(delButtonColumn);
         table.getColumns().add(edtButtonColumn);
+
+        //Add Cover
+
+       Callback<TableColumn<Book,Void>,TableCell<Book,Void>>cellFactory= param -> new TableCell<Book,Void>(){
+           private final ImageView imageView = new ImageView();
+           {
+               imageView.setFitHeight(50);
+               imageView.setFitWidth(50);
+           }
+           public void updateItem(Void item,boolean empty){
+               super.updateItem(item,empty);
+               if(empty){
+                   setGraphic(null);
+               }else {
+                   Image image= new Image("bookk.png");
+                   imageView.setImage(image);
+                   setGraphic(imageView);
+               }
+           }
+
+        };
+        imageColumn.setCellFactory(cellFactory);
+        table.getColumns().add(imageColumn);
+
+
     }
-    /*public void addImage(){
-        TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
-        imageColumn.setPrefWidth(50);
-        imageColumn.
 
-
-
-
-    }*/
 
     //Function that provides a list view of books in a table.
     public void listTab(String text) {
@@ -412,7 +429,7 @@ public class UserInterface extends Application {
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-        String[] labels = {"Title:", "Author:", "Publisher:", "Date:", "ISBN", "Subtitle:", "Edition:", "Language:", "Rating:", "Tags:", "Translator:"};
+        String[] labels = {"Title:", "Tags:", "Subtitle:", "Author:", "Publisher:", "Date:", "ISBN", "Edition:", "Language:", "Translator:", "Rating:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
         for (String labelText : labels) {

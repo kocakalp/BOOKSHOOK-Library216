@@ -54,6 +54,18 @@ public  class SearchBar {
             System.out.println("Book can not found for the language:"+language);
         }
     }
+    public static void searchBookByRating(String rating){
+        boolean isFound=false;
+        for(Book book :books){
+            if(book.getRating().equalsIgnoreCase(rating)){
+                System.out.println("Book Title :"+book.getTitle());
+                isFound=true;
+            }
+        }
+        if(!isFound){
+            System.out.println("Book can not found for the rating:"+rating);
+        }
+    }
     public static void searchBookByDate(String year){
         boolean isFound=false;
         for(Book book:books){
@@ -108,8 +120,8 @@ public  class SearchBar {
     public static void searchBookByTags(String tag){
         boolean isFound=false;
         for(Book book :books){
-            for(String translator :book.getTranslators()){
-                if(translator.equalsIgnoreCase(tag)){
+            for(String tags :book.getTags()){
+                if(tag.equalsIgnoreCase(tag)){
                     System.out.println("Book Title :"+book.getTitle());
                     isFound=true;
                     break;
@@ -120,6 +132,7 @@ public  class SearchBar {
             System.out.println("Book can not for the tag:"+tag);
         }
     }
+
 
     public static ArrayList<Book> search(String in) {
         ArrayList<Book> show = new ArrayList<>();

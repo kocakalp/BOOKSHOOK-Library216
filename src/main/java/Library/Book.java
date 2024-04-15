@@ -275,10 +275,10 @@ public class Book implements Comparable<Book>  {
     //toString
     @Override
     public String toString() {
-        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getLanguage()+", " +getIsbn()+", "+getEdition();
-        if(tags.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+", "+getTranslatorAsString();
-        if(translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+", "+getTagsAsString();
-        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getLanguage()+", "+getEdition()+","+getTagsAsString()+", "+getTranslatorAsString();
+        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getSubtitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", " +getEdition()+", " +getLanguage()+", "+getRating();
+        if(tags.isEmpty()) return getTitle()+", "+getSubtitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+", "+getTranslatorAsString()+", "+getRating();
+        if(translators.isEmpty()) return getTitle()+", "+getTagsAsString()+", "+getSubtitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+", "+getRating();
+        return getTitle()+", "+getTagsAsString()+", "+getSubtitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+","+getTranslatorAsString()+", "+getRating();
     }
     public String getTagsAsString(){
         if (tags.isEmpty()) return "";
@@ -318,11 +318,15 @@ public class Book implements Comparable<Book>  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPublisher(), book.getPublisher()) && Objects.equals(getLanguage(), book.getLanguage()) && Objects.equals(getDate(), book.getDate()) && Objects.equals(getIsbn(), book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getTags(), book.getTags());
+        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getTags(), book.getTags()) && Objects.equals(getSubtitle(),
+                book.getSubtitle())&& Objects.equals(getAuthor(), book.getAuthor())  && Objects.equals(getPublisher(),
+                book.getPublisher()) && Objects.equals(getDate(), book.getDate()) && Objects.equals(getIsbn(),
+                book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getLanguage(),
+                book.getLanguage()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getRating(), book.getRating());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getAuthor(), getPublisher(), getDate(), getIsbn(), getEdition(), getLanguage(), getTranslators(), getTags());
+        return Objects.hash(getTitle(), getTags(), getSubtitle(), getAuthor(), getPublisher(), getDate(), getIsbn(), getEdition(), getLanguage(), getTranslators(), getRating());
     }
 }
