@@ -156,7 +156,9 @@ public class UserInterface extends Application {
                 "This textField includes an example path. Once pasted, click the 'ADD PATH' button to include the library in BOOKSHOOK.\n" +
                 "To add a book to the library, fill in the book requirements on the ADD Menu, then simply click the 'ADD' button.\n" +
                 "If you have already installed a library, the book you added will be registered within it.\n" +
-                "If not, the application will automatically create an empty library for you.\n\n\n" +
+                "If not, the application will automatically create an empty library for you.\n" +
+                "To add book information, simply enter the details. If you'd like to include a cover image,\n"+
+                "press the 'SELECT COVER' button, then proceed to press the 'CREATE BOOK' button.\n\n\n" +
 
 
                 "STAGE 2 - SEARCHING, SORTING BOOKS\n\n" +
@@ -164,6 +166,7 @@ public class UserInterface extends Application {
                 "After adding the library to BOOKSHOOK or creating a new one, finding a specific book is easy.\n" +
                 "Simply type one of the book attributes, such as Book Name, Tags, or Author Name, into the SearchBar.\n" +
                 "Then, press the 'SEARCH' button below the SearchBar. This allows you to quickly access the books you're looking for in your library.\n" +
+                "Or if you want to search by the tag enter the tag then press the SEARCH by TAG button \n"+
                 "Once the Book List opens, you can sort the displayed books alphabetically, in reverse alphabetical order, numerically\n" +
                 "or vice versa by clicking on the column names at the top of the columns.\n\n\n" +
 
@@ -174,9 +177,11 @@ public class UserInterface extends Application {
                 "Clicking the button with the trash can symbol deletes the corresponding book\n" +
                 "(Note: There's only one warning message upon deleting a book, so exercise caution).\n\n" +
 
-                "To edit the attributes of a book, you can either click the edit button of the desired book and modify the attribute you wish to change,\n" +
-                "or simply double-click on the attribute itself. This action opens an edit text field where you can make your changes,\n" +
-                "followed by pressing the 'Enter' button to confirm.\n");
+                "To edit the attributes of a book, simply double-click on the attribute itself. This action opens an edit text field where you can make your changes,\n" +
+                "followed by pressing the 'Enter' button to confirm.\n\n" +
+                "To change book cover, press the book button and select desired image ");
+
+
 
 
         hHelp.getChildren().addAll(text);
