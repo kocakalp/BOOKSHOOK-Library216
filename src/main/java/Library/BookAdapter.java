@@ -58,7 +58,7 @@ public class BookAdapter extends TypeAdapter {
                 case "publisher":
                     book.setPublisher(in.nextString());
                     break;
-                case "publicationYear":
+                case "date":
                     book.setDate(in.nextString());
                     break;
                 case "isbn":
