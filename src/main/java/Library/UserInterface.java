@@ -315,9 +315,9 @@ public class UserInterface extends Application {
         });
 
 
-        TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
+        TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setPrefWidth(110);
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getDate()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dateColumn.setOnEditCommit(event -> {
@@ -344,6 +344,33 @@ public class UserInterface extends Application {
             Library.editEdition(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
+        TableColumn<Book, String> ratingColumn = new TableColumn<>("Rating");
+        ratingColumn.setPrefWidth(85);
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        ratingColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getRating()));
+        ratingColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        ratingColumn.setOnEditCommit(event -> {
+            Library.editRating(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+        });
+
+        TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
+        subtitleColumn.setPrefWidth(85);
+        subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
+        subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
+        subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        subtitleColumn.setOnEditCommit(event -> {
+            Library.editSubtitle(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+        });
+
+        TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
+        languageColumn.setPrefWidth(85);
+        languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
+        languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
+        languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        languageColumn.setOnEditCommit(event -> {
+            Library.editLanguage(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+        });
+
 
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
@@ -355,7 +382,7 @@ public class UserInterface extends Application {
         });
 
 
-        table.getColumns().addAll(titleColumn,tagColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,translatorColumn);
+        table.getColumns().addAll(titleColumn,tagColumn,subtitleColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,languageColumn,translatorColumn,ratingColumn);
         addButtonToTable();
         table.setItems(data);
 
@@ -385,7 +412,7 @@ public class UserInterface extends Application {
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-        String[] labels = {"Book Title:", "Author:", "Publisher:", "Publication Date:", "ISBN", "Edition:", "Translator:", "Tags:"};
+        String[] labels = {"Title:", "Author:", "Publisher:", "Date:", "ISBN", "Subtitle:", "Edition:", "Language:", "Rating:", "Tags:", "Translator:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
         for (String labelText : labels) {

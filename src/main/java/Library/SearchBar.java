@@ -42,6 +42,18 @@ public  class SearchBar {
             System.out.println("Book can not found for the publisher:"+publisher);
         }
     }
+    public static void searchBookByLanguage(String language){
+        boolean isFound=false;
+        for(Book book :books){
+            if(book.getLanguage().equalsIgnoreCase(language)){
+                System.out.println("Book Title :"+book.getTitle());
+                isFound=true;
+            }
+        }
+        if(!isFound){
+            System.out.println("Book can not found for the language:"+language);
+        }
+    }
     public static void searchBookByDate(String year){
         boolean isFound=false;
         for(Book book:books){

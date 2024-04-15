@@ -24,6 +24,12 @@ public class BookAdapter extends TypeAdapter {
         out.value(book.getIsbn());
         out.name("edition");
         out.value(book.getEdition());
+        out.name("language");
+        out.value(book.getLanguage());
+        out.name("rating");
+        out.value(book.getRating());
+        out.name("subtitle");
+        out.value(book.getSubtitle());
         out.name("tags");
         out.beginArray();
         for (String tag: book.getTags()) {
@@ -61,11 +67,20 @@ public class BookAdapter extends TypeAdapter {
                 case "date":
                     book.setDate(in.nextString());
                     break;
+                case "language":
+                    book.setLanguage(in.nextString());
+                    break;
+                case "subtitle":
+                    book.setSubtitle(in.nextString());
+                    break;
                 case "isbn":
                     book.setIsbn(in.nextString());
                     break;
                 case "edition":
                     book.setEdition(in.nextString());
+                    break;
+                case "rating":
+                    book.setRating(in.nextString());
                     break;
                 case "tags":
                     in.beginArray();

@@ -30,6 +30,12 @@ public class Library {
             JSON.updateJsonFile();
         }
     }
+    public static void editLanguage(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setLanguage(input);
+            JSON.updateJsonFile();
+        }
+    }
     public static void editIsbn(String input, Book edited) {
         if (books.contains(edited)) {
             edited.setIsbn(input);
@@ -42,6 +48,20 @@ public class Library {
             JSON.updateJsonFile();
         }
     }
+    public static void editRating(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setRating(input);
+            JSON.updateJsonFile();
+        }
+    }
+
+    public static void editSubtitle(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setSubtitle(input);
+            JSON.updateJsonFile();
+        }
+    }
+
     public static  void editTags(String input,Book edited) {
         if (books.contains(edited)) {
             edited.setTags(input);

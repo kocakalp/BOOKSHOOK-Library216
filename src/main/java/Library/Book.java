@@ -47,6 +47,9 @@ public class Book implements Comparable<Book>  {
         setDate(date);
         setIsbn(isbn);
         setEdition(edition);
+        setLanguage(language);
+        setRating(rating);
+        setSubtitle(subtitle);
         addTags(tags);
         addTranslators(translators);
         setCoverPath(coverPath);
@@ -64,6 +67,10 @@ public class Book implements Comparable<Book>  {
     public String getDate() {return date;}
     public String getIsbn() {return isbn;}
     public String getEdition() {return edition;}
+    public String getRating() {return rating;}
+    public String getLanguage() {return language;}
+    public String getSubtitle(){return subtitle;}
+
     public ArrayList<String> getTags() {return tags;}
 
     public ArrayList<String> getTranslators() {return translators;}
@@ -95,6 +102,25 @@ public class Book implements Comparable<Book>  {
             setPublisher("publisher");
         }
     }
+
+    public void setLanguage(String language) {
+        if(isValidLanguage(publisher)){
+            this.language = language;
+        } else {
+            System.out.println("invalid language");
+            setLanguage("language");
+        }
+    }
+
+    public void setSubtitle(String subtitle) {
+        if(isValidAuthor(subtitle)){
+            this.subtitle = subtitle;
+        } else {
+            System.out.println("invalid subtitle");
+            setSubtitle("subtitle");
+        }
+    }
+
     public void setDate(String date) {
         if(isValidDate(date)){
             this.date = date;
@@ -117,6 +143,15 @@ public class Book implements Comparable<Book>  {
         } else {
             System.out.println("invalid edition");
             setEdition("1");
+        }
+    }
+
+    public void setRating(String rating) {
+        if (isValidRating(rating)){
+            this.rating = rating;
+        } else {
+            System.out.println("invalid rating");
+            setRating("0");
         }
     }
 
@@ -167,6 +202,21 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
+    public Boolean isValidLanguage(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+
+    public  Boolean isValidSubtitle(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch (Exception E){
+            return false;
+        }
+    }
     public boolean isValidPublisher(String input) {
         try {
             return input != null && !input.isBlank();
@@ -198,6 +248,14 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
+    public boolean isValidRating(String input) {
+        try {
+            int i = Integer.parseInt(input);
+            return !input.isBlank() && (input.length() == 1) && (i >= 0 && i <= 5);
+        } catch (Exception E) {
+            return false;
+        }
+    }
     public boolean isValidTranslators(String input) {
         try {
             return input != null && !input.isBlank();
@@ -217,10 +275,10 @@ public class Book implements Comparable<Book>  {
     //toString
     @Override
     public String toString() {
-        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition();
-        if(tags.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString();
-        if(translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getTagsAsString();
-        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+","+getTagsAsString()+", "+getTranslatorAsString();
+        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getLanguage()+", " +getIsbn()+", "+getEdition();
+        if(tags.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+", "+getTranslatorAsString();
+        if(translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+", "+getTagsAsString();
+        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getLanguage()+", "+getEdition()+","+getTagsAsString()+", "+getTranslatorAsString();
     }
     public String getTagsAsString(){
         if (tags.isEmpty()) return "";
@@ -260,11 +318,11 @@ public class Book implements Comparable<Book>  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPublisher(), book.getPublisher()) && Objects.equals(getDate(), book.getDate()) && Objects.equals(getIsbn(), book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getTags(), book.getTags());
+        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPublisher(), book.getPublisher()) && Objects.equals(getLanguage(), book.getLanguage()) && Objects.equals(getDate(), book.getDate()) && Objects.equals(getIsbn(), book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getTags(), book.getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getAuthor(), getPublisher(), getDate(), getIsbn(), getEdition(), getTranslators(), getTags());
+        return Objects.hash(getTitle(), getAuthor(), getPublisher(), getDate(), getIsbn(), getEdition(), getLanguage(), getTranslators(), getTags());
     }
 }
