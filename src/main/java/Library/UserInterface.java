@@ -318,10 +318,10 @@ public class UserInterface extends Application {
         TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
         dateColumn.setPrefWidth(110);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
-        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublicationYear()));
+        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getDate()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dateColumn.setOnEditCommit(event -> {
-            Library.editPublicationYear(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            Library.editDate(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
 
@@ -435,7 +435,9 @@ public class UserInterface extends Application {
             tags.add(textFieldArrayList.get(6).getText());
             ArrayList<String> trans = new ArrayList<>();
             trans.add(translatorTextField.getText());
-            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans);
+            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(),
+                    textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(),
+                    textFieldArrayList.get(7).getText(), textFieldArrayList.get(8).getText(), tags,null,null);
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
