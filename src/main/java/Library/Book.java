@@ -11,7 +11,7 @@ public class Book implements Comparable<Book>  {
     private String title;
     private String author;
     private String publisher;
-    private String publicationYear;
+    private String date;
     private String isbn;
     private String edition;
     private final ArrayList<String> tags = new ArrayList<>();
@@ -36,12 +36,12 @@ public class Book implements Comparable<Book>  {
     }
 
     //JSON.updateJsonFile(); Test it may be dysfunctional.
-    public Book(String title, String author, String publisher, String publicationYear, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String imagePath) {
+    public Book(String title, String author, String publisher, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String imagePath) {
 
         setTitle(title);
         setAuthor(author);
         setPublisher(publisher);
-        setPublicationYear(publicationYear);
+        setDate(date);
         setIsbn(isbn);
         setEdition(edition);
         addTags(tags);
@@ -58,7 +58,7 @@ public class Book implements Comparable<Book>  {
     public String getTitle() {return title;}
     public String getAuthor() {return author;}
     public String getPublisher() {return publisher;}
-    public String getPublicationYear() {return publicationYear;}
+    public String getDate() {return date;}
     public String getIsbn() {return isbn;}
     public String getEdition() {return edition;}
     public ArrayList<String> getTags() {return tags;}
@@ -92,12 +92,12 @@ public class Book implements Comparable<Book>  {
             setPublisher("publisher");
         }
     }
-    public void setPublicationYear(String publicationYear) {
-        if(isValidPublicationYear(publicationYear)){
-            this.publicationYear = publicationYear;
+    public void setDate(String date) {
+        if(isValidDate(date)){
+            this.date = date;
         } else {
             System.out.println("invalid publication year");
-            setPublicationYear("1");
+            setDate("1");
         }
     }
     public void setIsbn(String isbn) {
@@ -171,7 +171,7 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidPublicationYear(String input) {
+    public boolean isValidDate(String input) {
         try{
             int i = Integer.parseInt(input);
             return !input.isBlank() && i > 0;
@@ -214,10 +214,10 @@ public class Book implements Comparable<Book>  {
     //toString
     @Override
     public String toString() {
-        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition();
-        if(tags.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString();
-        if(translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+", "+getTagsAsString();
-        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getPublicationYear()+", "+getIsbn()+", "+getEdition()+","+getTagsAsString()+", "+getTranslatorAsString();
+        if(tags.isEmpty() && translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition();
+        if(tags.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getTranslatorAsString();
+        if(translators.isEmpty()) return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getTagsAsString();
+        return getTitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+","+getTagsAsString()+", "+getTranslatorAsString();
     }
     public String getTagsAsString(){
         if (tags.isEmpty()) return "";
@@ -257,11 +257,11 @@ public class Book implements Comparable<Book>  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPublisher(), book.getPublisher()) && Objects.equals(getPublicationYear(), book.getPublicationYear()) && Objects.equals(getIsbn(), book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getTags(), book.getTags());
+        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getAuthor(), book.getAuthor()) && Objects.equals(getPublisher(), book.getPublisher()) && Objects.equals(getDate(), book.getDate()) && Objects.equals(getIsbn(), book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getTags(), book.getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getAuthor(), getPublisher(), getPublicationYear(), getIsbn(), getEdition(), getTranslators(), getTags());
+        return Objects.hash(getTitle(), getAuthor(), getPublisher(), getDate(), getIsbn(), getEdition(), getTranslators(), getTags());
     }
 }

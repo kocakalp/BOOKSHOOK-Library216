@@ -306,13 +306,13 @@ public class UserInterface extends Application {
         });
 
 
-        TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
+        TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setPrefWidth(110);
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
-        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublicationYear()));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getDate()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dateColumn.setOnEditCommit(event -> {
-            Library.editPublicationYear(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            Library.editDate(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
 

@@ -42,10 +42,10 @@ public  class SearchBar {
             System.out.println("Book can not found for the publisher:"+publisher);
         }
     }
-    public static void searchBookByPublicationYear(String year){
+    public static void searchBookByDate(String year){
         boolean isFound=false;
         for(Book book:books){
-            if(book.getPublicationYear().equals(year)){
+            if(book.getDate().equals(year)){
                 System.out.println("Book Title:"+book.getTitle());
                 isFound=true;
             }

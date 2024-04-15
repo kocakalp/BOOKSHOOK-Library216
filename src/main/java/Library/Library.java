@@ -24,9 +24,9 @@ public class Library {
             JSON.updateJsonFile();
         }
     }
-    public static void editPublicationYear(String input, Book edited) {
+    public static void editDate(String input, Book edited) {
         if (books.contains(edited)) {
-            edited.setPublicationYear(input);
+            edited.setDate(input);
             JSON.updateJsonFile();
         }
     }

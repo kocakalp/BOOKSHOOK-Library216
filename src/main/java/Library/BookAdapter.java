@@ -18,8 +18,8 @@ public class BookAdapter extends TypeAdapter {
         out.value(book.getAuthor());
         out.name("publisher");
         out.value(book.getPublisher());
-        out.name("publicationYear");
-        out.value(book.getPublicationYear());
+        out.name("date");
+        out.value(book.getDate());
         out.name("isbn");
         out.value(book.getIsbn());
         out.name("edition");
@@ -59,7 +59,7 @@ public class BookAdapter extends TypeAdapter {
                     book.setPublisher(in.nextString());
                     break;
                 case "publicationYear":
-                    book.setPublicationYear(in.nextString());
+                    book.setDate(in.nextString());
                     break;
                 case "isbn":
                     book.setIsbn(in.nextString());
