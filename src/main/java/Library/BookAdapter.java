@@ -36,8 +36,8 @@ public class BookAdapter extends TypeAdapter {
             out.value(translator);
         }
         out.endArray();
-        out.name("imagePath");
-        out.value(book.getImagePath());
+        out.name("coverPath");
+        out.value(book.getCoverPath());
         out.endObject();
     }
 
@@ -85,8 +85,8 @@ public class BookAdapter extends TypeAdapter {
                     in.endArray();
                     book.addTranslators(translators);
                     break;
-                case "imagePath":
-                    book.setImagePath(in.nextString());
+                case "coverPath":
+                    book.setCoverPath(in.nextString());
                     break;
                 default:
                     in.skipValue(); // Ignore unrecognized fields

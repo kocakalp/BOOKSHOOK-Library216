@@ -19,27 +19,27 @@ public class Book implements Comparable<Book>  {
     private String rating;
     private final ArrayList<String> tags = new ArrayList<>();
     private final ArrayList<String> translators = new ArrayList<>();
-    private String imagePath;
-    private Image image;
+    private String coverPath;
+    private Image cover;
 
-    public void setImagePath(String imagePath) {
-        if (isValidImagePath()) {
-            this.imagePath = imagePath;
+    public void setCoverPath(String coverPath) {
+        if (isValidCoverPath()) {
+            this.coverPath = coverPath;
 
         } else {
             System.out.println("invalid image path");
-            this.imagePath = "default";
+            this.coverPath = "default";
         }
     }
-    public String getImagePath() {
-        return imagePath;
+    public String getCoverPath() {
+        return coverPath;
     }
-    public boolean isValidImagePath() {
+    public boolean isValidCoverPath() {
         return true;
     }
 
     //JSON.updateJsonFile(); Test it may be dysfunctional.
-    public Book(String title, String author, String publisher, String subtitle, String language, String rating, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String imagePath) {
+    public Book(String title, String author, String publisher, String subtitle, String language, String rating, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String coverPath) {
 
         setTitle(title);
         setAuthor(author);
@@ -49,7 +49,7 @@ public class Book implements Comparable<Book>  {
         setEdition(edition);
         addTags(tags);
         addTranslators(translators);
-        setImagePath(imagePath);
+        setCoverPath(coverPath);
         JSON.updateJsonFile();
     }
 
