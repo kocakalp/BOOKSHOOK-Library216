@@ -93,6 +93,13 @@ public class UserInterface extends Application {
         searchButton.setOnAction(e -> listTab(searchBar.getText()));
         searchButton.setPrefSize(150,50);
 
+        Button searchTag = new Button("SEARCH by TAG");
+        searchTag.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+        searchTag.setOnMouseEntered(e -> searchTag.setStyle("-fx-background-color: #a5d9be"));
+        searchTag.setOnMouseExited(e -> searchTag.setStyle("-fx-background-color: #c4d5fc"));
+        searchTag.setOnAction(e -> listTab(searchBar.getText()));
+        searchTag.setPrefSize(150,50);
+
         //ADD
         Button addButton = new Button("ADD");
         addButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
@@ -103,7 +110,7 @@ public class UserInterface extends Application {
 
         Region spacer2 = new Region();
         spacer2.setPrefWidth(250); //Add a space 100 units wide.
-        hBox3.getChildren().addAll(searchButton,spacer2,addButton);
+        hBox3.getChildren().addAll(searchButton,searchTag,spacer2,addButton);
         hBox3.setAlignment(Pos.CENTER);
 
 
