@@ -412,7 +412,7 @@ public class UserInterface extends Application {
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-        String[] labels = {"Title:", "Author:", "Publisher:", "Date:", "ISBN", "Subtitle:", "Edition:", "Language:", "Rating:", "Tags:", "Translator:"};
+        String[] labels = {"Title:", "Tags:", "Subtitle:", "Author:", "Publisher:", "Date:", "ISBN", "Edition:", "Language:", "Translator:", "Rating:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
         for (String labelText : labels) {
