@@ -283,7 +283,7 @@ public class UserInterface extends Application {
                         hBox1.setAlignment(Pos.CENTER);
                         HBox.setHgrow(hBox1,Priority.ALWAYS);
 
-                        Button PathButton = new Button("SELECT PATH");
+                        Button PathButton = new Button("SELECT COVER");
                         PathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
                         PathButton.setOnMouseEntered(e -> PathButton.setStyle("-fx-background-color: #a5d9be"));
                         PathButton.setOnMouseExited(e -> PathButton.setStyle("-fx-background-color: #c4d5fc"));
