@@ -142,6 +142,7 @@ public  class SearchBar {
         return show;
     }
     public static ArrayList<Book> searchByTag(String in) {
+
         ArrayList<Book> show = new ArrayList<>();
         for (Book b : JSON.getBooks()) {
             if(b.getTagsAsString().equals(in)) show.add(b);
