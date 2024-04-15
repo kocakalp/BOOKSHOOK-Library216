@@ -41,7 +41,7 @@ public class Book implements Comparable<Book>  {
     }
 
     public Book() {
-        this("title", new ArrayList<>(), "subtitle", "author","publisher", "1", "0000000000", "1", "language" ,new ArrayList<>(),"1","default");
+        this("title", new ArrayList<>(), "subtitle", "author","publisher", "1", "0000000000", "1", "language" ,new ArrayList<>(),"1","bookk.png");
     }
 
 
