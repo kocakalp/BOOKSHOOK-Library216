@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public  class SearchBar {
     ArrayList<String> arrayList=  new ArrayList<>();
-    ArrayList <Book> books = new ArrayList<>();
-    void searchBookByTitle(String title){
+    static ArrayList <Book> books = new ArrayList<>();
+    public static void searchBookByTitle(String title){
         boolean isFound=false;
         for(Book book:books){
             if(book.getTitle().toLowerCase().contains(title.toLowerCase())){
@@ -14,11 +14,11 @@ public  class SearchBar {
                 isFound=true;
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not found for the title:"+title);
         }
     }
-    void searchBookByAuthor(String authorName){
+    public static void searchBookByAuthor(String authorName){
         boolean isFound=false;
         for(Book book :books){
             if(book.getAuthor().equalsIgnoreCase(authorName)){
@@ -26,11 +26,11 @@ public  class SearchBar {
                 isFound=true;
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not found for the author:"+authorName);
         }
     }
-    void searchBookByPublisher(String publisher){
+    public static void searchBookByPublisher(String publisher){
         boolean isFound=false;
         for(Book book :books){
             if(book.getPublisher().equalsIgnoreCase(publisher)){
@@ -38,11 +38,11 @@ public  class SearchBar {
                 isFound=true;
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not found for the publisher:"+publisher);
         }
     }
-    void searchBookByPublicationYear(String year){
+    public static void searchBookByPublicationYear(String year){
         boolean isFound=false;
         for(Book book:books){
             if(book.getPublicationYear().equals(year)){
@@ -50,11 +50,11 @@ public  class SearchBar {
                 isFound=true;
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not for the publication year:"+year);
         }
     }
-    void searchBookByISBN(String isbn){
+    public static void searchBookByISBN(String isbn){
         boolean isFound=false;
         for(Book book:books){
             if(book.getIsbn().equals(isbn)){
@@ -62,11 +62,11 @@ public  class SearchBar {
                 isFound=true;
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not for the ISBN:"+isbn);
         }
     }
-    void searchBookByEdition(String edition){
+    public static void searchBookByEdition(String edition){
         boolean isFound=false;
         for(Book book:books){
             if(book.getEdition().equals(edition)){
@@ -74,11 +74,11 @@ public  class SearchBar {
                 isFound=true;
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not for the edition:"+edition);
         }
     }
-    void searchBookByTranslator(String translatorName){
+    public static void searchBookByTranslator(String translatorName){
         boolean isFound=false;
         for(Book book :books){
             for(String translator :book.getTranslators()){
@@ -89,11 +89,11 @@ public  class SearchBar {
                 }
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not for the translator:"+translatorName);
         }
     }
-    void searchBookByTags(String tag){
+    public static void searchBookByTags(String tag){
         boolean isFound=false;
         for(Book book :books){
             for(String translator :book.getTranslators()){
@@ -104,7 +104,7 @@ public  class SearchBar {
                 }
             }
         }
-        if(isFound=false){
+        if(!isFound){
             System.out.println("Book can not for the tag:"+tag);
         }
     }
