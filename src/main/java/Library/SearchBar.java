@@ -145,7 +145,9 @@ public  class SearchBar {
 
         ArrayList<Book> show = new ArrayList<>();
         for (Book b : JSON.getBooks()) {
-            if(b.getTagsAsString().equalsIgnoreCase(in)) show.add(b);
+            for (String s : b.getTags()) {
+                if (s.equalsIgnoreCase(in)) show.add(b);break;
+            }
         }
         return show;
     }
