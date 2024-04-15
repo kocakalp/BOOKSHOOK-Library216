@@ -243,9 +243,37 @@ public class UserInterface extends Application {
                     setGraphic(edtButton);
 
                     edtButton.setOnAction(event -> {
-                        Book book = getTableView().getItems().get(getIndex());
+                        String[] s = new String[1];
+                        //Book book = getTableView().getItems().get(getIndex());
                         //Make all cells in this row editable.
-                        table.edit(getIndex(),  table.getColumns().get(0));
+                        //table.edit(getIndex(),  table.getColumns().get(0));
+                        ImageView selectedBookView = new ImageView(table.getItems().get(getIndex()).getCover());
+                        VBox vBoxCover = new VBox();
+
+                        HBox hBox1 = new HBox(selectedBookView);
+                        hBox1.setAlignment(Pos.CENTER);
+                        HBox.setHgrow(hBox1,Priority.ALWAYS);
+
+                        Button PathButton = new Button("SELECT PATH");
+                        PathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+                        PathButton.setOnMouseEntered(e -> PathButton.setStyle("-fx-background-color: #a5d9be"));
+                        PathButton.setOnMouseExited(e -> PathButton.setStyle("-fx-background-color: #c4d5fc"));
+                        PathButton.setOnAction(e -> { // when add button is pressed its opens file explorer
+                            FileChooser fc = new FileChooser();
+                            fc.setTitle("Select File to open");
+                            File f = fc.showOpenDialog(addStage);
+                            s[0] =(String.valueOf(f.toPath()));
+                            table.getItems().get(getIndex()).setCoverPath(s[0]);
+                        });
+                        HBox hBox2 = new HBox();
+                        hBox2.setAlignment(Pos.CENTER);
+                        hBox2.getChildren().add(PathButton);
+                        vBoxCover.getChildren().addAll(hBox1,hBox2);
+                        Scene sceneCover = new Scene(vBoxCover,600,600);
+                        Stage stage = new Stage();
+                        stage.setScene(sceneCover);
+                        stage.show();
+
                     });
                 }
             }
@@ -270,8 +298,7 @@ public class UserInterface extends Application {
                if(empty){
                    setGraphic(null);
                }else {
-                   Image image= new Image("bookimage.png");
-                   imageView.setImage(image);
+                   imageView.setImage(table.getItems().get(getIndex()).getCover());
                    setGraphic(imageView);
                }
            }
@@ -408,7 +435,7 @@ public class UserInterface extends Application {
         vbox.setVgrow(table,Priority.ALWAYS);
 
 
-        Scene scene = new Scene(vbox,1000,750);
+        Scene scene = new Scene(vbox,1325,900);
         listStage.setScene(scene);
         listStage.setTitle("Book List");
 
@@ -424,6 +451,7 @@ public class UserInterface extends Application {
 
     //A method that allows adding books to the library or transferring an entire library.
     public void addTab() {
+        String[] s = new String[1];
         //Vbox opened
         VBox vAdd = new VBox();
         vAdd.setPadding(new Insets(10));
@@ -481,7 +509,7 @@ public class UserInterface extends Application {
             trans.add(translatorTextField.getText());
             Book book = new Book(textFieldArrayList.get(0).getText(), tags, textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(),
                     textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(), textFieldArrayList.get(7).getText(),
-                    textFieldArrayList.get(8).getText() , trans, textFieldArrayList.get(9).getText() ,"null");
+                    textFieldArrayList.get(8).getText() , trans, textFieldArrayList.get(9).getText() ,s[0]);
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
@@ -501,7 +529,19 @@ public class UserInterface extends Application {
             File f = fc.showOpenDialog(addStage);
             Library.addBooks(String.valueOf(f.toPath()));
         });
-        vAdd.getChildren().add(selecthPathButton);
+
+
+        Button coverButton = new Button("SELECT COVER");
+        coverButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+        coverButton.setOnMouseEntered(e -> coverButton.setStyle("-fx-background-color: #a5d9be"));
+        coverButton.setOnMouseExited(e -> coverButton.setStyle("-fx-background-color: #c4d5fc"));
+        coverButton.setOnAction(e -> { // when add button is pressed its opens file explorer
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Select Cover to open");
+            File f = fc.showOpenDialog(addStage);
+            s[0] =(String.valueOf(f.toPath()));
+        });
+
 
         TextField pathField = new TextField();
         pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\Library.json\"");
@@ -521,11 +561,13 @@ public class UserInterface extends Application {
             Library.addBooks(pathField.getText());
             addTab();
         });
-        vAdd.getChildren().add(pathField);
 
+        vAdd.getChildren().add(coverButton);
+        vAdd.getChildren().add(selecthPathButton);
+        vAdd.getChildren().add(pathField);
         vAdd.getChildren().add(addPathButton);
 
-        Scene listScene = new Scene(vAdd, 600, 600);
+        Scene listScene = new Scene(vAdd, 700, 700);
 
         //setOnAction
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
