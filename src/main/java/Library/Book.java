@@ -24,7 +24,7 @@ public class Book implements Comparable<Book>  {
     public Image cover;
 
     //JSON.updateJsonFile(); Test it may be dysfunctional.
-    public Book(String title, String author, String publisher, String subtitle, String language, String rating, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String coverPath) {
+    public Book(String title, ArrayList<String> tags, String subtitle, String author, String publisher, String date, String isbn, String edition, String language ,ArrayList<String> translators, String rating, String coverPath) {
 
         setTitle(title);
         setAuthor(author);
@@ -41,8 +41,9 @@ public class Book implements Comparable<Book>  {
     }
 
     public Book() {
-        this("title","author","publisher", "subtitle", "language", "1", "1" ,"0000000000","1",new ArrayList<>(), new ArrayList<>(), "bookk.png");
+        this("title", new ArrayList<>(), "subtitle", "author","publisher", "1", "0000000000", "1", "language" ,new ArrayList<>(),"1","default");
     }
+
 
     //Getters
     public Image getCover() { return cover;}
