@@ -270,7 +270,7 @@ public class UserInterface extends Application {
                if(empty){
                    setGraphic(null);
                }else {
-                   Image image= new Image("bookk.png");
+                   Image image= new Image("bookimage.png");
                    imageView.setImage(image);
                    setGraphic(imageView);
                }
@@ -278,7 +278,7 @@ public class UserInterface extends Application {
 
         };
         imageColumn.setCellFactory(cellFactory);
-        table.getColumns().add(imageColumn);
+        table.getColumns().add(0,imageColumn);
 
 
     }
