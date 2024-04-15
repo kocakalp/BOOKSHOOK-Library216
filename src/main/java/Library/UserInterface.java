@@ -257,6 +257,15 @@ public class UserInterface extends Application {
         table.getColumns().add(delButtonColumn);
         table.getColumns().add(edtButtonColumn);
     }
+    /*public void addImage(){
+        TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
+        imageColumn.setPrefWidth(50);
+        imageColumn.
+
+
+
+
+    }*/
 
     //Function that provides a list view of books in a table.
     public void listTab(String text) {
@@ -306,13 +315,13 @@ public class UserInterface extends Application {
         });
 
 
-        TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
+        TableColumn<Book, String> dateColumn = new TableColumn<>("Publication Date");
         dateColumn.setPrefWidth(110);
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getDate()));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear"));
+        dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublicationYear()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dateColumn.setOnEditCommit(event -> {
-            Library.editDate(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            Library.editPublicationYear(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
         });
 
 
@@ -376,10 +385,8 @@ public class UserInterface extends Application {
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-
-        String[] labels = {"Title:", "Author:", "Publisher:", "Date:", "ISBN", "Subtitle:", "Edition:", "Language:", "Rating:", "Tags:", "Translator:"};
+        String[] labels = {"Book Title:", "Author:", "Publisher:", "Publication Date:", "ISBN", "Edition:", "Translator:", "Tags:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
-
 
         for (String labelText : labels) {
             if(labelText.equals("Translator:")) { continue; } // continues the translator's text field because it can be empty
@@ -396,23 +403,18 @@ public class UserInterface extends Application {
             Tooltip.install(hover, tooltip);
 
 
-
-
             textFieldArrayList.add(textField);
-
 
             HBox hbox = new HBox();
             hbox.getChildren().addAll(label, textField, hover);
             vAdd.getChildren().add(hbox);
         }
 
-
         Label translatorLabeler = new Label("Translator:");
         TextField translatorTextField = new TextField();
         HBox translatorHBox = new HBox();
         translatorHBox.getChildren().addAll(translatorLabeler, translatorTextField);
         vAdd.getChildren().add(translatorHBox);
-
 
         Button addButton = new Button("CREATE BOOK");
         addButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
@@ -430,22 +432,17 @@ public class UserInterface extends Application {
                 }
             }
             ArrayList<String> tags = new ArrayList<>();
-            tags.add(textFieldArrayList.get(9).getText());
+            tags.add(textFieldArrayList.get(6).getText());
             ArrayList<String> trans = new ArrayList<>();
             trans.add(translatorTextField.getText());
-            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(),
-                    textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(),
-                    textFieldArrayList.get(7).getText(), textFieldArrayList.get(8).getText(), tags, null,null);
+            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(),textFieldArrayList.get(5).getText(),tags,trans);
             JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
         });
         addButton.setPrefSize(150,50);
 
-
         vAdd.getChildren().add(addButton);
-
-
 
 
         Button selecthPathButton = new Button("SELECT PATH");
@@ -460,14 +457,12 @@ public class UserInterface extends Application {
         });
         vAdd.getChildren().add(selecthPathButton);
 
-
         TextField pathField = new TextField();
         pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\Library.json\"");
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
         addPathButton.setOnMouseExited(e -> addPathButton.setStyle("-fx-background-color: #c4d5fc"));
-
 
         addPathButton.setOnAction(e -> { // when add button is pressed it's  the text field for a path if its empty its show a warning.
             if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
@@ -482,18 +477,14 @@ public class UserInterface extends Application {
         });
         vAdd.getChildren().add(pathField);
 
-
         vAdd.getChildren().add(addPathButton);
 
-
         Scene listScene = new Scene(vAdd, 600, 600);
-
 
         //setOnAction
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
         addStage.setScene(listScene);
         addStage.setTitle("ADD MENU");
-
 
         //The tab's openness control raises it to the top if it's open.
         if (addStage.isShowing()){
@@ -503,6 +494,5 @@ public class UserInterface extends Application {
             addStage.show();
         }
     }
-
 
 }
