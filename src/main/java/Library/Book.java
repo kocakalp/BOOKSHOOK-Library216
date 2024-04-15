@@ -41,7 +41,7 @@ public class Book implements Comparable<Book>  {
     }
 
     public Book() {
-        this("title","author","publisher", "subtitle", "language", "1", "1" ,"0000000000","1",new ArrayList<>(), new ArrayList<>(), "default");
+        this("title","author","publisher", "subtitle", "language", "1", "1" ,"0000000000","1",new ArrayList<>(), new ArrayList<>(), "bookk.png");
     }
 
     //Getters
@@ -70,7 +70,7 @@ public class Book implements Comparable<Book>  {
 
         } else {
             System.out.println("invalid Cover path");
-            setCoverPath("default.png");
+            setCoverPath("bookk.png");
         }
     }
     public void setTitle(String title) {
