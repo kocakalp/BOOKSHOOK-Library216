@@ -116,9 +116,11 @@ public class UserInterface extends Application {
         addButton.setOnAction(e -> addTab());
         addButton.setPrefSize(150,50);
 
+        spacer1 = new Region();
+        spacer1.setPrefWidth(250); //Add a space 100 units wide.
         Region spacer2 = new Region();
         spacer2.setPrefWidth(250); //Add a space 100 units wide.
-        hBox3.getChildren().addAll(searchButton,searchTag,spacer2,addButton);
+        hBox3.getChildren().addAll(searchButton,spacer1,searchTag,spacer2,addButton);
         hBox3.setAlignment(Pos.CENTER);
 
 
@@ -227,7 +229,7 @@ public class UserInterface extends Application {
     //It is the function unit where you add buttons to each row in the table and gain the functionality of the buttons.
     private void addButtonToTable() {
         TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
-        TableColumn<Book, Void> edtButtonColumn = new TableColumn<>("E");
+        TableColumn<Book, Void> bookButtonColumn = new TableColumn<>("B");
         TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
@@ -254,8 +256,8 @@ public class UserInterface extends Application {
         };
 
 
-        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> edtCellFactory = param -> new TableCell<Book, Void>() {
-            private final Button edtButton = new Button();
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> bookCellFactory = param -> new TableCell<Book, Void>() {
+            private final Button bookButton = new Button();
 
             @Override
             public void updateItem(Void item, boolean empty) {
@@ -263,13 +265,13 @@ public class UserInterface extends Application {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    ImageView edtView = new ImageView(new Image("edit.png"));
-                    edtView.setFitWidth(25);
-                    edtView.setFitHeight(30);
-                    edtButton.setGraphic(edtView);
-                    setGraphic(edtButton);
+                    ImageView bookView = new ImageView(new Image("book.png"));
+                    bookView.setFitWidth(25);
+                    bookView.setFitHeight(30);
+                    bookButton.setGraphic(bookView);
+                    setGraphic(bookButton);
 
-                    edtButton.setOnAction(event -> {
+                    bookButton.setOnAction(event -> {
                         String[] s = new String[1];
                         //Book book = getTableView().getItems().get(getIndex());
                         //Make all cells in this row editable.
@@ -299,6 +301,7 @@ public class UserInterface extends Application {
                         Scene sceneCover = new Scene(vBoxCover,600,600);
                         Stage stage = new Stage();
                         stage.setScene(sceneCover);
+                        stage.setTitle("Book Cover");
                         stage.show();
 
                     });
@@ -307,10 +310,10 @@ public class UserInterface extends Application {
         };
 
         delButtonColumn.setCellFactory(delCellFactory);
-        edtButtonColumn.setCellFactory(edtCellFactory);
+        bookButtonColumn.setCellFactory(bookCellFactory);
 
         table.getColumns().add(delButtonColumn);
-        table.getColumns().add(edtButtonColumn);
+        table.getColumns().add(bookButtonColumn);
 
         //Add Cover
 
