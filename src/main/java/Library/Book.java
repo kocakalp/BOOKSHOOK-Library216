@@ -1,6 +1,7 @@
 package Library;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -20,23 +21,7 @@ public class Book implements Comparable<Book>  {
     private final ArrayList<String> tags = new ArrayList<>();
     private final ArrayList<String> translators = new ArrayList<>();
     private String coverPath;
-    private Image cover;
-
-    public void setCoverPath(String coverPath) {
-        if (isValidCoverPath()) {
-            this.coverPath = coverPath;
-
-        } else {
-            System.out.println("invalid Cover path");
-            this.coverPath = "default";
-        }
-    }
-    public String getCoverPath() {
-        return coverPath;
-    }
-    public boolean isValidCoverPath() {
-        return true;
-    }
+    public Image cover;
 
     //JSON.updateJsonFile(); Test it may be dysfunctional.
     public Book(String title, String author, String publisher, String subtitle, String language, String rating, String date, String isbn, String edition,ArrayList<String> tags,ArrayList<String> translators,String coverPath) {
@@ -53,14 +38,15 @@ public class Book implements Comparable<Book>  {
         addTags(tags);
         addTranslators(translators);
         setCoverPath(coverPath);
-        JSON.updateJsonFile();
     }
 
     public Book() {
-        this("title","author","publisher", "subtitle", "language", "1", "1" ,"0000000000","1",new ArrayList<>(), new ArrayList<>(), "");
+        this("title","author","publisher", "subtitle", "language", "1", "1" ,"0000000000","1",new ArrayList<>(), new ArrayList<>(), "default");
     }
 
     //Getters
+    public Image getCover() { return cover;}
+    public String getCoverPath() {return coverPath;}
     public String getTitle() {return title;}
     public String getAuthor() {return author;}
     public String getPublisher() {return publisher;}
@@ -78,6 +64,15 @@ public class Book implements Comparable<Book>  {
     //Setters
 
     //Change the Else parts to call the edit method in the future.(?)
+    public void setCoverPath(String coverPath) {
+        if (isValidCoverPath(coverPath)) {
+            this.coverPath = coverPath;
+
+        } else {
+            System.out.println("invalid Cover path");
+            setCoverPath("default.png");
+        }
+    }
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
@@ -188,6 +183,14 @@ public class Book implements Comparable<Book>  {
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
+    public boolean isValidCoverPath(String input) {
+        try {
+            cover = new Image(input);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
     public Boolean isValidTitle(String input) {
         try {
             return input != null && !input.isBlank();
