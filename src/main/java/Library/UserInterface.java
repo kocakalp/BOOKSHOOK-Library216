@@ -377,7 +377,7 @@ public class UserInterface extends Application {
         vAdd.setSpacing(10);
 
 
-        String[] labels = {"Title:", "Subtitle:", "Authors:", "Translator:", "ISBN", "Publisher:", "Date:", "Edition:", "Language:", "Rating:", "Tags:"};
+        String[] labels = {"Title:", "Authors:", "Publisher:", "Date:", "ISBN", "Subtitle:", "Edition:", "Language:", "Rating:", "Tags:", "Translator:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
 
@@ -433,10 +433,10 @@ public class UserInterface extends Application {
             tags.add(textFieldArrayList.get(10).getText());
             ArrayList<String> trans = new ArrayList<>();
             trans.add(translatorTextField.getText());
-            Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(),trans,
+            /*Book book = new Book(textFieldArrayList.get(0).getText(), textFieldArrayList.get(1).getText(), textFieldArrayList.get(2).getText(),trans,
                     textFieldArrayList.get(3).getText(), textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(),
-                    textFieldArrayList.get(7).getText(), textFieldArrayList.get(8).getText(), tags);
-            JSON.getBooks().add(book);
+                    textFieldArrayList.get(7).getText(), textFieldArrayList.get(8).getText(), tags);*/
+            //JSON.getBooks().add(book);
             JSON.updateJsonFile();
             addTab();
         });
