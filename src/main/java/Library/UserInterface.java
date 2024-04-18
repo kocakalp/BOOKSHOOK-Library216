@@ -283,6 +283,8 @@ public class UserInterface extends Application {
                         //table.edit(getIndex(),  table.getColumns().get(0));
                         ImageView selectedBookView = new ImageView(table.getItems().get(getIndex()).getCover());
                         VBox vBoxCover = new VBox();
+                        selectedBookView.setFitHeight(550);
+                        selectedBookView.setFitWidth(550);
 
                         HBox hBox1 = new HBox(selectedBookView);
                         hBox1.setAlignment(Pos.CENTER);
