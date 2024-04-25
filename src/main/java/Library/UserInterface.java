@@ -494,6 +494,13 @@ public class UserInterface extends Application {
         String[] s = new String[1];
         //Vbox opened
         VBox vAdd = new VBox();
+        BackgroundImage backgroundImage = new BackgroundImage(
+                new Image("cover.png", 1000, 1000, true, true),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        vAdd.setBackground(new Background(backgroundImage));
+
+
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
