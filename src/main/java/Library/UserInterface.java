@@ -580,7 +580,7 @@ public class UserInterface extends Application {
         });
         addButton.setPrefSize(150,50);
 
-        vAdd.getChildren().add(addButton);
+
 
 
         Button selecthPathButton = new Button("SELECT PATH");
@@ -596,6 +596,14 @@ public class UserInterface extends Application {
 
 
         Button coverButton = new Button("SELECT COVER");
+        ImageView bookView = new ImageView(new Image("book.png"));
+        bookView.setFitWidth(25);
+        bookView.setFitHeight(30);
+        coverButton.setGraphic(bookView);
+        //setGraphic(coverButton);
+
+
+
         coverButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         coverButton.setOnMouseEntered(e -> coverButton.setStyle("-fx-background-color: #a5d9be"));
         coverButton.setOnMouseExited(e -> coverButton.setStyle("-fx-background-color: #c4d5fc"));
@@ -606,9 +614,9 @@ public class UserInterface extends Application {
             s[0] =(String.valueOf(f.toPath()));
         });
 
-
+        HBox addPathHbox = new HBox();
         TextField pathField = new TextField();
-        pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\Library.json\"");
+        pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\SpaceOddity.json\"");
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
@@ -627,9 +635,14 @@ public class UserInterface extends Application {
         });
 
         vAdd.getChildren().add(coverButton);
+        vAdd.getChildren().add(addButton);
         vAdd.getChildren().add(selecthPathButton);
-        vAdd.getChildren().add(pathField);
-        vAdd.getChildren().add(addPathButton);
+
+        Region spacer4 = new Region();
+        spacer4.setPrefWidth(250);
+        addPathHbox.getChildren().addAll(pathField, spacer4, addPathButton);
+        vAdd.getChildren().add(addPathHbox);
+
 
         Scene listScene = new Scene(vAdd, 700, 700);
 
