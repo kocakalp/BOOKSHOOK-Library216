@@ -240,6 +240,12 @@ public class UserInterface extends Application {
         TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
         TableColumn<Book, Void> bookButtonColumn = new TableColumn<>("B");
         TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
+        delButtonColumn.setResizable(false);
+        delButtonColumn.setPrefWidth(60);
+        bookButtonColumn.setResizable(false);
+        bookButtonColumn.setPrefWidth(60);
+        imageColumn.setResizable(false);
+        imageColumn.setPrefWidth(60);
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
 
