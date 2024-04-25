@@ -473,6 +473,7 @@ public class UserInterface extends Application {
 
 
         Scene scene = new Scene(vbox,1325,900);
+        listStage.alwaysOnTopProperty();
         listStage.setScene(scene);
         listStage.setTitle("Book List");
 
@@ -523,6 +524,13 @@ public class UserInterface extends Application {
         TextField translatorTextField = new TextField();
         HBox translatorHBox = new HBox();
         translatorHBox.getChildren().addAll(translatorLabeler, translatorTextField);
+
+        int clickCount = 0;
+
+        Label textLabel = new Label("Text");
+        vAdd.getChildren().add(textLabel);
+
+
         vAdd.getChildren().add(translatorHBox);
 
         Button addButton = new Button("CREATE BOOK");
