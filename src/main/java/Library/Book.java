@@ -67,7 +67,9 @@ public class Book implements Comparable<Book>  {
     //Change the Else parts to call the edit method in the future.(?)
 
     public void setCover(Image cover) {
-        this.cover = cover;
+        if (isValidCover(cover)) {
+            this.cover = cover;
+        }
     }
     public void setCoverPath(String coverPath) {
         if (isValidCoverPath(coverPath)) {
@@ -188,9 +190,12 @@ public class Book implements Comparable<Book>  {
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
+    public boolean isValidCover(Image input) {
+        return !input.isError();
+    }
     public boolean isValidCoverPath(String input) {
         try {
-            cover = new Image(input);
+            setCover(new Image(input));
         } catch (Exception e) {
             return false;
         }
