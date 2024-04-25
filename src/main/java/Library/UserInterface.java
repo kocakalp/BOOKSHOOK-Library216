@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -245,7 +246,7 @@ public class UserInterface extends Application {
         bookButtonColumn.setResizable(false);
         bookButtonColumn.setPrefWidth(60);
         imageColumn.setResizable(false);
-        imageColumn.setPrefWidth(60);
+        imageColumn.setPrefWidth(63);
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
 
@@ -296,32 +297,44 @@ public class UserInterface extends Application {
                         selectedBookView.setFitHeight(550);
                         selectedBookView.setFitWidth(550);
 
+                        Label lTitle = new Label(table.getItems().get(getIndex()).getTitle().toUpperCase(Locale.ROOT));
+                        lTitle.setFont(new Font(20));
+                        HBox hTitle = new HBox();
+                        hTitle.setAlignment(Pos.CENTER);
+                        hTitle.getChildren().add(lTitle);
+                        hTitle.setPadding(new Insets(10,0,10,0));
+
                         HBox hBox1 = new HBox(selectedBookView);
                         hBox1.setAlignment(Pos.CENTER);
                         HBox.setHgrow(hBox1,Priority.ALWAYS);
+                        hBox1.setPadding(new Insets(0,0,10,0));
 
-                        Button PathButton = new Button("SELECT COVER");
-                        PathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
-                        PathButton.setOnMouseEntered(e -> PathButton.setStyle("-fx-background-color: #a5d9be"));
-                        PathButton.setOnMouseExited(e -> PathButton.setStyle("-fx-background-color: #c4d5fc"));
-                        PathButton.setOnAction(e -> { // when add button is pressed its opens file explorer
+                        Button selectCoverButton = new Button("SELECT COVER");
+                        selectCoverButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+                        selectCoverButton.setPrefSize(120,30);
+                        selectCoverButton.setOnMouseEntered(e -> selectCoverButton.setStyle("-fx-background-color: #a5d9be"));
+                        selectCoverButton.setOnMouseExited(e -> selectCoverButton.setStyle("-fx-background-color: #c4d5fc"));
+
+                        selectCoverButton.setOnAction(e -> { // when add button is pressed its opens file explorer
                             FileChooser fc = new FileChooser();
-                            fc.setTitle("Select File to open");
+                            fc.setTitle("Select Cover to open");
                             File f = fc.showOpenDialog(addStage);
                             s[0] =(String.valueOf(f.toPath()));
                             Library.editCoverPath(s[0],table.getItems().get(getIndex()));
                             table.getItems().get(getIndex()).setCoverPath(s[0]);
                             selectedBookView.setImage(table.getItems().get(getIndex()).getCover());
                             Library.editCover(selectedBookView.getImage(),table.getItems().get(getIndex()));
+                            table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
                         });
                         HBox hBox2 = new HBox();
                         hBox2.setAlignment(Pos.CENTER);
-                        hBox2.getChildren().add(PathButton);
-                        vBoxCover.getChildren().addAll(hBox1,hBox2);
-                        Scene sceneCover = new Scene(vBoxCover,600,600);
+                        hBox2.getChildren().add(selectCoverButton);
+                        vBoxCover.getChildren().addAll(hTitle,hBox1,hBox2);
+                        Scene sceneCover = new Scene(vBoxCover,600,650);
                         //Stage bookStage = new Stage();
                         bookStage.setScene(sceneCover);
                         bookStage.setTitle("Book Cover");
+                        bookStage.setResizable(false);
 
                         //The tab's openness control raises it to the top if it's open.
                         if (bookStage.isShowing()){
