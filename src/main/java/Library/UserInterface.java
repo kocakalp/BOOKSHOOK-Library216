@@ -32,6 +32,7 @@ public class UserInterface extends Application {
     private Stage helpStage = new Stage();
     private Stage listStage = new Stage();
     private Stage addStage = new Stage();
+    private Stage bookStage = new Stage();
     private boolean searchAll = true;
     public static void main(String[] args) {
         launch();
@@ -312,11 +313,17 @@ public class UserInterface extends Application {
                         hBox2.getChildren().add(PathButton);
                         vBoxCover.getChildren().addAll(hBox1,hBox2);
                         Scene sceneCover = new Scene(vBoxCover,600,600);
-                        Stage stage = new Stage();
-                        stage.setScene(sceneCover);
-                        stage.setTitle("Book Cover");
-                        stage.show();
+                        //Stage bookStage = new Stage();
+                        bookStage.setScene(sceneCover);
+                        bookStage.setTitle("Book Cover");
 
+                        //The tab's openness control raises it to the top if it's open.
+                        if (bookStage.isShowing()){
+                            bookStage.toFront();
+                        }
+                        else {
+                            bookStage.show();
+                        }
                     });
                 }
             }
