@@ -41,7 +41,8 @@ public class JSON {
         Type t = new TypeToken<Book>(){}.getType();
         try {
             JsonReader reader = new JsonReader(new FileReader(filePath));
-            books.add(gson.fromJson(reader, t));
+            Book b = gson.fromJson(reader, t);
+            if(!books.contains(b))books.add(b);
         } catch (Exception e) {
             System.out.println("An error occurred while adding a book!!");
         } finally {

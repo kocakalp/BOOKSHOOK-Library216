@@ -555,8 +555,12 @@ public class UserInterface extends Application {
             Book book = new Book(textFieldArrayList.get(0).getText(), tags, textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(),
                     textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(), textFieldArrayList.get(7).getText(),
                     textFieldArrayList.get(8).getText() , trans, textFieldArrayList.get(9).getText() ,s[0]);
-            JSON.getBooks().add(book);
-            JSON.updateJsonFile();
+            if (!JSON.getBooks().contains(book)) {
+                JSON.getBooks().add(book);
+                JSON.updateJsonFile();
+            } else {
+                System.out.println("Book already exist");
+            }
             addTab();
         });
         addButton.setPrefSize(150,50);
