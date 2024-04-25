@@ -242,10 +242,13 @@ public class UserInterface extends Application {
         TableColumn<Book, Void> bookButtonColumn = new TableColumn<>("B");
         TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
         delButtonColumn.setResizable(false);
+        delButtonColumn.setReorderable(false);
         delButtonColumn.setPrefWidth(60);
         bookButtonColumn.setResizable(false);
+        bookButtonColumn.setReorderable(false);
         bookButtonColumn.setPrefWidth(60);
         imageColumn.setResizable(false);
+        imageColumn.setReorderable(false);
         imageColumn.setPrefWidth(63);
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
@@ -391,7 +394,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
         titleColumn.setResizable(false);
-
+        titleColumn.setReorderable(false);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTitle()));
         titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -403,6 +406,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(150);
         tagColumn.setResizable(false);
+        tagColumn.setReorderable(false);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
         tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -414,6 +418,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
         authorColumn.setResizable(false);
+        authorColumn.setReorderable(false);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
         authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -425,6 +430,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(100);
         publisherColumn.setResizable(false);
+        publisherColumn.setReorderable(false);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
         publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -436,6 +442,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setPrefWidth(110);
         dateColumn.setResizable(false);
+        dateColumn.setReorderable(false);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getDate()));
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -447,6 +454,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
         isbnColumn.setPrefWidth(80);
         isbnColumn.setResizable(false);
+        isbnColumn.setReorderable(false);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         isbnColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getIsbn()));
         isbnColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -458,6 +466,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> editionColumn = new TableColumn<>("Edition");
         editionColumn.setPrefWidth(85);
         editionColumn.setResizable(false);
+        editionColumn.setReorderable(false);
         editionColumn.setCellValueFactory(new PropertyValueFactory<>("edition"));
         editionColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getEdition()));
         editionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -468,6 +477,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> ratingColumn = new TableColumn<>("Rating");
         ratingColumn.setPrefWidth(85);
         ratingColumn.setResizable(false);
+        ratingColumn.setReorderable(false);
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         ratingColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getRating()));
         ratingColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -478,6 +488,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
         subtitleColumn.setPrefWidth(85);
         subtitleColumn.setResizable(false);
+        subtitleColumn.setReorderable(false);
         subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
         subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
         subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -488,6 +499,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
         languageColumn.setPrefWidth(85);
         languageColumn.setResizable(false);
+        languageColumn.setReorderable(false);
         languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
         languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
         languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -499,6 +511,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setResizable(false);
+        translatorColumn.setReorderable(false);
         translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
         translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -510,7 +523,6 @@ public class UserInterface extends Application {
         table.getColumns().addAll(titleColumn,tagColumn,subtitleColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,languageColumn,translatorColumn,ratingColumn);
         addButtonToTable();
         table.setItems(data);
-
 
         VBox vbox = new VBox(table);
         vbox.setVgrow(table,Priority.ALWAYS);
