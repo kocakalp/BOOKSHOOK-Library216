@@ -601,7 +601,7 @@ public class UserInterface extends Application {
         bookView.setFitHeight(30);
         coverButton.setGraphic(bookView);
         //setGraphic(coverButton);
-        
+
         coverButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         coverButton.setOnMouseEntered(e -> coverButton.setStyle("-fx-background-color: #a5d9be"));
         coverButton.setOnMouseExited(e -> coverButton.setStyle("-fx-background-color: #c4d5fc"));
@@ -614,6 +614,7 @@ public class UserInterface extends Application {
 
         HBox addPathHbox = new HBox();
         TextField pathField = new TextField();
+        pathField.setPrefWidth(250);
         pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\SpaceOddity.json\"");
         Button addPathButton = new Button("ADD PATH");
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
