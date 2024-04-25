@@ -131,6 +131,7 @@ public class UserInterface extends Application {
         stage.setScene(scene);
         stage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         stage.setTitle("BOOKSHOOK");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -186,6 +187,7 @@ public class UserInterface extends Application {
 
         hHelp.getChildren().addAll(text);
         HBox.setHgrow(hHelp,Priority.ALWAYS);
+
         vHelp1.getChildren().addAll(text);
 
         Scene helpScene = new Scene(vHelp1, 900, 900);
@@ -194,6 +196,7 @@ public class UserInterface extends Application {
         helpStage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         helpStage.setScene(helpScene);
         helpStage.setTitle("Help Menu");
+        helpStage.setResizable(false);
 
         //The tab's openness control raises it to the top if it's open.
         if (helpStage.isShowing()){
@@ -478,6 +481,7 @@ public class UserInterface extends Application {
         listStage.alwaysOnTopProperty();
         listStage.setScene(scene);
         listStage.setTitle("Book List");
+        listStage.setResizable(false);
 
         //The tab's openness control raises it to the top if it's open.
         if (listStage.isShowing()){
@@ -510,6 +514,7 @@ public class UserInterface extends Application {
         for (String labelText : labels) {
             if(labelText.equals("Translator:")) { continue; } // continues the translator's text field because it can be empty
             Label label = new Label(labelText);
+            label.setTextFill(Color.rgb( 255,  215,  0)); //Set RGB color.
             TextField textField = new TextField();
             Label hover = new Label("*");
             Font hoverFont = new Font(22);
@@ -631,6 +636,7 @@ public class UserInterface extends Application {
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
         addStage.setScene(listScene);
         addStage.setTitle("ADD MENU");
+        addStage.setResizable(false);
 
         //The tab's openness control raises it to the top if it's open.
         if (addStage.isShowing()){
