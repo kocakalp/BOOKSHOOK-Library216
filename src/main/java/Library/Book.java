@@ -67,8 +67,11 @@ public class Book implements Comparable<Book>  {
     //Change the Else parts to call the edit method in the future.(?)
 
     public void setCover(Image cover) {
+        Image image = new Image("default.png");
         if (isValidCover(cover)) {
             this.cover = cover;
+        } else {
+            setCover(image);
         }
     }
     public void setCoverPath(String coverPath) {

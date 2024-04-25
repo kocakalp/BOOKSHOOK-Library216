@@ -302,6 +302,7 @@ public class UserInterface extends Application {
                             fc.setTitle("Select File to open");
                             File f = fc.showOpenDialog(addStage);
                             s[0] =(String.valueOf(f.toPath()));
+                            Library.editCoverPath(s[0],table.getItems().get(getIndex()));
                             table.getItems().get(getIndex()).setCoverPath(s[0]);
                             selectedBookView.setImage(table.getItems().get(getIndex()).getCover());
                             Library.editCover(selectedBookView.getImage(),table.getItems().get(getIndex()));
