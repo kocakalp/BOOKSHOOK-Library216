@@ -300,6 +300,8 @@ public class UserInterface extends Application {
                             File f = fc.showOpenDialog(addStage);
                             s[0] =(String.valueOf(f.toPath()));
                             table.getItems().get(getIndex()).setCoverPath(s[0]);
+                            selectedBookView.setImage(table.getItems().get(getIndex()).getCover());
+                            Library.editCover(selectedBookView.getImage(),table.getItems().get(getIndex()));
                         });
                         HBox hBox2 = new HBox();
                         hBox2.setAlignment(Pos.CENTER);

@@ -1,10 +1,25 @@
 package Library;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
 
+
+    public static void editCoverPath(String input, Book edited) {
+        if (books.contains(edited)) {
+            edited.setCoverPath(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public static void editCover(Image cover, Book edited) {
+        if (books.contains(edited)) {
+            edited.setCover(cover);
+            JSON.updateJsonFile();
+        }
+    }
     //Edit methods
     public static void editTitle(String input, Book edited) {
         if (books.contains(edited)) {
