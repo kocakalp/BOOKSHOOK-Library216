@@ -326,7 +326,7 @@ public class UserInterface extends Application {
                             try {
                                 FileChooser fc = new FileChooser();
                                 fc.setTitle("Select Cover to open");
-                                File f = fc.showOpenDialog(addStage);
+                                File f = fc.showOpenDialog(bookStage);
                                 s[0] =(String.valueOf(f.toPath()));
                                 Library.editCoverPath(s[0],table.getItems().get(getIndex()));
                                 table.getItems().get(getIndex()).setCoverPath(s[0]);
@@ -349,6 +349,9 @@ public class UserInterface extends Application {
                         //The tab's openness control raises it to the top if it's open.
                         if (bookStage.isShowing()){
                             bookStage.toFront();
+                        }
+                        if (bookStage.isIconified()) {
+                            bookStage.setIconified(false);
                         }
                         else {
                             bookStage.show();
@@ -546,6 +549,9 @@ public class UserInterface extends Application {
         if (listStage.isShowing()){
             listStage.toFront();
         }
+        if (listStage.isIconified()) {
+            listStage.setIconified(false);
+        }
         else {
             listStage.show();
         }
@@ -714,6 +720,9 @@ public class UserInterface extends Application {
         //The tab's openness control raises it to the top if it's open.
         if (addStage.isShowing()){
             addStage.toFront();
+        }
+        if (addStage.isIconified()) {
+            addStage.setIconified(false);
         }
         else {
             addStage.show();
