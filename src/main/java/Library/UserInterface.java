@@ -219,24 +219,10 @@ public class UserInterface extends Application {
         data.clear();
         Library.addBooks("mainJson.json");
         if(searchAll) {
-            for (int i = 0 ; i < books.size() ; i++ ) {
-                try {
-                    SearchBar.search(text);
-
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
+            SearchBar.search(text);
             return data;
         } else {
-            for (int i = 0 ; i < books.size() ; i++ ) {
-                try {
-                    SearchBar.searchByTag(text);
-
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
+            SearchBar.searchByTag(text);
             return data;
         }
     }
