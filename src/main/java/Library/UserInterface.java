@@ -35,6 +35,7 @@ public class UserInterface extends Application {
     private Stage addStage = new Stage();
     private Stage bookStage = new Stage();
     private static ObservableList<Book> data = FXCollections.observableArrayList();
+    private static final ArrayList<Book> books = JSON.getBooks();
     private boolean searchAll = true;
     public static ObservableList<Book> getData() {
         return data;
@@ -44,7 +45,7 @@ public class UserInterface extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        JSON.addBooks("mainJson.json");
+        Library.addBooks("mainJson.json");
         VBox vbox1 = new VBox();
         vbox1.setAlignment(Pos.CENTER);
 
@@ -216,11 +217,11 @@ public class UserInterface extends Application {
     //Method to take the data of the books required for the library from the json file and transfer it to the table.
     private ObservableList<Book> getBookData(String text) {
         data.clear();
-        JSON.addBooks("mainJson.json");
+        Library.addBooks("mainJson.json");
         if(searchAll) {
-            for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
+            for (int i = 0 ; i < books.size() ; i++ ) {
                 try {
-                    data.add(SearchBar.search(text).get(i));
+                    SearchBar.search(text);
 
                 } catch (Exception e) {
                     System.out.println(e);
@@ -228,9 +229,9 @@ public class UserInterface extends Application {
             }
             return data;
         } else {
-            for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {
+            for (int i = 0 ; i < books.size() ; i++ ) {
                 try {
-                    data.add(SearchBar.searchByTag(text).get(i));
+                    SearchBar.searchByTag(text);
 
                 } catch (Exception e) {
                     System.out.println(e);
@@ -259,7 +260,7 @@ public class UserInterface extends Application {
 
             {
                 delButton.setOnAction(event -> {
-                    JSON.removeBook(getTableView().getItems().remove(getIndex()));
+                    Library.removeBook(getTableView().getItems().remove(getIndex()));
                 });
             }
 
@@ -635,8 +636,8 @@ public class UserInterface extends Application {
             Book book = new Book(textFieldArrayList.get(0).getText(), tags, textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(),
                     textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(), textFieldArrayList.get(7).getText(),
                     textFieldArrayList.get(8).getText() , trans, textFieldArrayList.get(9).getText() ,s[0]);
-            if (!JSON.getBooks().contains(book)) {
-                JSON.getBooks().add(book);
+            if (!books.contains(book)) {
+                books.add(book);
                 JSON.updateJsonFile();
                 data.add(book);///////////////////////
                 table.refresh();

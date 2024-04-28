@@ -1,11 +1,17 @@
 package Library;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public  class SearchBar {
-    ArrayList<String> arrayList=  new ArrayList<>();
-    static ArrayList <Book> books = new ArrayList<>();
+    private static ObservableList<Book> data = UserInterface.getData();
+    private static final ArrayList<Book> books = JSON.getBooks();
+
+    //şevval senin metodlar bozulmuş olabilir.
+    //static ArrayList <Book> books = new ArrayList<>();
     public static void searchBookByTitle(String title){
         boolean isFound=false;
         for(Book book:books){
@@ -134,24 +140,20 @@ public  class SearchBar {
     }
 
 
-    public static ArrayList<Book> search(String in) {
-        ArrayList<Book> show = new ArrayList<>();
-        for (Book b : JSON.getBooks()) {
-            if(b.toString().toLowerCase().contains(in.toLowerCase())) show.add(b);
+    public static void search(String in) {
+        for (Book b : books) {
+            if(b.toString().toLowerCase().contains(in.toLowerCase())) data.add(b);
         }
-        return show;
     }
-    public static ArrayList<Book> searchByTag(String in) {
+    public static void searchByTag(String in) {
 
-        ArrayList<Book> show = new ArrayList<>();
-        for (Book b : JSON.getBooks()) {
+        for (Book b : books) {
             for (String s : b.getTags()) {
                 if (s.equalsIgnoreCase(in)) {
-                    show.add(b);
+                    data.add(b);
                     break;
                 }
             }
         }
-        return show;
     }
 }
