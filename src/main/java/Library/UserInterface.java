@@ -34,8 +34,11 @@ public class UserInterface extends Application {
     private Stage listStage = new Stage();
     private Stage addStage = new Stage();
     private Stage bookStage = new Stage();
-    private ObservableList<Book> data;
+    private static ObservableList<Book> data = FXCollections.observableArrayList();
     private boolean searchAll = true;
+    public static ObservableList<Book> getData() {
+        return data;
+    }
     public static void main(String[] args) {
         launch();
     }
@@ -212,7 +215,7 @@ public class UserInterface extends Application {
 
     //Method to take the data of the books required for the library from the json file and transfer it to the table.
     private ObservableList<Book> getBookData(String text) {
-        ObservableList<Book> data = FXCollections.observableArrayList();
+        data.clear();
         JSON.addBooks("mainJson.json");
         if(searchAll) {
             for (int i = 0 ; i < JSON.getBooks().size() ; i++ ) {

@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import javafx.collections.ObservableList;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,6 +16,7 @@ import java.util.Collection;
 
 public class JSON {
     private static final ArrayList<Book> books = new ArrayList<>();
+    private static ObservableList<Book> data = UserInterface.getData();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
     private static final String filePath = "mainJson.json";
 
@@ -24,7 +27,10 @@ public class JSON {
             JsonReader reader = new JsonReader(new FileReader(filePath));
             ArrayList<Book> books1 = new ArrayList<>(gson.fromJson(reader, t));
             for(Book b : books1) {
-                if(!books.contains(b))books.add(b);
+                if(!books.contains(b)){
+                    books.add(b);
+                    data.add(b);
+                }
             }
         } catch (JsonSyntaxException | ClassCastException e) {
             addBook(filePath);
@@ -42,7 +48,10 @@ public class JSON {
         try {
             JsonReader reader = new JsonReader(new FileReader(filePath));
             Book b = gson.fromJson(reader, t);
-            if(!books.contains(b))books.add(b);
+            if(!books.contains(b)){
+                books.add(b);
+                data.add(b);
+            }
         } catch (Exception e) {
             System.out.println("An error occurred while adding a book!!");
         } finally {
