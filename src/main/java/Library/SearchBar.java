@@ -142,16 +142,18 @@ public  class SearchBar {
 
     public static void search(String in) {
         for (Book b : books) {
-            if(b.toString().toLowerCase().contains(in.toLowerCase())) data.add(b);
+            if(b.toString().toLowerCase().contains(in.toLowerCase()) && !data.contains(b)) data.add(b);
         }
     }
     public static void searchByTag(String in) {
 
         for (Book b : books) {
-            for (String s : b.getTags()) {
-                if (s.equalsIgnoreCase(in)) {
-                    data.add(b);
-                    break;
+            if (!data.contains(b)) {
+                for (String s : b.getTags()) {
+                    if (s.equalsIgnoreCase(in)) {
+                        data.add(b);
+                        break;
+                    }
                 }
             }
         }
