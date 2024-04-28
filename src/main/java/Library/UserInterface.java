@@ -578,13 +578,13 @@ public class UserInterface extends Application {
 
         for (String labelText : labels) {
             if(labelText.equals("Translator:")) { continue; } // continues the translator's text field because it can be empty
-            Label label = new Label(labelText);
-            label.setTextFill(Color.rgb( 255,  215,  0)); //Set RGB color.
+            //Label label = new Label(labelText);
             TextField textField = new TextField();
+            textField.setPromptText(labelText);
             Label hover = new Label("*");
             Font hoverFont = new Font(22);
             hover.setFont(hoverFont);
-            hover.setTextFill(Color.rgb(208, 90 ,90)); //Set RGB color.
+            hover.setTextFill(Color.rgb(231, 219 ,21)); //Set RGB color.
             Tooltip tooltip = new Tooltip("This field is required");
             tooltip.setShowDelay(Duration.millis(3));
             Font tooltipFont = new Font(10);
@@ -595,21 +595,22 @@ public class UserInterface extends Application {
             textFieldArrayList.add(textField);
 
             HBox hbox = new HBox();
-            hbox.getChildren().addAll(label, textField, hover);
+            hbox.getChildren().addAll(textField, hover);
+            hbox.setAlignment(Pos.CENTER);
             vAdd.getChildren().add(hbox);
         }
 
-        Label translatorLabeler = new Label("Translator:");
+        //Label translatorLabeler = new Label("Translator:");
         TextField translatorTextField = new TextField();
+        translatorTextField.setPromptText("Translator:");
         HBox translatorHBox = new HBox();
-        translatorHBox.getChildren().addAll(translatorLabeler, translatorTextField);
-
-        int clickCount = 0;
-
-        Label textLabel = new Label("Text");
-        vAdd.getChildren().add(textLabel);
+        translatorHBox.getChildren().addAll(translatorTextField);
 
 
+
+
+
+        translatorHBox.setAlignment(Pos.CENTER);
         vAdd.getChildren().add(translatorHBox);
 
         Button addButton = new Button("CREATE BOOK");
@@ -701,12 +702,18 @@ public class UserInterface extends Application {
 
         vAdd.getChildren().add(coverButton);
         vAdd.getChildren().add(addButton);
-        vAdd.getChildren().add(selecthPathButton);
+        vAdd.setAlignment(Pos.CENTER);
 
+
+
+        Region spacer6 = new Region();
+        spacer6.setPrefWidth(15);
         Region spacer4 = new Region();
         spacer4.setPrefWidth(10);
-        addPathHbox.getChildren().addAll(pathField, spacer4, addPathButton);
-        vAdd.getChildren().add(addPathHbox);
+        Region spacer5 = new Region();
+        spacer5.setPrefWidth(220);
+        addPathHbox.getChildren().addAll(spacer6, pathField, spacer4, addPathButton, spacer5, selecthPathButton);
+        vAdd.getChildren().addAll(addPathHbox);
 
 
         Scene listScene = new Scene(vAdd, 700, 700);
