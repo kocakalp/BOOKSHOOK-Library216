@@ -34,6 +34,7 @@ public class UserInterface extends Application {
     private Stage listStage = new Stage();
     private Stage addStage = new Stage();
     private Stage bookStage = new Stage();
+    private ObservableList<Book> data;
     private boolean searchAll = true;
     public static void main(String[] args) {
         launch();
@@ -319,15 +320,18 @@ public class UserInterface extends Application {
                         selectCoverButton.setOnMouseExited(e -> selectCoverButton.setStyle("-fx-background-color: #c4d5fc"));
 
                         selectCoverButton.setOnAction(e -> { // when add button is pressed its opens file explorer
-                            FileChooser fc = new FileChooser();
-                            fc.setTitle("Select Cover to open");
-                            File f = fc.showOpenDialog(addStage);
-                            s[0] =(String.valueOf(f.toPath()));
-                            Library.editCoverPath(s[0],table.getItems().get(getIndex()));
-                            table.getItems().get(getIndex()).setCoverPath(s[0]);
-                            selectedBookView.setImage(table.getItems().get(getIndex()).getCover());
-                            Library.editCover(selectedBookView.getImage(),table.getItems().get(getIndex()));
-                            table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
+                            try {
+                                FileChooser fc = new FileChooser();
+                                fc.setTitle("Select Cover to open");
+                                File f = fc.showOpenDialog(addStage);
+                                s[0] =(String.valueOf(f.toPath()));
+                                Library.editCoverPath(s[0],table.getItems().get(getIndex()));
+                                table.getItems().get(getIndex()).setCoverPath(s[0]);
+                                selectedBookView.setImage(table.getItems().get(getIndex()).getCover());
+                                Library.editCover(selectedBookView.getImage(),table.getItems().get(getIndex()));
+                                table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
+                            }catch (Exception exception){}
+
                         });
                         HBox hBox2 = new HBox();
                         hBox2.setAlignment(Pos.CENTER);
@@ -388,7 +392,8 @@ public class UserInterface extends Application {
         table.setEditable(true);
         table.getColumns().clear(); //it S clears all the rows and columns inside the listTab before items are added
         table.getItems().clear(); //this way we will not see double items and columns
-        ObservableList<Book> data = getBookData(text);
+        //ObservableList<Book> data = getBookData(text);
+        data = getBookData(text);
 
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
@@ -623,6 +628,8 @@ public class UserInterface extends Application {
             if (!JSON.getBooks().contains(book)) {
                 JSON.getBooks().add(book);
                 JSON.updateJsonFile();
+                data.add(book);///////////////////////
+                table.refresh();
             } else {
                 System.out.println("Book already exist");
             }

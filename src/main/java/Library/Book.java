@@ -118,7 +118,7 @@ public class Book implements Comparable<Book>  {
     }
 
     public void setSubtitle(String subtitle) {
-        if(isValidAuthor(subtitle)){
+        if(isValidSubtitle(subtitle)){
             this.subtitle = subtitle;
         } else {
             System.out.println("invalid subtitle");
