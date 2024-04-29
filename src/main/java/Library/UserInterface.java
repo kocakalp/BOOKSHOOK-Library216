@@ -138,7 +138,7 @@ public class UserInterface extends Application {
         stage.setScene(scene);
         stage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         stage.setTitle("BOOKSHOOK");
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.show();
     }
 
@@ -203,7 +203,7 @@ public class UserInterface extends Application {
         helpStage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         helpStage.setScene(helpScene);
         helpStage.setTitle("Help Menu");
-        helpStage.setResizable(false);
+        //helpStage.setResizable(false);
 
         //The tab's openness control raises it to the top if it's open.
         if (helpStage.isShowing()){
@@ -232,13 +232,13 @@ public class UserInterface extends Application {
         TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
         TableColumn<Book, Void> bookButtonColumn = new TableColumn<>("B");
         TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
-        delButtonColumn.setResizable(false);
+        //delButtonColumn.setResizable(false);
         delButtonColumn.setReorderable(false);
         delButtonColumn.setPrefWidth(60);
-        bookButtonColumn.setResizable(false);
+        //bookButtonColumn.setResizable(false);
         bookButtonColumn.setReorderable(false);
         bookButtonColumn.setPrefWidth(60);
-        imageColumn.setResizable(false);
+        //imageColumn.setResizable(false);
         imageColumn.setReorderable(false);
         imageColumn.setPrefWidth(63);
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
@@ -331,7 +331,7 @@ public class UserInterface extends Application {
                         //Stage bookStage = new Stage();
                         bookStage.setScene(sceneCover);
                         bookStage.setTitle("Book Cover");
-                        bookStage.setResizable(false);
+                        //bookStage.setResizable(false);
 
                         //The tab's openness control raises it to the top if it's open.
                         if (bookStage.isShowing()){
@@ -391,7 +391,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
-        titleColumn.setResizable(false);
+        //titleColumn.setResizable(false);
         titleColumn.setReorderable(false);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTitle()));
@@ -403,7 +403,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(150);
-        tagColumn.setResizable(false);
+        //tagColumn.setResizable(false);
         tagColumn.setReorderable(false);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
         tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
@@ -415,7 +415,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
-        authorColumn.setResizable(false);
+        //authorColumn.setResizable(false);
         authorColumn.setReorderable(false);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
@@ -427,7 +427,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(100);
-        publisherColumn.setResizable(false);
+        //publisherColumn.setResizable(false);
         publisherColumn.setReorderable(false);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
@@ -439,7 +439,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setPrefWidth(110);
-        dateColumn.setResizable(false);
+        //dateColumn.setResizable(false);
         dateColumn.setReorderable(false);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getDate()));
@@ -451,7 +451,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
         isbnColumn.setPrefWidth(80);
-        isbnColumn.setResizable(false);
+        //isbnColumn.setResizable(false);
         isbnColumn.setReorderable(false);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         isbnColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getIsbn()));
@@ -463,7 +463,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> editionColumn = new TableColumn<>("Edition");
         editionColumn.setPrefWidth(85);
-        editionColumn.setResizable(false);
+        //editionColumn.setResizable(false);
         editionColumn.setReorderable(false);
         editionColumn.setCellValueFactory(new PropertyValueFactory<>("edition"));
         editionColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getEdition()));
@@ -474,7 +474,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> ratingColumn = new TableColumn<>("Rating");
         ratingColumn.setPrefWidth(85);
-        ratingColumn.setResizable(false);
+        //ratingColumn.setResizable(false);
         ratingColumn.setReorderable(false);
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         ratingColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getRating()));
@@ -485,7 +485,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
         subtitleColumn.setPrefWidth(85);
-        subtitleColumn.setResizable(false);
+        //subtitleColumn.setResizable(false);
         subtitleColumn.setReorderable(false);
         subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
         subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
@@ -496,7 +496,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
         languageColumn.setPrefWidth(85);
-        languageColumn.setResizable(false);
+        //languageColumn.setResizable(false);
         languageColumn.setReorderable(false);
         languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
         languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
@@ -508,7 +508,7 @@ public class UserInterface extends Application {
 
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
-        translatorColumn.setResizable(false);
+        //translatorColumn.setResizable(false);
         translatorColumn.setReorderable(false);
         translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
         translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
@@ -530,7 +530,7 @@ public class UserInterface extends Application {
         listStage.alwaysOnTopProperty();
         listStage.setScene(scene);
         listStage.setTitle("Book List");
-        listStage.setResizable(false);
+        //listStage.setResizable(false);
 
         //The tab's openness control raises it to the top if it's open.
         if (listStage.isShowing()){
@@ -709,7 +709,7 @@ public class UserInterface extends Application {
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
         addStage.setScene(listScene);
         addStage.setTitle("ADD MENU");
-        addStage.setResizable(false);
+        //addStage.setResizable(false);
 
         //The tab's openness control raises it to the top if it's open.
         if (addStage.isShowing()){
