@@ -394,7 +394,8 @@ public class UserInterface extends Application {
         titleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTitle()));
         titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         titleColumn.setOnEditCommit(event -> {
-            Library.editTitle(event.getNewValue(), event.getTableView().getItems().get(event.getTablePosition().getRow()) );
+            Library.editTitle(event.getNewValue(), event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -407,6 +408,7 @@ public class UserInterface extends Application {
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tagColumn.setOnEditCommit(event -> {
             Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -419,6 +421,7 @@ public class UserInterface extends Application {
         authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         authorColumn.setOnEditCommit(event -> {
             Library.editAuthor(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -430,7 +433,8 @@ public class UserInterface extends Application {
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
         publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         publisherColumn.setOnEditCommit(event -> {
-            Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()) );
+            Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -443,6 +447,7 @@ public class UserInterface extends Application {
         dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dateColumn.setOnEditCommit(event -> {
             Library.editDate(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -455,6 +460,7 @@ public class UserInterface extends Application {
         isbnColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         isbnColumn.setOnEditCommit(event -> {
             Library.editIsbn(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -467,6 +473,7 @@ public class UserInterface extends Application {
         editionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         editionColumn.setOnEditCommit(event -> {
             Library.editEdition(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         TableColumn<Book, String> ratingColumn = new TableColumn<>("Rating");
@@ -478,6 +485,7 @@ public class UserInterface extends Application {
         ratingColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         ratingColumn.setOnEditCommit(event -> {
             Library.editRating(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
@@ -489,6 +497,7 @@ public class UserInterface extends Application {
         subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         subtitleColumn.setOnEditCommit(event -> {
             Library.editSubtitle(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
@@ -500,6 +509,7 @@ public class UserInterface extends Application {
         languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         languageColumn.setOnEditCommit(event -> {
             Library.editLanguage(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
@@ -512,6 +522,7 @@ public class UserInterface extends Application {
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         translatorColumn.setOnEditCommit(event -> {
             Library.editTranslators(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
 
