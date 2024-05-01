@@ -605,31 +605,54 @@ public class UserInterface extends Application {
         addButton.setOnMouseEntered(e -> addButton.setStyle("-fx-background-color: #a5d9be"));
         addButton.setOnMouseExited(e -> addButton.setStyle("-fx-background-color: #c4d5fc"));
         addButton.setOnAction(e ->  { // when add button is pressed its checks all the text fields excepts translator's textField by adding them into arraylist.
+            boolean allFieldsFilled = true;
+
             for (TextField tf : textFieldArrayList) {
-                if(tf.getText().isEmpty() || tf.getText().isBlank()) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please fill in all fields.");
-                    alert.showAndWait();
+                if (tf.getText().isEmpty() || tf.getText().isBlank()) {
+                    allFieldsFilled = false;
                     break;
                 }
             }
-            ArrayList<String> tags = new ArrayList<>();
-            tags.add(textFieldArrayList.get(1).getText());
-            ArrayList<String> trans = new ArrayList<>();
-            trans.add(translatorTextField.getText());
-            Book book = new Book(textFieldArrayList.get(0).getText(), tags, textFieldArrayList.get(2).getText(), textFieldArrayList.get(3).getText(),
-                    textFieldArrayList.get(4).getText(), textFieldArrayList.get(5).getText(), textFieldArrayList.get(6).getText(), textFieldArrayList.get(7).getText(),
-                    textFieldArrayList.get(8).getText() , trans, textFieldArrayList.get(9).getText() ,s[0]);
-            if (!books.contains(book)) {
-                books.add(book);
-                JSON.updateJsonFile();
-                data.add(book);///////////////////////
-                table.refresh();
+
+            if (!allFieldsFilled) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill in all fields.");
+                alert.showAndWait();
             } else {
-                System.out.println("Book already exist");
+                ArrayList<String> tags = new ArrayList<>();
+                tags.add(textFieldArrayList.get(1).getText());
+
+                ArrayList<String> trans = new ArrayList<>();
+                trans.add(translatorTextField.getText());
+
+                Book book = new Book(
+                        textFieldArrayList.get(0).getText(),
+                        tags,
+                        textFieldArrayList.get(2).getText(),
+                        textFieldArrayList.get(3).getText(),
+                        textFieldArrayList.get(4).getText(),
+                        textFieldArrayList.get(5).getText(),
+                        textFieldArrayList.get(6).getText(),
+                        textFieldArrayList.get(7).getText(),
+                        textFieldArrayList.get(8).getText(),
+                        trans,
+                        textFieldArrayList.get(9).getText(),
+                        s[0]
+                );
+
+                if (!books.contains(book)) {
+                    books.add(book);
+                    JSON.updateJsonFile();
+                    data.add(book);
+                    table.refresh();
+                } else {
+                    System.out.println("Book already exists");
+                }
             }
+
+
             addTab();
         });
         addButton.setPrefSize(150,50);
