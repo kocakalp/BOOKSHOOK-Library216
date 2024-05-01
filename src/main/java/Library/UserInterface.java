@@ -283,15 +283,15 @@ public class UserInterface extends Application {
 
                     bookButton.setOnAction(event -> {
                         String[] s = new String[1];
-                        //Book book = getTableView().getItems().get(getIndex());
+                        Book book = getTableView().getItems().get(getIndex());
                         //Make all cells in this row editable.
                         //table.edit(getIndex(),  table.getColumns().get(0));
-                        ImageView selectedBookView = new ImageView(table.getItems().get(getIndex()).getCover());
+                        ImageView selectedBookView = new ImageView(book.getCover());
                         VBox vBoxCover = new VBox();
                         selectedBookView.setFitHeight(550);
                         selectedBookView.setFitWidth(550);
 
-                        Label lTitle = new Label(table.getItems().get(getIndex()).getTitle().toUpperCase(Locale.ROOT));
+                        Label lTitle = new Label(book.getTitle().toUpperCase(Locale.ROOT));
                         lTitle.setFont(new Font(20));
                         HBox hTitle = new HBox();
                         hTitle.setAlignment(Pos.CENTER);
@@ -310,18 +310,15 @@ public class UserInterface extends Application {
                         selectCoverButton.setOnMouseExited(e -> selectCoverButton.setStyle("-fx-background-color: #c4d5fc"));
 
                         selectCoverButton.setOnAction(e -> { // when add button is pressed its opens file explorer
-                            try {
-                                FileChooser fc = new FileChooser();
-                                fc.setTitle("Select Cover to open");
-                                File f = fc.showOpenDialog(bookStage);
-                                s[0] =(String.valueOf(f.toPath()));
-                                Library.editCoverPath(s[0],table.getItems().get(getIndex()));
-                                table.getItems().get(getIndex()).setCoverPath(s[0]);
-                                selectedBookView.setImage(table.getItems().get(getIndex()).getCover());
-                                Library.editCover(selectedBookView.getImage(),table.getItems().get(getIndex()));
-                                table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
-                            }catch (Exception exception){}
-
+                            FileChooser fc = new FileChooser();
+                            fc.setTitle("Select Cover to open");
+                            File f = fc.showOpenDialog(bookStage);
+                            s[0] =(String.valueOf(f.toPath()));
+                            Library.editCoverPath(s[0],book);
+                            book.setCoverPath(s[0]);
+                            selectedBookView.setImage(book.getCover());
+                            Library.editCover(selectedBookView.getImage(),book);
+                            table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
                         });
                         HBox hBox2 = new HBox();
                         hBox2.setAlignment(Pos.CENTER);
