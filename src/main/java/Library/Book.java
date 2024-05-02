@@ -161,7 +161,7 @@ public class Book implements Comparable<Book>  {
     }
 
     //Handling Arrays
-    public void setTags(String in) {
+   public void setTags(String in) {
         String[] tags = in.split(",");
         if(!in.isBlank() && tags.length == 0) return;
         this.tags.clear();
@@ -169,6 +169,7 @@ public class Book implements Comparable<Book>  {
             addTag(t);
         }
     }
+
     public void setTranslators(String in) {
         String[] translators = in.split(",");
         if(!in.isBlank() && translators.length == 0) return;
@@ -196,7 +197,7 @@ public class Book implements Comparable<Book>  {
     public boolean isValidCover(Image input) {
         return !input.isError();
     }
-    public boolean isValidCoverPath(String input) {
+    public  boolean isValidCoverPath(String input) {
         try {
             setCover(new Image(input));
         } catch (Exception e) {
@@ -204,21 +205,21 @@ public class Book implements Comparable<Book>  {
         }
         return true;
     }
-    public Boolean isValidTitle(String input) {
+    public  Boolean isValidTitle(String input) {
         try {
             return input != null && !input.isBlank();
         } catch(Exception E){
             return false;
         }
     }
-    public Boolean isValidAuthor(String input) {
+    public  Boolean isValidAuthor(String input) {
         try {
-            return input != null && !input.isBlank();
+            return input != null && !input.isBlank()&& input.matches("[^\\d]*");
         } catch(Exception E){
             return false;
         }
     }
-    public Boolean isValidLanguage(String input) {
+    public  Boolean isValidLanguage(String input) {
         try {
             return input != null && !input.isBlank();
         } catch(Exception E){
@@ -233,14 +234,14 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidPublisher(String input) {
+    public  boolean isValidPublisher(String input) {
         try {
             return input != null && !input.isBlank();
         } catch(Exception E){
             return false;
         }
     }
-    public boolean isValidDate(String input) {
+    public  boolean isValidDate(String input) {
         try{
             int i = Integer.parseInt(input);
             return !input.isBlank() && i > 0;
@@ -248,7 +249,7 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidISBN(String input) {
+    public   boolean isValidISBN(String input) {
         try{
             Integer.parseInt(input);
             return !input.isBlank() && (input.length() == 13 || input.length() ==10);
@@ -256,7 +257,7 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidEdition(String input) {
+    public  boolean isValidEdition(String input) {
         try{
             int i = Integer.parseInt(input);
             return !input.isBlank() && i > 0;
@@ -264,7 +265,7 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidRating(String input) {
+    public  boolean isValidRating(String input) {
         try {
             int i = Integer.parseInt(input);
             return !input.isBlank() && (input.length() == 1) && (i >= 0 && i <= 5);
@@ -272,14 +273,14 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public boolean isValidTranslators(String input) {
+    public  boolean isValidTranslators(String input) {
         try {
             return input != null && !input.isBlank();
         } catch(Exception E){
             return false;
         }
     }
-    public boolean isValidTags(String input) {
+    public  boolean isValidTags(String input) {
         try {
             return input != null && !input.isBlank();
         } catch(Exception E){

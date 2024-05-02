@@ -1,6 +1,7 @@
 package Library;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -29,6 +32,7 @@ import javafx.util.Duration;
 public class UserInterface extends Application {
 
     private final TableView<Book> table = new TableView<>();
+    private boolean isButtonOneActive=true;
 
     private Stage helpStage = new Stage();
     private Stage listStage = new Stage();
@@ -60,10 +64,8 @@ public class UserInterface extends Application {
         Font labelFont = new Font(75);
         labelBookShook.setFont(labelFont);
         labelBookShook.setLayoutY(10);
-        //
-        HBox.setHgrow(labelBookShook,Priority.ALWAYS);
-        //
 
+        HBox.setHgrow(labelBookShook,Priority.ALWAYS);
         hBox1.getChildren().addAll(labelBookShook);
 
 
@@ -72,7 +74,7 @@ public class UserInterface extends Application {
 
         TextField searchBar = new TextField();
         searchBar.setPromptText("===>  Book Name, Author, ISBN etc.");
-        searchBar.setPrefSize(1000,50);
+        searchBar.setPrefSize(1100,50);
         searchBar.setFocusTraversable(false);
 
 
@@ -88,15 +90,11 @@ public class UserInterface extends Application {
         helpButton.setOnAction(e -> helpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
-        //
         HBox.setHgrow(searchBar,Priority.ALWAYS);
         HBox.setHgrow(spacer1,Priority.ALWAYS);
         HBox.setHgrow(helpButton,Priority.ALWAYS);
-
-
-        //
         hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
-        hBox2.setPadding(new Insets(0, 0, 100, 0));
+        hBox2.setPadding(new Insets(0, 35, 100, 35));
 
 
         //SearchButton And AddButton
@@ -125,6 +123,7 @@ public class UserInterface extends Application {
 
         searchTag.setPrefSize(150,50);
 
+
         //ADD
         Button addButton = new Button("ADD");
         addButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
@@ -138,11 +137,8 @@ public class UserInterface extends Application {
         Region spacer2 = new Region();
         spacer2.setPrefWidth(250); //Add a space 100 units wide.
 
-
-
         hBox3.getChildren().addAll(searchButton,spacer1,searchTag,spacer2,addButton);
         hBox3.setAlignment(Pos.CENTER);
-
 
         VBox.setVgrow(vbox1,Priority.ALWAYS);
         HBox.setHgrow(vbox1,Priority.ALWAYS);
@@ -150,7 +146,6 @@ public class UserInterface extends Application {
         vbox1.getChildren().addAll(hBox1,hBox2,hBox3);
 
         Scene scene = new Scene(vbox1, 1200, 800);
-
         stage.setScene(scene);
         stage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         stage.setTitle("BOOKSHOOK");
@@ -404,7 +399,6 @@ public class UserInterface extends Application {
         //ObservableList<Book> data = getBookData(text);
         data = getBookData(text);
 
-
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
         //titleColumn.setResizable(false);
@@ -417,48 +411,77 @@ public class UserInterface extends Application {
             table.refresh();
         });
 
-
+        // new for tag
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(150);
-        //tagColumn.setResizable(false);
         tagColumn.setReorderable(false);
-        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
-        tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
-        tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        tagColumn.setCellValueFactory(data ->{
+            List<String> tags = data.getValue().getTags();
+            return new SimpleStringProperty(tags != null ? String.join(", ", tags) : "");
+        });
+        tagColumn.setCellFactory(column -> new TableCellValidation());
         tagColumn.setOnEditCommit(event -> {
-            Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
+            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            boolean success = Library.editTags(event.getNewValue(), editedBook);
+
+            if (success) {
+                table.refresh();
+            }else{
+                showAlert("Warning!","Invalid Input!Please try again...");
+                if (event.getOldValue() != null && !event.getOldValue().isEmpty()) {
+                    List<String> oldTags = Arrays.asList(event.getOldValue().split("\\s*,\\s*"));
+                    editedBook.setTags(String.valueOf(oldTags));
+                } else {
+                     //editedBook.setTags(new ArrayList<>());
+                } table.refresh();
+            }
+
         });
 
-
+        // new for author
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
-        //authorColumn.setResizable(false);
         authorColumn.setReorderable(false);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
-        authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        authorColumn.setCellFactory(column -> new TableCellValidation());
         authorColumn.setOnEditCommit(event -> {
-            Library.editAuthor(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
+            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            boolean success = Library.editAuthor(event.getNewValue(), editedBook);
+
+            if (success) {
+                table.refresh();
+            }else{
+                showAlert("Warning!","Invalid Input!Please try again...");
+                editedBook.setTitle(event.getOldValue());
+                table.refresh();
+            }
+
         });
 
-
+        // new for publisher
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(100);
-        //publisherColumn.setResizable(false);
         publisherColumn.setReorderable(false);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
-        publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        publisherColumn.setCellFactory(column -> new TableCellValidation());
         publisherColumn.setOnEditCommit(event -> {
-            Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
+            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            boolean success = Library.editPublisher(event.getNewValue(), editedBook);
+
+            if (success) {
+                table.refresh();
+            }else{
+                showAlert("Warning!","Invalid Input!Please try again...");
+                editedBook.setPublisher(event.getOldValue());
+                table.refresh();
+            }
+
         });
 
-
         TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
-        dateColumn.setPrefWidth(110);
+        dateColumn.setPrefWidth(100);
         //dateColumn.setResizable(false);
         dateColumn.setReorderable(false);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -469,9 +492,8 @@ public class UserInterface extends Application {
             table.refresh();
         });
 
-
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
-        isbnColumn.setPrefWidth(80);
+        isbnColumn.setPrefWidth(75);
         //isbnColumn.setResizable(false);
         isbnColumn.setReorderable(false);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -482,9 +504,8 @@ public class UserInterface extends Application {
             table.refresh();
         });
 
-
         TableColumn<Book, String> editionColumn = new TableColumn<>("Edition");
-        editionColumn.setPrefWidth(85);
+        editionColumn.setPrefWidth(75);
         //editionColumn.setResizable(false);
         editionColumn.setReorderable(false);
         editionColumn.setCellValueFactory(new PropertyValueFactory<>("edition"));
@@ -496,7 +517,7 @@ public class UserInterface extends Application {
         });
 
         TableColumn<Book, String> ratingColumn = new TableColumn<>("Rating");
-        ratingColumn.setPrefWidth(85);
+        ratingColumn.setPrefWidth(75);
         //ratingColumn.setResizable(false);
         ratingColumn.setReorderable(false);
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
@@ -507,43 +528,74 @@ public class UserInterface extends Application {
             table.refresh();
         });
 
+        //new for subtitle
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
         subtitleColumn.setPrefWidth(85);
-        //subtitleColumn.setResizable(false);
         subtitleColumn.setReorderable(false);
         subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
         subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
-        subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        subtitleColumn.setCellFactory(column -> new TableCellValidation());
         subtitleColumn.setOnEditCommit(event -> {
-            Library.editSubtitle(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
+            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            boolean success = Library.editSubtitle(event.getNewValue(), editedBook);
+
+            if (success) {
+                table.refresh();
+            }else{
+                showAlert("Warning!","Invalid Input!Please try again...");
+                editedBook.setSubtitle(event.getOldValue());
+                table.refresh();
+            }
+
         });
 
+        // new for language
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
-        languageColumn.setPrefWidth(85);
-        //languageColumn.setResizable(false);
+        languageColumn.setPrefWidth(110);
         languageColumn.setReorderable(false);
         languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
         languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
-        languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        languageColumn.setCellFactory(column -> new TableCellValidation());
         languageColumn.setOnEditCommit(event -> {
-            Library.editLanguage(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
+            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            boolean success = Library.editLanguage(event.getNewValue(), editedBook);
+
+            if (success) {
+                table.refresh();
+            }else{
+                showAlert("Warning!","Invalid Input!Please try again...");
+                editedBook.setLanguage(event.getOldValue());
+                table.refresh();
+            }
+
         });
 
-
+        // new for translator
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
-        //translatorColumn.setResizable(false);
         translatorColumn.setReorderable(false);
-        translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
-        translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
-        translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        translatorColumn.setOnEditCommit(event -> {
-            Library.editTranslators(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
+        translatorColumn.setCellValueFactory(data ->{
+            List<String> translators = data.getValue().getTranslators();
+            return new SimpleStringProperty(translators != null ? String.join(", ",translators) : "");
         });
+        translatorColumn.setCellFactory(column -> new TableCellValidation());
+        translatorColumn.setOnEditCommit(event -> {
+            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            boolean success = Library.editTranslators(event.getNewValue(), editedBook);
 
+            if (success) {
+                table.refresh();
+            }else{
+                showAlert("Warning!","Invalid Input!Please try again...");
+                if (event.getOldValue() != null && !event.getOldValue().isEmpty()) {
+                    List<String> oldTranslators = Arrays.asList(event.getOldValue().split("\\s*,\\s*"));
+                    editedBook.setTranslators(String.valueOf(oldTranslators));
+                }else {
+                    //editedBook.setTranslators(String.valueOf(new ArrayList<>()));
+                } table.refresh();
+            }
+
+        });
 
         table.getColumns().addAll(titleColumn,tagColumn,subtitleColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,languageColumn,translatorColumn,ratingColumn);
         addButtonToTable();
@@ -820,6 +872,12 @@ private boolean isWarningShown=false;
             addStage.show();
         }
     }
-
-
-}
+    //show alert
+    private void showAlert(String input, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(input);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    }
