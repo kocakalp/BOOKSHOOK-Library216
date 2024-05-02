@@ -620,7 +620,8 @@ private boolean isWarningShown=false;
         TextField translatorTextField = new TextField();
         translatorTextField.setPromptText("Translator:");
         HBox translatorHBox = new HBox();
-        translatorHBox.getChildren().addAll(translatorTextField);
+        Label a= new Label("   ");
+        translatorHBox.getChildren().addAll(translatorTextField, a);
 
 
 
