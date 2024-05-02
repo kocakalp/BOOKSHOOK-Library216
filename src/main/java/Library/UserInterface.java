@@ -72,7 +72,7 @@ public class UserInterface extends Application {
 
         TextField searchBar = new TextField();
         searchBar.setPromptText("===>  Book Name, Author, ISBN etc.");
-        searchBar.setPrefSize(1000,50);
+        searchBar.setPrefSize(1100,50);
         searchBar.setFocusTraversable(false);
 
 
@@ -96,7 +96,7 @@ public class UserInterface extends Application {
 
         //
         hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
-        hBox2.setPadding(new Insets(0, 0, 100, 0));
+        hBox2.setPadding(new Insets(0, 35, 100, 35));
 
 
         //SearchButton And AddButton
