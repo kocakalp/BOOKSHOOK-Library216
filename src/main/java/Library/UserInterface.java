@@ -60,6 +60,9 @@ public class UserInterface extends Application {
         Font labelFont = new Font(75);
         labelBookShook.setFont(labelFont);
         labelBookShook.setLayoutY(10);
+        //
+        HBox.setHgrow(labelBookShook,Priority.ALWAYS);
+        //
 
         hBox1.getChildren().addAll(labelBookShook);
 
@@ -85,6 +88,13 @@ public class UserInterface extends Application {
         helpButton.setOnAction(e -> helpMenu());
 
         hBox2.setAlignment(Pos.CENTER);
+        //
+        HBox.setHgrow(searchBar,Priority.ALWAYS);
+        HBox.setHgrow(spacer1,Priority.ALWAYS);
+        HBox.setHgrow(helpButton,Priority.ALWAYS);
+
+
+        //
         hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
         hBox2.setPadding(new Insets(0, 0, 100, 0));
 
@@ -127,9 +137,15 @@ public class UserInterface extends Application {
         spacer1.setPrefWidth(250); //Add a space 100 units wide.
         Region spacer2 = new Region();
         spacer2.setPrefWidth(250); //Add a space 100 units wide.
+
+
+
         hBox3.getChildren().addAll(searchButton,spacer1,searchTag,spacer2,addButton);
         hBox3.setAlignment(Pos.CENTER);
 
+
+        VBox.setVgrow(vbox1,Priority.ALWAYS);
+        HBox.setHgrow(vbox1,Priority.ALWAYS);
 
         vbox1.getChildren().addAll(hBox1,hBox2,hBox3);
 
@@ -138,7 +154,7 @@ public class UserInterface extends Application {
         stage.setScene(scene);
         stage.alwaysOnTopProperty(); //It will always push POPUP to the top.
         stage.setTitle("BOOKSHOOK");
-        //stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 
@@ -192,9 +208,10 @@ public class UserInterface extends Application {
 
 
 
-        hHelp.getChildren().addAll(text);
         HBox.setHgrow(hHelp,Priority.ALWAYS);
+        hHelp.getChildren().addAll(text);
 
+        VBox.setVgrow(vHelp1,Priority.ALWAYS);
         vHelp1.getChildren().addAll(text);
 
         Scene helpScene = new Scene(vHelp1, 900, 900);
@@ -322,7 +339,9 @@ public class UserInterface extends Application {
                         });
                         HBox hBox2 = new HBox();
                         hBox2.setAlignment(Pos.CENTER);
+                        HBox.setHgrow(selectCoverButton,Priority.ALWAYS);
                         hBox2.getChildren().add(selectCoverButton);
+                        VBox.setVgrow(vBoxCover,Priority.ALWAYS);
                         vBoxCover.getChildren().addAll(hTitle,hBox1,hBox2);
                         Scene sceneCover = new Scene(vBoxCover,600,650);
                         //Stage bookStage = new Stage();
@@ -553,6 +572,7 @@ public class UserInterface extends Application {
 
     }
 
+private boolean isWarningShown=false;
     //A method that allows adding books to the library or transferring an entire library.
     public void addTab() {
         String[] s = new String[1];
@@ -590,6 +610,7 @@ public class UserInterface extends Application {
             textFieldArrayList.add(textField);
 
             HBox hbox = new HBox();
+            HBox.setHgrow(hbox,Priority.ALWAYS);
             hbox.getChildren().addAll(textField, hover);
             hbox.setAlignment(Pos.CENTER);
             vAdd.getChildren().add(hbox);
@@ -698,25 +719,67 @@ public class UserInterface extends Application {
         });
 
         HBox addPathHbox = new HBox();
+        //
+        HBox.setHgrow(addPathHbox,Priority.ALWAYS);
+        addPathHbox.setAlignment(Pos.CENTER);
         TextField pathField = new TextField();
         pathField.setPrefWidth(250);
+        //
+        pathField.setAlignment(Pos.CENTER);
         pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\SpaceOddity.json\"");
         Button addPathButton = new Button("ADD PATH");
+        //
+        addPathButton.setAlignment(Pos.CENTER);
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+        //
+
         addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
         addPathButton.setOnMouseExited(e -> addPathButton.setStyle("-fx-background-color: #c4d5fc"));
 
+
+
         addPathButton.setOnAction(e -> { // when add button is pressed it's  the text field for a path if its empty its show a warning.
             if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill in field.");
-                alert.showAndWait();
+
+                if(!isWarningShown) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please fill in field.");
+                    alert.showAndWait();
+
+                    isWarningShown = true;
+                }
+            }else {
+                if(isWarningShown){
+                    return;
+                }
+                for (TextField tf : textFieldArrayList) {
+                    if (tf.getText().isEmpty() || tf.getText().isBlank()) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please fill in all fields.");
+                        alert.showAndWait();
+                        isWarningShown = true;
+                        return;
+                    }
+                }
+
+                Library.addBooks(pathField.getText());
+                addTab();
+               // addPathButton.setAlignment(Pos.CENTER);
+
+                addPathButton.setDisable(true);
+                isWarningShown=false;
             }
-            Library.addBooks(pathField.getText());
-            addTab();
         });
+
+
+
+
+        //**********************
+        VBox.setVgrow(vAdd,Priority.ALWAYS);
 
         vAdd.getChildren().add(coverButton);
         vAdd.getChildren().add(addButton);
@@ -729,8 +792,12 @@ public class UserInterface extends Application {
         Region spacer4 = new Region();
         spacer4.setPrefWidth(10);
         Region spacer5 = new Region();
-        spacer5.setPrefWidth(220);
+        spacer5.setPrefWidth(200);
+        //
+        HBox.setHgrow(addPathHbox,Priority.ALWAYS);
         addPathHbox.getChildren().addAll(spacer6, pathField, spacer4, addPathButton, spacer5, selecthPathButton);
+        //
+        VBox.setVgrow(vAdd,Priority.ALWAYS);
         vAdd.getChildren().addAll(addPathHbox);
 
 
@@ -740,7 +807,7 @@ public class UserInterface extends Application {
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
         addStage.setScene(listScene);
         addStage.setTitle("ADD MENU");
-        //addStage.setResizable(false);
+        //addStage.setResizable(true);
 
         //The tab's openness control raises it to the top if it's open.
         if (addStage.isShowing()){
@@ -753,5 +820,6 @@ public class UserInterface extends Application {
             addStage.show();
         }
     }
+
 
 }
