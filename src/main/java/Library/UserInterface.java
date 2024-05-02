@@ -708,7 +708,9 @@ private boolean isWarningShown=false;
         bookView.setFitHeight(30);
         coverButton.setGraphic(bookView);
         //setGraphic(coverButton);
-
+        ImageView imageView = new ImageView(new Image("default.png"));
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
         coverButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         coverButton.setOnMouseEntered(e -> coverButton.setStyle("-fx-background-color: #a5d9be"));
         coverButton.setOnMouseExited(e -> coverButton.setStyle("-fx-background-color: #c4d5fc"));
@@ -717,6 +719,17 @@ private boolean isWarningShown=false;
             fc.setTitle("Select Cover to open");
             File f = fc.showOpenDialog(addStage);
             s[0] =(String.valueOf(f.toPath()));
+            if(s[0].endsWith(".jpg") || s[0].toLowerCase().endsWith(".png"))  {
+                imageView.setImage(new Image(new File(s[0]).toURI().toString()));
+                imageView.setFitWidth(50);
+                imageView.setFitHeight(50);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Please select an image in PNG or JPEG format.");
+                alert.showAndWait();
+            }
         });
 
         HBox addPathHbox = new HBox();
@@ -780,12 +793,15 @@ private boolean isWarningShown=false;
 
 
         //**********************
+        Region spacer7 = new Region();
+        spacer7.setPrefWidth(15);
         VBox.setVgrow(vAdd,Priority.ALWAYS);
-
-        vAdd.getChildren().add(coverButton);
+        HBox cover = new HBox();
+        cover.getChildren().addAll(coverButton, spacer7, imageView);
+        cover.setAlignment(Pos.CENTER);
+        vAdd.getChildren().addAll(cover);
         vAdd.getChildren().add(addButton);
         vAdd.setAlignment(Pos.CENTER);
-
 
 
         Region spacer6 = new Region();
