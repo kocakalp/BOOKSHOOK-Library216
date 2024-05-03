@@ -110,6 +110,7 @@ public class UserInterface extends Application {
         searchButton.setOnAction(e -> {
             searchAll = true;
             listTab(searchBar.getText()); // Call the listTab method with the text from searchBar
+            searchBar.clear();
         });
         searchButton.setPrefSize(150,50);
 
@@ -121,6 +122,7 @@ public class UserInterface extends Application {
         searchTag.setOnAction(e -> {
             searchAll = false;
             listTab(searchBar.getText()); // Call the listTab method with the text from searchBar
+            searchBar.clear();
         });
 
         searchTag.setPrefSize(150,50);
@@ -553,9 +555,9 @@ public class UserInterface extends Application {
         vbox.setVgrow(table,Priority.ALWAYS);
 
 
-        Scene scene = new Scene(vbox,1325,900);
+        Scene listscene = new Scene(vbox,1325,900);
         listStage.alwaysOnTopProperty();
-        listStage.setScene(scene);
+        listStage.setScene(listscene);
         listStage.setTitle("Book List");
         //listStage.setResizable(false);
 
@@ -818,11 +820,11 @@ private boolean isWarningShown=false;
         vAdd.getChildren().addAll(addPathHbox);
 
 
-        Scene listScene = new Scene(vAdd, 700, 700);
+        Scene addScene = new Scene(vAdd, 700, 700);
 
         //setOnAction
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
-        addStage.setScene(listScene);
+        addStage.setScene(addScene);
         addStage.setTitle("ADD MENU");
         //addStage.setResizable(true);
 
