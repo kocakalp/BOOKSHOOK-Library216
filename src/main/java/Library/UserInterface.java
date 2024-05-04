@@ -108,6 +108,7 @@ public class UserInterface extends Application {
         searchButton.setOnAction(e -> {
             searchAll = true;
             listTab(searchBar.getText()); // Call the listTab method with the text from searchBar
+            searchBar.clear();
         });
         searchButton.setPrefSize(150,50);
 
@@ -119,6 +120,7 @@ public class UserInterface extends Application {
         searchTag.setOnAction(e -> {
             searchAll = false;
             listTab(searchBar.getText()); // Call the listTab method with the text from searchBar
+            searchBar.clear();
         });
 
         searchTag.setPrefSize(150,50);
@@ -605,9 +607,9 @@ public class UserInterface extends Application {
         vbox.setVgrow(table,Priority.ALWAYS);
 
 
-        Scene scene = new Scene(vbox,1325,900);
+        Scene listscene = new Scene(vbox,1325,900);
         listStage.alwaysOnTopProperty();
-        listStage.setScene(scene);
+        listStage.setScene(listscene);
         listStage.setTitle("Book List");
         //listStage.setResizable(false);
 
@@ -672,7 +674,8 @@ private boolean isWarningShown=false;
         TextField translatorTextField = new TextField();
         translatorTextField.setPromptText("Translator:");
         HBox translatorHBox = new HBox();
-        translatorHBox.getChildren().addAll(translatorTextField);
+        Label a= new Label("   ");
+        translatorHBox.getChildren().addAll(translatorTextField, a);
 
 
 
@@ -759,7 +762,9 @@ private boolean isWarningShown=false;
         bookView.setFitHeight(30);
         coverButton.setGraphic(bookView);
         //setGraphic(coverButton);
-
+        ImageView imageView = new ImageView(new Image("default.png"));
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
         coverButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
         coverButton.setOnMouseEntered(e -> coverButton.setStyle("-fx-background-color: #a5d9be"));
         coverButton.setOnMouseExited(e -> coverButton.setStyle("-fx-background-color: #c4d5fc"));
@@ -768,6 +773,17 @@ private boolean isWarningShown=false;
             fc.setTitle("Select Cover to open");
             File f = fc.showOpenDialog(addStage);
             s[0] =(String.valueOf(f.toPath()));
+            if(s[0].endsWith(".jpg") || s[0].toLowerCase().endsWith(".png"))  {
+                imageView.setImage(new Image(new File(s[0]).toURI().toString()));
+                imageView.setFitWidth(50);
+                imageView.setFitHeight(50);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Please select an image in PNG or JPEG format.");
+                alert.showAndWait();
+            }
         });
 
         HBox addPathHbox = new HBox();
@@ -831,12 +847,15 @@ private boolean isWarningShown=false;
 
 
         //**********************
+        Region spacer7 = new Region();
+        spacer7.setPrefWidth(15);
         VBox.setVgrow(vAdd,Priority.ALWAYS);
-
-        vAdd.getChildren().add(coverButton);
+        HBox cover = new HBox();
+        cover.getChildren().addAll(coverButton, spacer7, imageView);
+        cover.setAlignment(Pos.CENTER);
+        vAdd.getChildren().addAll(cover);
         vAdd.getChildren().add(addButton);
         vAdd.setAlignment(Pos.CENTER);
-
 
 
         Region spacer6 = new Region();
@@ -853,11 +872,11 @@ private boolean isWarningShown=false;
         vAdd.getChildren().addAll(addPathHbox);
 
 
-        Scene listScene = new Scene(vAdd, 700, 700);
+        Scene addScene = new Scene(vAdd, 700, 700);
 
         //setOnAction
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
-        addStage.setScene(listScene);
+        addStage.setScene(addScene);
         addStage.setTitle("ADD MENU");
         //addStage.setResizable(true);
 
