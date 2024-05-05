@@ -76,6 +76,7 @@ public class UserInterface extends Application {
         searchBar.setPromptText("===>  Book Name, Author, ISBN etc.");
         searchBar.setPrefSize(1100,50);
         searchBar.setFocusTraversable(false);
+        HBox.setHgrow(searchBar,Priority.ALWAYS);
 
 
         Region spacer1 = new Region();
@@ -222,6 +223,9 @@ public class UserInterface extends Application {
         //The tab's openness control raises it to the top if it's open.
         if (helpStage.isShowing()){
             helpStage.toFront();
+        }
+        if (helpStage.isIconified()) {
+            helpStage.setIconified(false);
         }
         else {
             helpStage.show();
