@@ -665,11 +665,11 @@ private boolean isWarningShown=false;
         vAdd.setPadding(new Insets(10));
         vAdd.setSpacing(10);
 
-        String[] labels = {"Title:", "Tags:", "Subtitle:", "Author:", "Publisher:", "Date:", "ISBN", "Edition:", "Language:", "Translator:", "Rating:"};
+        String[] labels = {"Title:", "Author:", "Subtitle:", "Publisher:", "Date:", "ISBN", "Edition:", "Language:", "Rating:", "Tags:", "Translators:"};
         ArrayList<TextField> textFieldArrayList = new ArrayList<>();
 
         for (String labelText : labels) {
-            if(labelText.equals("Translator:")) { continue; } // continues the translator's text field because it can be empty
+            if(labelText.equals("Translators:")) { continue; } // continues the translator's text field because it can be empty
             //Label label = new Label(labelText);
             TextField textField = new TextField();
             textField.setPromptText(labelText);
@@ -695,7 +695,7 @@ private boolean isWarningShown=false;
 
         //Label translatorLabeler = new Label("Translator:");
         TextField translatorTextField = new TextField();
-        translatorTextField.setPromptText("Translator:");
+        translatorTextField.setPromptText("Translators:");
         HBox translatorHBox = new HBox();
         Label a= new Label("   ");
         translatorHBox.getChildren().addAll(translatorTextField, a);
@@ -729,14 +729,14 @@ private boolean isWarningShown=false;
                 alert.showAndWait();
             } else {
                 ArrayList<String> tags = new ArrayList<>();
-                tags.add(textFieldArrayList.get(1).getText());
+                tags.add(textFieldArrayList.get(9).getText());
 
                 ArrayList<String> trans = new ArrayList<>();
                 trans.add(translatorTextField.getText());
 
                 Book book = new Book(
                         textFieldArrayList.get(0).getText(),
-                        tags,
+                        textFieldArrayList.get(1).getText(),
                         textFieldArrayList.get(2).getText(),
                         textFieldArrayList.get(3).getText(),
                         textFieldArrayList.get(4).getText(),
@@ -744,8 +744,8 @@ private boolean isWarningShown=false;
                         textFieldArrayList.get(6).getText(),
                         textFieldArrayList.get(7).getText(),
                         textFieldArrayList.get(8).getText(),
+                        tags,
                         trans,
-                        textFieldArrayList.get(9).getText(),
                         s[0]
                 );
 

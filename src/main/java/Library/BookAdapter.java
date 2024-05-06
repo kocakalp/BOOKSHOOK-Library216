@@ -16,6 +16,8 @@ public class BookAdapter extends TypeAdapter {
         out.value(book.getTitle());
         out.name("author");
         out.value(book.getAuthor());
+        out.name("subtitle");
+        out.value(book.getSubtitle());
         out.name("publisher");
         out.value(book.getPublisher());
         out.name("date");
@@ -28,8 +30,6 @@ public class BookAdapter extends TypeAdapter {
         out.value(book.getLanguage());
         out.name("rating");
         out.value(book.getRating());
-        out.name("subtitle");
-        out.value(book.getSubtitle());
         out.name("tags");
         out.beginArray();
         for (String tag: book.getTags()) {
@@ -46,7 +46,6 @@ public class BookAdapter extends TypeAdapter {
         out.value(book.getCoverPath());
         out.endObject();
     }
-
     //Check spelling, methods and verify functionality.
     @Override
     public Book read(JsonReader in) throws IOException {
@@ -61,23 +60,23 @@ public class BookAdapter extends TypeAdapter {
                 case "author":
                     book.setAuthor(in.nextString());
                     break;
+                case "subtitle":
+                    book.setSubtitle(in.nextString());
+                    break;
                 case "publisher":
                     book.setPublisher(in.nextString());
                     break;
                 case "date":
                     book.setDate(in.nextString());
                     break;
-                case "language":
-                    book.setLanguage(in.nextString());
-                    break;
-                case "subtitle":
-                    book.setSubtitle(in.nextString());
-                    break;
                 case "isbn":
                     book.setIsbn(in.nextString());
                     break;
                 case "edition":
                     book.setEdition(in.nextString());
+                    break;
+                case "language":
+                    book.setLanguage(in.nextString());
                     break;
                 case "rating":
                     book.setRating(in.nextString());

@@ -1,12 +1,9 @@
 package Library;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-
 
 public class Book implements Comparable<Book>  {
     private String title;
@@ -23,66 +20,43 @@ public class Book implements Comparable<Book>  {
     private String coverPath;
     public Image cover;
 
-    //JSON.updateJsonFile(); Test it may be dysfunctional.
-    public Book(String title, ArrayList<String> tags, String subtitle, String author, String publisher, String date, String isbn, String edition, String language ,ArrayList<String> translators, String rating, String coverPath) {
+    //Constructors
+    public Book(String title, String author, String subtitle, String publisher, String date, String isbn, String edition, String language, String rating, ArrayList<String> tags ,ArrayList<String> translators, String coverPath) {
 
         setTitle(title);
         setAuthor(author);
+        setSubtitle(subtitle);
         setPublisher(publisher);
         setDate(date);
         setIsbn(isbn);
         setEdition(edition);
         setLanguage(language);
         setRating(rating);
-        setSubtitle(subtitle);
         addTags(tags);
         addTranslators(translators);
         setCoverPath(coverPath);
     }
-
     public Book() {
-        this("title", new ArrayList<>(), "subtitle", "author","publisher", "1", "0000000000", "1", "language" ,new ArrayList<>(),"1","default.png");
+        this("title", "author", "subtitle", "publisher", "1", "0000000000", "1", "language", "1", new ArrayList<>(), new ArrayList<>(), "default.png");
     }
 
-
     //Getters
-    public Image getCover() { return cover;}
     public String getCoverPath() {return coverPath;}
     public String getTitle() {return title;}
     public String getAuthor() {return author;}
+    public String getSubtitle(){return subtitle;}
     public String getPublisher() {return publisher;}
     public String getDate() {return date;}
     public String getIsbn() {return isbn;}
     public String getEdition() {return edition;}
-    public String getRating() {return rating;}
     public String getLanguage() {return language;}
-    public String getSubtitle(){return subtitle;}
-
+    public String getRating() {return rating;}
     public ArrayList<String> getTags() {return tags;}
-
     public ArrayList<String> getTranslators() {return translators;}
+    public Image getCover() { return cover;}
 
     //Setters
-
     //Change the Else parts to call the edit method in the future.(?)
-
-    public void setCover(Image cover) {
-        Image image = new Image("default.png");
-        if (isValidCover(cover)) {
-            this.cover = cover;
-        } else {
-            setCover(image);
-        }
-    }
-    public void setCoverPath(String coverPath) {
-        if (isValidCoverPath(coverPath)) {
-            this.coverPath = coverPath;
-
-        } else {
-            System.out.println("invalid Cover path");
-            setCoverPath("default.png");
-        }
-    }
     public void setTitle(String title) {
         if(isValidTitle(title)){
             this.title = title;
@@ -99,24 +73,6 @@ public class Book implements Comparable<Book>  {
             setAuthor("author");
         }
     }
-    public void setPublisher(String publisher) {
-        if(isValidPublisher(publisher)){
-            this.publisher = publisher;
-        } else {
-            System.out.println("invalid publisher");
-            setPublisher("publisher");
-        }
-    }
-
-    public void setLanguage(String language) {
-        if(isValidLanguage(publisher)){
-            this.language = language;
-        } else {
-            System.out.println("invalid language");
-            setLanguage("language");
-        }
-    }
-
     public void setSubtitle(String subtitle) {
         if(isValidSubtitle(subtitle)){
             this.subtitle = subtitle;
@@ -125,7 +81,14 @@ public class Book implements Comparable<Book>  {
             setSubtitle("subtitle");
         }
     }
-
+    public void setPublisher(String publisher) {
+        if(isValidPublisher(publisher)){
+            this.publisher = publisher;
+        } else {
+            System.out.println("invalid publisher");
+            setPublisher("publisher");
+        }
+    }
     public void setDate(String date) {
         if(isValidDate(date)){
             this.date = date;
@@ -150,7 +113,14 @@ public class Book implements Comparable<Book>  {
             setEdition("1");
         }
     }
-
+    public void setLanguage(String language) {
+        if(isValidLanguage(publisher)){
+            this.language = language;
+        } else {
+            System.out.println("invalid language");
+            setLanguage("language");
+        }
+    }
     public void setRating(String rating) {
         if (isValidRating(rating)){
             this.rating = rating;
@@ -159,9 +129,7 @@ public class Book implements Comparable<Book>  {
             setRating("0");
         }
     }
-
-    //Handling Arrays
-   public void setTags(String in) {
+    public void setTags(String in) {
         String[] tags = in.split(",");
         if(!in.isBlank() && tags.length == 0) return;
         this.tags.clear();
@@ -169,7 +137,6 @@ public class Book implements Comparable<Book>  {
             addTag(t);
         }
     }
-
     public void setTranslators(String in) {
         String[] translators = in.split(",");
         if(!in.isBlank() && translators.length == 0) return;
@@ -178,41 +145,41 @@ public class Book implements Comparable<Book>  {
             addTranslator(t);
         }
     }
-    public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
-    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
+    public void setCoverPath(String coverPath) {
+        if (isValidCoverPath(coverPath)) {
+            this.coverPath = coverPath;
+
+        } else {
+            System.out.println("invalid Cover path");
+            setCoverPath("default.png");
+        }
+    }
+    public void setCover(Image cover) {
+        Image image = new Image("default.png");
+        if (isValidCover(cover)) {
+            this.cover = cover;
+        } else {
+            setCover(image);
+        }
+    }
+
+    //Handling Arrays
     public void addTags(ArrayList<String> tags) {
         for (String tag : tags) {
             addTag(tag);
         }
     }
+    public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
+    public void removeTag(String tag) {tags.remove(tag);}
     public void addTranslators(ArrayList<String> translators) {
         for (String translator : translators) {
             addTranslator(translator);
         }
     }
-    public void removeTag(String tag) {tags.remove(tag);}
+    public void addTranslator(String translator) {if(isValidTranslators(translator) && !translators.contains(translator))translators.add(translator);}
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
-    private boolean isNumber(String input) {
-        try {
-            int i = Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    public boolean isValidCover(Image input) {
-        return !input.isError();
-    }
-    public  boolean isValidCoverPath(String input) {
-        try {
-            setCover(new Image(input));
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
     public  Boolean isValidTitle(String input) {
         try {
             return input != null && !input.isBlank();
@@ -227,14 +194,6 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
-    public  Boolean isValidLanguage(String input) {
-        try {
-            return input != null && !input.isBlank() && !isNumber(input);
-        } catch(Exception E){
-            return false;
-        }
-    }
-
     public  Boolean isValidSubtitle(String input) {
         try {
             return input != null && !input.isBlank();
@@ -259,8 +218,7 @@ public class Book implements Comparable<Book>  {
     }
     public   boolean isValidISBN(String input) {
         try{
-            Integer.parseInt(input);
-            return !input.isBlank() && (input.length() == 13 || input.length() ==10);
+            return isNumber(input) && !input.isBlank() && (input.length() == 13 || input.length() ==10);
         } catch(Exception E) {
             return false;
         }
@@ -273,18 +231,18 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
+    public  Boolean isValidLanguage(String input) {
+        try {
+            return input != null && !input.isBlank() && !isNumber(input);
+        } catch(Exception E){
+            return false;
+        }
+    }
     public  boolean isValidRating(String input) {
         try {
             int i = Integer.parseInt(input);
             return !input.isBlank() && (input.length() == 1) && (i >= 0 && i <= 5);
         } catch (Exception E) {
-            return false;
-        }
-    }
-    public  boolean isValidTranslators(String input) {
-        try {
-            return input != null && !input.isBlank();
-        } catch(Exception E){
             return false;
         }
     }
@@ -295,6 +253,33 @@ public class Book implements Comparable<Book>  {
             return false;
         }
     }
+    public  boolean isValidTranslators(String input) {
+        try {
+            return input != null && !input.isBlank();
+        } catch(Exception E){
+            return false;
+        }
+    }
+    public  boolean isValidCoverPath(String input) {
+        try {
+            setCover(new Image(input));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+    public boolean isValidCover(Image input) {
+        return !input.isError();
+    }
+    private boolean isNumber(String input) {
+        try {
+            int i = Integer.parseInt(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public String edit(){Scanner sc = new Scanner(System.in);return sc.nextLine();}
 
     //toString
@@ -343,15 +328,20 @@ public class Book implements Comparable<Book>  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getTags(), book.getTags()) && Objects.equals(getSubtitle(),
-                book.getSubtitle())&& Objects.equals(getAuthor(), book.getAuthor())  && Objects.equals(getPublisher(),
-                book.getPublisher()) && Objects.equals(getDate(), book.getDate()) && Objects.equals(getIsbn(),
-                book.getIsbn()) && Objects.equals(getEdition(), book.getEdition()) && Objects.equals(getLanguage(),
-                book.getLanguage()) && Objects.equals(getTranslators(), book.getTranslators()) && Objects.equals(getRating(), book.getRating());
+        return Objects.equals(getTitle(), book.getTitle()) &&
+                Objects.equals(getAuthor(), book.getAuthor()) &&
+                Objects.equals(getSubtitle(), book.getSubtitle()) &&
+                Objects.equals(getPublisher(), book.getPublisher()) &&
+                Objects.equals(getDate(), book.getDate()) &&
+                Objects.equals(getIsbn(), book.getIsbn()) &&
+                Objects.equals(getEdition(), book.getEdition()) &&
+                Objects.equals(getLanguage(), book.getLanguage()) &&
+                Objects.equals(getRating(), book.getRating()) &&
+                Objects.equals(getTags(), book.getTags()) &&
+                Objects.equals(getTranslators(), book.getTranslators());
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getTags(), getSubtitle(), getAuthor(), getPublisher(), getDate(), getIsbn(), getEdition(), getLanguage(), getTranslators(), getRating());
+        return Objects.hash(getTitle(), getAuthor(), getSubtitle(), getPublisher(), getDate(), getIsbn(), getEdition(), getLanguage(), getRating(), getTags(), getTranslators());
     }
 }

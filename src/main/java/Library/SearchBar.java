@@ -48,30 +48,6 @@ public  class SearchBar {
             System.out.println("Book can not found for the publisher:"+publisher);
         }
     }
-    public static void searchBookByLanguage(String language){
-        boolean isFound=false;
-        for(Book book :books){
-            if(book.getLanguage().equalsIgnoreCase(language)){
-                System.out.println("Book Title :"+book.getTitle());
-                isFound=true;
-            }
-        }
-        if(!isFound){
-            System.out.println("Book can not found for the language:"+language);
-        }
-    }
-    public static void searchBookByRating(String rating){
-        boolean isFound=false;
-        for(Book book :books){
-            if(book.getRating().equalsIgnoreCase(rating)){
-                System.out.println("Book Title :"+book.getTitle());
-                isFound=true;
-            }
-        }
-        if(!isFound){
-            System.out.println("Book can not found for the rating:"+rating);
-        }
-    }
     public static void searchBookByDate(String year){
         boolean isFound=false;
         for(Book book:books){
@@ -108,19 +84,28 @@ public  class SearchBar {
             System.out.println("Book can not for the edition:"+edition);
         }
     }
-    public static void searchBookByTranslator(String translatorName){
+    public static void searchBookByLanguage(String language){
         boolean isFound=false;
         for(Book book :books){
-            for(String translator :book.getTranslators()){
-                if(translator.equalsIgnoreCase(translatorName)){
-                    System.out.println("Book Title :"+book.getTitle());
-                    isFound=true;
-                    break;
-                }
+            if(book.getLanguage().equalsIgnoreCase(language)){
+                System.out.println("Book Title :"+book.getTitle());
+                isFound=true;
             }
         }
         if(!isFound){
-            System.out.println("Book can not for the translator:"+translatorName);
+            System.out.println("Book can not found for the language:"+language);
+        }
+    }
+    public static void searchBookByRating(String rating){
+        boolean isFound=false;
+        for(Book book :books){
+            if(book.getRating().equalsIgnoreCase(rating)){
+                System.out.println("Book Title :"+book.getTitle());
+                isFound=true;
+            }
+        }
+        if(!isFound){
+            System.out.println("Book can not found for the rating:"+rating);
         }
     }
     public static void searchBookByTags(String tag){
@@ -138,7 +123,21 @@ public  class SearchBar {
             System.out.println("Book can not for the tag:"+tag);
         }
     }
-
+    public static void searchBookByTranslator(String translatorName){
+        boolean isFound=false;
+        for(Book book :books){
+            for(String translator :book.getTranslators()){
+                if(translator.equalsIgnoreCase(translatorName)){
+                    System.out.println("Book Title :"+book.getTitle());
+                    isFound=true;
+                    break;
+                }
+            }
+        }
+        if(!isFound){
+            System.out.println("Book can not for the translator:"+translatorName);
+        }
+    }
 
     public static void search(String in) {
         for (Book b : books) {
@@ -146,7 +145,6 @@ public  class SearchBar {
         }
     }
     public static void searchByTag(String in) {
-
         for (Book b : books) {
             for (String s : b.getTags()) {
                 if (s.equalsIgnoreCase(in)) {

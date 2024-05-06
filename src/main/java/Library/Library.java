@@ -17,21 +17,7 @@ public class Library {
         return exportedBooks;
     }
 
-    public static void editCoverPath(String input, Book edited) {
-        if (books.contains(edited)&& edited.isValidCoverPath(input)) {
-            edited.setCoverPath(input);
-            JSON.updateJsonFile();
-        }else{
-            UserInterface.showAlert();
-        }
-    }
-    public static void editCover(Image cover, Book edited) {
-        if (books.contains(edited)) {
-            edited.setCover(cover);
-            JSON.updateJsonFile();
-        }
-    }
-
+    //Edit methods
     public static void editTitle(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidTitle(input)) {
             edited.setTitle(input);
@@ -40,10 +26,17 @@ public class Library {
             UserInterface.showAlert();
         }
     }
-
     public static void editAuthor(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidAuthor(input)) {
             edited.setAuthor(input);
+            JSON.updateJsonFile();
+        }else{
+            UserInterface.showAlert();
+        }
+    }
+    public static void editSubtitle(String input, Book edited) {
+        if (books.contains(edited)&& edited.isValidSubtitle(input)) {
+            edited.setSubtitle(input);
             JSON.updateJsonFile();
         }else{
             UserInterface.showAlert();
@@ -65,14 +58,6 @@ public class Library {
             UserInterface.showAlert();
         }
     }
-    public static void editLanguage(String input, Book edited) {
-        if (books.contains(edited)&& edited.isValidLanguage(input)) {
-            edited.setLanguage(input);
-            JSON.updateJsonFile();
-        }else {
-            UserInterface.showAlert();
-        }
-    }
     public static void editIsbn(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidISBN(input)) {
             edited.setIsbn(input);
@@ -89,18 +74,17 @@ public class Library {
             UserInterface.showAlert();
         }
     }
-    public static void editRating(String input, Book edited) {
-        if (books.contains(edited)&& edited.isValidRating(input)) {
-            edited.setRating(input);
+    public static void editLanguage(String input, Book edited) {
+        if (books.contains(edited)&& edited.isValidLanguage(input)) {
+            edited.setLanguage(input);
             JSON.updateJsonFile();
-        }else{
+        }else {
             UserInterface.showAlert();
         }
     }
-
-    public static void editSubtitle(String input, Book edited) {
-        if (books.contains(edited)&& edited.isValidSubtitle(input)) {
-            edited.setSubtitle(input);
+    public static void editRating(String input, Book edited) {
+        if (books.contains(edited)&& edited.isValidRating(input)) {
+            edited.setRating(input);
             JSON.updateJsonFile();
         }else{
             UserInterface.showAlert();
@@ -115,6 +99,20 @@ public class Library {
     public static  void editTranslators(String input,Book edited) {
         if (books.contains(edited)) {
             edited.setTranslators(input);
+            JSON.updateJsonFile();
+        }
+    }
+    public static void editCoverPath(String input, Book edited) {
+        if (books.contains(edited)&& edited.isValidCoverPath(input)) {
+            edited.setCoverPath(input);
+            JSON.updateJsonFile();
+        }else{
+            UserInterface.showAlert();
+        }
+    }
+    public static void editCover(Image cover, Book edited) {
+        if (books.contains(edited)) {
+            edited.setCover(cover);
             JSON.updateJsonFile();
         }
     }
@@ -167,7 +165,6 @@ public class Library {
            exportedBooks.remove(book);
        }
     }
-
     public static void exportBook(String filePath) {
         if (filePath.isBlank() || filePath.equals("mainJson") || filePath.equals("mainJson.json")) System.out.println("invalid fileName");
         JSON.exportJsonFile(filePath,exportedBooks);
