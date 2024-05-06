@@ -1,15 +1,12 @@
 package Library;
 
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
-    private static ArrayList<Book> exportedBooks = new ArrayList();
+    private static final ArrayList<Book> exportedBooks = new ArrayList<>();
     //Edit methods
 
 
@@ -148,10 +145,7 @@ public class Library {
     public static boolean addBooks(String jsonFilePath) {
         int i = books.size();
         JSON.addBooks(jsonFilePath);
-        if (i == books.size()) {
-            return false;
-        }
-        return true;
+        return i != books.size();
     }
     public static void removeBook(Book removed) {
         JSON.removeBook(removed);

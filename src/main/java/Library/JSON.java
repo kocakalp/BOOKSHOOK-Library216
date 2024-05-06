@@ -16,7 +16,7 @@ import java.util.Collection;
 
 public class JSON {
     private static final ArrayList<Book> books = new ArrayList<>();
-    private static ObservableList<Book> data = UserInterface.getData();
+    private static final ObservableList<Book> data = UserInterface.getData();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
     private static final String filePath = "mainJson";
 

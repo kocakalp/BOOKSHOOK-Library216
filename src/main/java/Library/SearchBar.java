@@ -1,13 +1,12 @@
 package Library;
 
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 public  class SearchBar {
-    private static ObservableList<Book> data = UserInterface.getData();
+    private static final ObservableList<Book> data = UserInterface.getData();
     private static final ArrayList<Book> books = JSON.getBooks();
 
     //şevval senin metodlar bozulmuş olabilir.
@@ -112,7 +111,7 @@ public  class SearchBar {
         boolean isFound=false;
         for(Book book :books){
             for(String tags :book.getTags()){
-                if(tag.equalsIgnoreCase(tag)){
+                if(tags.equalsIgnoreCase(tag)){
                     System.out.println("Book Title :"+book.getTitle());
                     isFound=true;
                     break;

@@ -273,7 +273,7 @@ public class Book implements Comparable<Book>  {
     }
     private boolean isNumber(String input) {
         try {
-            int i = Integer.parseInt(input);
+            Integer.parseInt(input);
             return true;
         } catch (Exception e) {
             return false;

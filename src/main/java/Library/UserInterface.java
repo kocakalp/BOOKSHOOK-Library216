@@ -1,7 +1,6 @@
 package Library;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,11 +21,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -35,8 +30,6 @@ import javafx.util.Duration;
 public class UserInterface extends Application {
 
     private final TableView<Book> table = new TableView<>();
-    private boolean isButtonOneActive=true;
-
     private Stage helpStage = new Stage();
     private Stage listStage = new Stage();
     private Stage addStage = new Stage();
@@ -44,12 +37,11 @@ public class UserInterface extends Application {
     private static ObservableList<Book> data = FXCollections.observableArrayList();
     private static final ArrayList<Book> books = JSON.getBooks();
     private boolean searchAll = true;
-    public static ObservableList<Book> getData() {
-        return data;
-    }
-    public static void main(String[] args) {
-        launch();
-    }
+    private boolean isWarningShown=false;
+
+
+    public static ObservableList<Book> getData() {return data;}
+    public static void main(String[] args) {launch();}
     @Override
     public void start(Stage stage) throws IOException {
         Library.addBooks("mainJson.json");
@@ -178,7 +170,6 @@ public class UserInterface extends Application {
         stage.show();
     }
 
-
     //HelpMenu function for users to use the application without difficulty.
     public void helpMenu() {
         //V-box opened
@@ -270,11 +261,10 @@ public class UserInterface extends Application {
         Library.addBooks("mainJson.json");
         if(searchAll) {
             SearchBar.search(text);
-            return data;
         } else {
             SearchBar.searchByTag(text);
-            return data;
         }
+        return data;
     }
 
     //It is the function unit where you add buttons to each row in the table and gain the functionality of the buttons.
@@ -476,6 +466,7 @@ public class UserInterface extends Application {
         //ObservableList<Book> data = getBookData(text);
         data = getBookData(text);
 
+        // new for title
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
         //titleColumn.setResizable(false);
@@ -490,19 +481,6 @@ public class UserInterface extends Application {
             Library.editTitle(event.getNewValue(), event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
-        // new for tag
-        TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
-        tagColumn.setPrefWidth(150);
-        tagColumn.setReorderable(false);
-        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
-        tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
-        tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        tagColumn.setOnEditCommit(event -> {
-            Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
-        });
-
         // new for author
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
@@ -514,7 +492,17 @@ public class UserInterface extends Application {
             Library.editAuthor(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
+        //new for subtitle
+        TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
+        subtitleColumn.setPrefWidth(105);
+        subtitleColumn.setReorderable(false);
+        subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
+        subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
+        subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        subtitleColumn.setOnEditCommit(event -> {
+            Library.editSubtitle(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
+        });
         // new for publisher
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(120);
@@ -526,7 +514,7 @@ public class UserInterface extends Application {
             Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
+        // new for date
         TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setPrefWidth(80);
         //dateColumn.setResizable(false);
@@ -541,7 +529,7 @@ public class UserInterface extends Application {
             Library.editDate(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
+        // new for isbn
         TableColumn<Book, String> isbnColumn = new TableColumn<>("ISBN");
         isbnColumn.setPrefWidth(85);
         //isbnColumn.setResizable(false);
@@ -556,7 +544,7 @@ public class UserInterface extends Application {
             Library.editIsbn(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
+        // new for edition
         TableColumn<Book, String> editionColumn = new TableColumn<>("Edition");
         editionColumn.setPrefWidth(65);
         //editionColumn.setResizable(false);
@@ -571,7 +559,18 @@ public class UserInterface extends Application {
             Library.editEdition(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
+        // new for language
+        TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
+        languageColumn.setPrefWidth(110);
+        languageColumn.setReorderable(false);
+        languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
+        languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
+        languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        languageColumn.setOnEditCommit(event -> {
+            Library.editLanguage(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
+        });
+        // new for rating
         TableColumn<Book, String> ratingColumn = new TableColumn<>("Rating");
         ratingColumn.setPrefWidth(75);
         //ratingColumn.setResizable(false);
@@ -586,28 +585,15 @@ public class UserInterface extends Application {
             Library.editRating(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
-
-        //new for subtitle
-        TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
-        subtitleColumn.setPrefWidth(105);
-        subtitleColumn.setReorderable(false);
-        subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
-        subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
-        subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        subtitleColumn.setOnEditCommit(event -> {
-            Library.editSubtitle(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
-            table.refresh();
-        });
-
-        // new for language
-        TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
-        languageColumn.setPrefWidth(110);
-        languageColumn.setReorderable(false);
-        languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
-        languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
-        languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        languageColumn.setOnEditCommit(event -> {
-            Library.editLanguage(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+        // new for tag
+        TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
+        tagColumn.setPrefWidth(150);
+        tagColumn.setReorderable(false);
+        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
+        tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
+        tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        tagColumn.setOnEditCommit(event -> {
+            Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
             table.refresh();
         });
         // new for translator
@@ -649,7 +635,6 @@ public class UserInterface extends Application {
 
     }
 
-private boolean isWarningShown=false;
     //A method that allows adding books to the library or transferring an entire library.
     public void addTab() {
         String[] s = new String[1];
@@ -921,4 +906,4 @@ private boolean isWarningShown=false;
         alert.setContentText("Invalid Input!Please try again...");
         alert.showAndWait();
     }
-    }
+}
