@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -834,29 +835,23 @@ private boolean isWarningShown=false;
                     alert.showAndWait();
 
                     isWarningShown = true;
+                    addTab();
                 }
             }else {
-                if(isWarningShown){
-                    return;
+                
+                if(Library.addBooks(pathField.getText())) {
+                    Popup popup = new Popup();
+                    Image checkMarkImage = new Image("tik işareti.png");
+                    ImageView checkMarkImageView = new ImageView(checkMarkImage);
+                    StackPane popupContent = new StackPane();
+                    popupContent.getChildren().add(checkMarkImageView);
+                    popup.getContent().add(popupContent);
                 }
-                for (TextField tf : textFieldArrayList) {
-                    if (tf.getText().isEmpty() || tf.getText().isBlank()) {
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Warning");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Please fill in all fields.");
-                        alert.showAndWait();
-                        isWarningShown = true;
-                        return;
-                    }
-                }
-
-                Library.addBooks(pathField.getText());
                 addTab();
                // addPathButton.setAlignment(Pos.CENTER);
 
                 addPathButton.setDisable(true);
-                isWarningShown=false;
+
             }
         });
 
