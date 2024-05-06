@@ -111,14 +111,12 @@ public class Library {
             edited.setTags(input);
             JSON.updateJsonFile();
         }
-        UserInterface.showAlert();
     }
     public static  void editTranslators(String input,Book edited) {
         if (books.contains(edited)) {
             edited.setTranslators(input);
             JSON.updateJsonFile();
         }
-        UserInterface.showAlert();
     }
 
     //can be improved
