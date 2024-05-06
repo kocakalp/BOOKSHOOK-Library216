@@ -23,8 +23,8 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
-
         }
     }
     public static void editCover(Image cover, Book edited) {
@@ -40,6 +40,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -50,6 +51,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -59,6 +61,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -68,6 +71,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else {
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -77,6 +81,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else {
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -86,6 +91,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -95,6 +101,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -104,6 +111,7 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
@@ -114,29 +122,27 @@ public class Library {
             JSON.updateJsonFile();
             return true;
         }else{
+            UserInterface.showAlert();
             return false;
         }
     }
-
     public static  boolean editTags(String input,Book edited) {
-        List<String> tagList = Arrays.asList(input.split("\\s*,\\s*"));
-        if (books.contains(edited)&& edited.isValidTags(input)) {
-            edited.setTags(String.valueOf(tagList));
+        if (books.contains(edited)) {
+            edited.setTags(input);
             JSON.updateJsonFile();
             return true;
-        }else{
-            return false;
         }
+        UserInterface.showAlert();
+        return false;
     }
     public static  boolean editTranslators(String input,Book edited) {
-        List<String> translatorList = Arrays.asList(input.split("\\s*,\\s*"));
-        if (books.contains(edited)&& edited.isValidTranslators(input)) {
-            edited.setTranslators(String.valueOf(translatorList));
+        if (books.contains(edited)) {
+            edited.setTranslators(input);
             JSON.updateJsonFile();
             return true;
-        }else{
-            return false;
         }
+        UserInterface.showAlert();
+        return false;
     }
 
     //can be improved

@@ -457,78 +457,36 @@ public class UserInterface extends Application {
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(150);
         tagColumn.setReorderable(false);
-        tagColumn.setStyle("-fx-alignment: CENTER_LEFT;");
-        tagColumn.setMaxWidth(170);
-        tagColumn.setMinWidth(130);
-        tagColumn.setCellValueFactory(data ->{
-            List<String> tags = data.getValue().getTags();
-            return new SimpleStringProperty(tags != null ? String.join(", ", tags) : "");
-        });
-        tagColumn.setCellFactory(column -> new TableCellValidation());
+        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
+        tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
+        tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tagColumn.setOnEditCommit(event -> {
-            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            boolean success = Library.editTags(event.getNewValue(), editedBook);
-
-            if (success) {
-                table.refresh();
-            }else{
-                showAlert("Warning!","Invalid Input!Please try again...");
-                if (event.getOldValue() != null && !event.getOldValue().isEmpty()) {
-                    List<String> oldTags = Arrays.asList(event.getOldValue().split("\\s*,\\s*"));
-                    editedBook.setTags(String.valueOf(oldTags));
-                } else {
-                     //editedBook.setTags(new ArrayList<>());
-                } table.refresh();
-            }
-
+            Library.editTags(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         // new for author
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
         authorColumn.setReorderable(false);
-        authorColumn.setStyle("-fx-alignment: CENTER_LEFT;");
-        authorColumn.setMaxWidth(130);
-        authorColumn.setMinWidth(90);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
-        authorColumn.setCellFactory(column -> new TableCellValidation());
+        authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         authorColumn.setOnEditCommit(event -> {
-            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            boolean success = Library.editAuthor(event.getNewValue(), editedBook);
-
-            if (success) {
-                table.refresh();
-            }else{
-                showAlert("Warning!","Invalid Input!Please try again...");
-                editedBook.setTitle(event.getOldValue());
-                table.refresh();
-            }
-
+            Library.editAuthor(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         // new for publisher
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(120);
         publisherColumn.setReorderable(false);
-        publisherColumn.setStyle("-fx-alignment: CENTER_LEFT;");
-        publisherColumn.setMaxWidth(140);
-        publisherColumn.setMinWidth(100);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
-        publisherColumn.setCellFactory(column -> new TableCellValidation());
+        publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         publisherColumn.setOnEditCommit(event -> {
-            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            boolean success = Library.editPublisher(event.getNewValue(), editedBook);
-
-            if (success) {
-                table.refresh();
-            }else{
-                showAlert("Warning!","Invalid Input!Please try again...");
-                editedBook.setPublisher(event.getOldValue());
-                table.refresh();
-            }
-
+            Library.editPublisher(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         TableColumn<Book, String> dateColumn = new TableColumn<>("Date");
@@ -595,78 +553,35 @@ public class UserInterface extends Application {
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
         subtitleColumn.setPrefWidth(105);
         subtitleColumn.setReorderable(false);
-        subtitleColumn.setStyle("-fx-alignment: CENTER_LEFT;");
-        subtitleColumn.setMaxWidth(125);
-        subtitleColumn.setMinWidth(85);
         subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
         subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
-        subtitleColumn.setCellFactory(column -> new TableCellValidation());
+        subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         subtitleColumn.setOnEditCommit(event -> {
-            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            boolean success = Library.editSubtitle(event.getNewValue(), editedBook);
-
-            if (success) {
-                table.refresh();
-            }else{
-                showAlert("Warning!","Invalid Input!Please try again...");
-                editedBook.setSubtitle(event.getOldValue());
-                table.refresh();
-            }
-
+            Library.editSubtitle(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         // new for language
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
         languageColumn.setPrefWidth(110);
         languageColumn.setReorderable(false);
-        languageColumn.setStyle("-fx-alignment: CENTER_LEFT;");
-        languageColumn.setMaxWidth(130);
-        languageColumn.setMinWidth(90);
         languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
         languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
-        languageColumn.setCellFactory(column -> new TableCellValidation());
+        languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         languageColumn.setOnEditCommit(event -> {
-            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            boolean success = Library.editLanguage(event.getNewValue(), editedBook);
-
-            if (success) {
-                table.refresh();
-            }else{
-                showAlert("Warning!","Invalid Input!Please try again...");
-                editedBook.setLanguage(event.getOldValue());
-                table.refresh();
-            }
-
+            Library.editLanguage(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
-
         // new for translator
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setReorderable(false);
-        translatorColumn.setStyle("-fx-alignment: CENTER_LEFT;");
-        translatorColumn.setMaxWidth(120);
-        translatorColumn.setMinWidth(80);
-        translatorColumn.setCellValueFactory(data ->{
-            List<String> translators = data.getValue().getTranslators();
-            return new SimpleStringProperty(translators != null ? String.join(", ",translators) : "");
-        });
-        translatorColumn.setCellFactory(column -> new TableCellValidation());
+        translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
+        translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
+        translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         translatorColumn.setOnEditCommit(event -> {
-            Book editedBook = event.getTableView().getItems().get(event.getTablePosition().getRow());
-            boolean success = Library.editTranslators(event.getNewValue(), editedBook);
-
-            if (success) {
-                table.refresh();
-            }else{
-                showAlert("Warning!","Invalid Input!Please try again...");
-                if (event.getOldValue() != null && !event.getOldValue().isEmpty()) {
-                    List<String> oldTranslators = Arrays.asList(event.getOldValue().split("\\s*,\\s*"));
-                    editedBook.setTranslators(String.valueOf(oldTranslators));
-                }else {
-                    //editedBook.setTranslators(String.valueOf(new ArrayList<>()));
-                } table.refresh();
-            }
-
+            Library.editTranslators(event.getNewValue(),event.getTableView().getItems().get(event.getTablePosition().getRow()));
+            table.refresh();
         });
 
         table.getColumns().addAll(titleColumn,tagColumn,subtitleColumn,authorColumn,publisherColumn,dateColumn,isbnColumn,editionColumn,languageColumn,translatorColumn,ratingColumn);
@@ -967,11 +882,11 @@ private boolean isWarningShown=false;
         }
     }
     //show alert
-    private void showAlert(String input, String content) {
+    public static void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(input);
+        alert.setTitle("Warning!");
         alert.setHeaderText(null);
-        alert.setContentText(content);
+        alert.setContentText("Invalid Input!Please try again...");
         alert.showAndWait();
     }
     }

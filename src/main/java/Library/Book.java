@@ -214,7 +214,7 @@ public class Book implements Comparable<Book>  {
     }
     public  Boolean isValidAuthor(String input) {
         try {
-            return input != null && !input.isBlank()&& input.matches("[^\\d]*");
+            return input != null && !input.isBlank();
         } catch(Exception E){
             return false;
         }
