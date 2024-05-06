@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
-
+    private ArrayList<Book> exportedBooks = new ArrayList();
     //Edit methods
 
     public static boolean editCoverPath(String input, Book edited) {
@@ -169,6 +169,15 @@ public class Library {
         JSON.removeBook(removed);
     }
 
+    public void addExportedBook(Book book) {
+       if (!exportedBooks.contains(book))exportedBooks.add(book);
+    }
+
+    public void exportBook(String filePath) {
+        if (filePath.isBlank() || filePath.equals("mainJson.json")) System.out.println("invalid fileName");
+        JSON.exportJsonFile(filePath,exportedBooks);
+        exportedBooks.clear();
+    }
 }
 
 

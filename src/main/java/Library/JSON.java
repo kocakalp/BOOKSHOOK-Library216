@@ -59,6 +59,7 @@ public class JSON {
         }
     }
 
+
     public static void removeBook(Book b) {
         try {
             books.remove(b);
@@ -71,7 +72,11 @@ public class JSON {
     }
 
     public static void updateJsonFile() {
-        try (FileWriter f = new FileWriter(filePath)) {
+        exportJsonFile(filePath,books);
+    }
+
+    public static void exportJsonFile(String fileName,ArrayList<Book> books) {
+        try (FileWriter f = new FileWriter(fileName)) {
             f.write(gson.toJson(books));
         } catch (Exception e) {
             System.out.println("An error occurred while updating JSON file!!");
