@@ -861,9 +861,12 @@ private boolean isWarningShown=false;
 
 
         addPathButton.setOnAction(e -> { // when add button is pressed it's  the text field for a path if its empty its show a warning.
-            if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
+            boolean addField=true;
 
-                if(!isWarningShown) {
+            if (pathField.getText().isEmpty() || pathField.getText().isBlank()) {
+                addField= false;
+
+                if(!addField) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning");
                     alert.setHeaderText(null);
