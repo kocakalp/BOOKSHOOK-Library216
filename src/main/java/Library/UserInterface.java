@@ -250,6 +250,7 @@ public class UserInterface extends Application {
         TableColumn<Book, Void> delButtonColumn = new TableColumn<>("D");
         TableColumn<Book, Void> bookButtonColumn = new TableColumn<>("B");
         TableColumn<Book, Void> imageColumn = new TableColumn<>("Cover");
+        TableColumn<Book, Void> checkColumn = new TableColumn<>("C");
         delButtonColumn.setResizable(false);
         delButtonColumn.setReorderable(false);
         delButtonColumn.setPrefWidth(60);
@@ -259,6 +260,9 @@ public class UserInterface extends Application {
         imageColumn.setResizable(false);
         imageColumn.setReorderable(false);
         imageColumn.setPrefWidth(63);
+        checkColumn.setResizable(false);
+        checkColumn.setReorderable(false);
+        checkColumn.setPrefWidth(63);
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
 
@@ -365,11 +369,35 @@ public class UserInterface extends Application {
             }
         };
 
+        Callback<TableColumn<Book, Void>, TableCell<Book, Void>> checkCellFactory = param -> new TableCell<Book, Void>() {
+            private final CheckBox checkBox = new CheckBox();
+
+            {
+                checkBox.setOnAction(event -> {
+                    if (checkBox.isSelected()) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(checkBox);
+                }
+            }
+        };
+
         delButtonColumn.setCellFactory(delCellFactory);
         bookButtonColumn.setCellFactory(bookCellFactory);
+        checkColumn.setCellFactory(checkCellFactory);
 
         table.getColumns().add(delButtonColumn);
         table.getColumns().add(bookButtonColumn);
+        table.getColumns().add(checkColumn);
 
         //Add Cover
 
