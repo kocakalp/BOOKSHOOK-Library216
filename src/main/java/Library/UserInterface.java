@@ -374,9 +374,7 @@ public class UserInterface extends Application {
 
             {
                 checkBox.setOnAction(event -> {
-                    if (checkBox.isSelected()) {
-
-                    }
+                    Library.addExportedBook(getTableView().getItems().get(getIndex()));
                 });
             }
 

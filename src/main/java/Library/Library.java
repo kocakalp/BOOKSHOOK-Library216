@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
-    private ArrayList<Book> exportedBooks = new ArrayList();
+    private static ArrayList<Book> exportedBooks = new ArrayList();
     //Edit methods
 
     public static boolean editCoverPath(String input, Book edited) {
@@ -167,13 +167,18 @@ public class Library {
     }
     public static void removeBook(Book removed) {
         JSON.removeBook(removed);
+        exportedBooks.remove(removed);
     }
 
-    public void addExportedBook(Book book) {
-       if (!exportedBooks.contains(book))exportedBooks.add(book);
+    public static void addExportedBook(Book book) {
+       if (!exportedBooks.contains(book)){
+           exportedBooks.add(book);
+       } else {
+           exportedBooks.remove(book);
+       }
     }
 
-    public void exportBook(String filePath) {
+    public static void exportBook(String filePath) {
         if (filePath.isBlank() || filePath.equals("mainJson.json")) System.out.println("invalid fileName");
         JSON.exportJsonFile(filePath,exportedBooks);
         exportedBooks.clear();
