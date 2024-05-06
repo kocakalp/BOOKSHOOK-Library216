@@ -9,8 +9,13 @@ import java.util.List;
 
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
-    public static ArrayList<Book> exportedBooks = new ArrayList();
+    private static ArrayList<Book> exportedBooks = new ArrayList();
     //Edit methods
+
+
+    public static ArrayList<Book> getExportedBooks() {
+        return exportedBooks;
+    }
 
     public static boolean editCoverPath(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidCoverPath(input)) {
