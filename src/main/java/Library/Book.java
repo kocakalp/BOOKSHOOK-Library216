@@ -194,6 +194,14 @@ public class Book implements Comparable<Book>  {
     public void removeTranslator(String translator) {translators.remove(translator);}
 
     //Validation Methods.
+    private boolean isNumber(String input) {
+        try {
+            int i = Integer.parseInt(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     public boolean isValidCover(Image input) {
         return !input.isError();
     }
@@ -221,7 +229,7 @@ public class Book implements Comparable<Book>  {
     }
     public  Boolean isValidLanguage(String input) {
         try {
-            return input != null && !input.isBlank();
+            return input != null && !input.isBlank() && !isNumber(input);
         } catch(Exception E){
             return false;
         }
@@ -236,7 +244,7 @@ public class Book implements Comparable<Book>  {
     }
     public  boolean isValidPublisher(String input) {
         try {
-            return input != null && !input.isBlank();
+            return input != null && !input.isBlank() && !isNumber(input);
         } catch(Exception E){
             return false;
         }
