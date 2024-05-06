@@ -376,7 +376,6 @@ public class UserInterface extends Application {
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> checkCellFactory = param -> new TableCell<Book, Void>() {
             private final CheckBox checkBox = new CheckBox();
 
-
             {
                 checkBox.setOnAction(event -> {
                     Library.addExportedBook(getTableView().getItems().get(getIndex()));
@@ -390,7 +389,7 @@ public class UserInterface extends Application {
                     setGraphic(null);
                 } else {
                     setGraphic(checkBox);
-                    if (Library.exportedBooks.contains(table.getItems().get(getIndex()))) {
+                    if (Library.getExportedBooks().contains(table.getItems().get(getIndex()))) {
                         checkBox.setSelected(true);
                     }
                 }
