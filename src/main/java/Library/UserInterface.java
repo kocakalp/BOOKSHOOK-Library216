@@ -262,7 +262,11 @@ public class UserInterface extends Application {
         imageColumn.setPrefWidth(63);
         checkColumn.setResizable(false);
         checkColumn.setReorderable(false);
-        checkColumn.setPrefWidth(63);
+        checkColumn.setPrefWidth(60);
+        delButtonColumn.setStyle("-fx-alignment: CENTER;");
+        bookButtonColumn.setStyle("-fx-alignment: CENTER;");
+        imageColumn.setStyle("-fx-alignment: CENTER;");
+        checkColumn.setStyle("-fx-alignment: CENTER;");
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> delCellFactory = param -> new TableCell<Book, Void>() {
             private final Button delButton = new Button();
 
@@ -441,6 +445,7 @@ public class UserInterface extends Application {
         titleColumn.setMaxWidth(170);
         titleColumn.setMinWidth(130);
         titleColumn.setReorderable(false);
+        titleColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTitle()));
         titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -453,6 +458,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(150);
         tagColumn.setReorderable(false);
+        tagColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         tagColumn.setMaxWidth(170);
         tagColumn.setMinWidth(130);
         tagColumn.setCellValueFactory(data ->{
@@ -482,6 +488,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
         authorColumn.setReorderable(false);
+        authorColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         authorColumn.setMaxWidth(130);
         authorColumn.setMinWidth(90);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
@@ -505,6 +512,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(120);
         publisherColumn.setReorderable(false);
+        publisherColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         publisherColumn.setMaxWidth(140);
         publisherColumn.setMinWidth(100);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
@@ -528,6 +536,7 @@ public class UserInterface extends Application {
         dateColumn.setPrefWidth(80);
         //dateColumn.setResizable(false);
         dateColumn.setReorderable(false);
+        dateColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         dateColumn.setMaxWidth(100);
         dateColumn.setMinWidth(60);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -542,6 +551,7 @@ public class UserInterface extends Application {
         isbnColumn.setPrefWidth(85);
         //isbnColumn.setResizable(false);
         isbnColumn.setReorderable(false);
+        isbnColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         isbnColumn.setMaxWidth(105);
         isbnColumn.setMinWidth(65);
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -556,6 +566,7 @@ public class UserInterface extends Application {
         editionColumn.setPrefWidth(65);
         //editionColumn.setResizable(false);
         editionColumn.setReorderable(false);
+        editionColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         editionColumn.setMaxWidth(85);
         editionColumn.setMinWidth(45);
         editionColumn.setCellValueFactory(new PropertyValueFactory<>("edition"));
@@ -570,6 +581,7 @@ public class UserInterface extends Application {
         ratingColumn.setPrefWidth(75);
         //ratingColumn.setResizable(false);
         ratingColumn.setReorderable(false);
+        ratingColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         ratingColumn.setMaxWidth(95);
         ratingColumn.setMinWidth(55);
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
@@ -584,6 +596,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
         subtitleColumn.setPrefWidth(105);
         subtitleColumn.setReorderable(false);
+        subtitleColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         subtitleColumn.setMaxWidth(125);
         subtitleColumn.setMinWidth(85);
         subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
@@ -607,6 +620,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
         languageColumn.setPrefWidth(110);
         languageColumn.setReorderable(false);
+        languageColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         languageColumn.setMaxWidth(130);
         languageColumn.setMinWidth(90);
         languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
@@ -630,6 +644,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setReorderable(false);
+        translatorColumn.setStyle("-fx-alignment: CENTER_LEFT;");
         translatorColumn.setMaxWidth(120);
         translatorColumn.setMinWidth(80);
         translatorColumn.setCellValueFactory(data ->{
@@ -663,7 +678,7 @@ public class UserInterface extends Application {
         vbox.setVgrow(table,Priority.ALWAYS);
 
 
-        Scene listscene = new Scene(vbox,1325,900);
+        Scene listscene = new Scene(vbox,1385,900);
         listStage.alwaysOnTopProperty();
         listStage.setScene(listscene);
         listStage.setTitle("Book List");
@@ -802,6 +817,7 @@ private boolean isWarningShown=false;
 
         Button selecthPathButton = new Button("SELECT PATH");
         selecthPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+        selecthPathButton.setPrefWidth(100);
         selecthPathButton.setOnMouseEntered(e -> selecthPathButton.setStyle("-fx-background-color: #a5d9be"));
         selecthPathButton.setOnMouseExited(e -> selecthPathButton.setStyle("-fx-background-color: #c4d5fc"));
         selecthPathButton.setOnAction(e -> { // when add button is pressed its opens file explorer
@@ -855,6 +871,7 @@ private boolean isWarningShown=false;
         //
         addPathButton.setAlignment(Pos.CENTER);
         addPathButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+        addPathButton.setPrefWidth(80);
         //
 
         addPathButton.setOnMouseEntered(e -> addPathButton.setStyle("-fx-background-color: #a5d9be"));
@@ -931,7 +948,7 @@ private boolean isWarningShown=false;
         vAdd.getChildren().addAll(addPathHbox);
 
 
-        Scene addScene = new Scene(vAdd, 700, 700);
+        Scene addScene = new Scene(vAdd, 650, 700);
 
         //setOnAction
         addStage.alwaysOnTopProperty();//It will always push POPUP to the top.
