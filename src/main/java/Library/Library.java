@@ -17,14 +17,12 @@ public class Library {
         return exportedBooks;
     }
 
-    public static boolean editCoverPath(String input, Book edited) {
+    public static void editCoverPath(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidCoverPath(input)) {
             edited.setCoverPath(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
     public static void editCover(Image cover, Book edited) {
@@ -34,115 +32,93 @@ public class Library {
         }
     }
 
-    public static boolean editTitle(String input, Book edited) {
+    public static void editTitle(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidTitle(input)) {
             edited.setTitle(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
 
-    public static boolean editAuthor(String input, Book edited) {
+    public static void editAuthor(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidAuthor(input)) {
             edited.setAuthor(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static boolean editPublisher(String input, Book edited) {
+    public static void editPublisher(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidPublisher(input)) {
             edited.setPublisher(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static boolean editDate(String input, Book edited) {
+    public static void editDate(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidDate(input)) {
             edited.setDate(input);
             JSON.updateJsonFile();
-            return true;
         }else {
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static boolean editLanguage(String input, Book edited) {
+    public static void editLanguage(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidLanguage(input)) {
             edited.setLanguage(input);
             JSON.updateJsonFile();
-            return true;
         }else {
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static boolean editIsbn(String input, Book edited) {
+    public static void editIsbn(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidISBN(input)) {
             edited.setIsbn(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static boolean editEdition(String input, Book edited) {
+    public static void editEdition(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidEdition(input)) {
             edited.setEdition(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static boolean editRating(String input, Book edited) {
+    public static void editRating(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidRating(input)) {
             edited.setRating(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
 
-    public static boolean editSubtitle(String input, Book edited) {
+    public static void editSubtitle(String input, Book edited) {
         if (books.contains(edited)&& edited.isValidSubtitle(input)) {
             edited.setSubtitle(input);
             JSON.updateJsonFile();
-            return true;
         }else{
             UserInterface.showAlert();
-            return false;
         }
     }
-    public static  boolean editTags(String input,Book edited) {
+    public static  void editTags(String input,Book edited) {
         if (books.contains(edited)) {
             edited.setTags(input);
             JSON.updateJsonFile();
-            return true;
         }
         UserInterface.showAlert();
-        return false;
     }
-    public static  boolean editTranslators(String input,Book edited) {
+    public static  void editTranslators(String input,Book edited) {
         if (books.contains(edited)) {
             edited.setTranslators(input);
             JSON.updateJsonFile();
-            return true;
         }
         UserInterface.showAlert();
-        return false;
     }
 
     //can be improved
@@ -173,8 +149,13 @@ public class Library {
     }
 
     //The addBook and remove book methods in the JSON class can be moved here directly.
-    public static void addBooks(String jsonFilePath) {
+    public static boolean addBooks(String jsonFilePath) {
+        int i = books.size();
         JSON.addBooks(jsonFilePath);
+        if (i == books.size()) {
+            return false;
+        }
+        return true;
     }
     public static void removeBook(Book removed) {
         JSON.removeBook(removed);
