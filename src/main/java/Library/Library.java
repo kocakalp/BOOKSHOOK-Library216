@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Library {
     private static final ArrayList<Book> books = JSON.getBooks();
-    private static ArrayList<Book> exportedBooks = new ArrayList();
+    public static ArrayList<Book> exportedBooks = new ArrayList();
     //Edit methods
 
     public static boolean editCoverPath(String input, Book edited) {
