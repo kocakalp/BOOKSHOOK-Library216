@@ -223,7 +223,17 @@ public class UserInterface extends Application {
 
                 "To edit the attributes of a book, simply double-click on the attribute itself. This action opens an edit text field where you can make your changes,\n" +
                 "followed by pressing the 'Enter' button to confirm.\n\n" +
-                "To change book cover, press the book button and select desired image ");
+
+                "To change book cover, press the book button and In the Book Cover tab,\n" +
+                " where the larger version of the book cover is displayed, you can change the cover image by clicking the SELECT COVER button located at the bottom.\n\n\n" +
+
+                "STAGE 4 - EXPORTING BOOKS\n\n" +
+
+                "To export books, start by selecting the books you want to export from the Book List using the checkbox located at the far right of each book entry.\n" +
+                "Then, click on the EXPORT button on the main interface. Next, choose the directory where you want to save the file from the file save menu that appears,\n" +
+                "enter a name for the file, and save it. The exported data will be saved as a JSON file in the selected directory.\n\n"
+
+        );
 
 
 
