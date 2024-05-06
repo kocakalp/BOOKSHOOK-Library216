@@ -190,7 +190,7 @@ public class Library {
     }
 
     public static void exportBook(String filePath) {
-        if (filePath.isBlank() || filePath.equals("mainJson.json")) System.out.println("invalid fileName");
+        if (filePath.isBlank() || filePath.equals("mainJson") || filePath.equals("mainJson.json")) System.out.println("invalid fileName");
         JSON.exportJsonFile(filePath,exportedBooks);
         exportedBooks.clear();
     }

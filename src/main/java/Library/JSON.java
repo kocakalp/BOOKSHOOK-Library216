@@ -18,7 +18,7 @@ public class JSON {
     private static final ArrayList<Book> books = new ArrayList<>();
     private static ObservableList<Book> data = UserInterface.getData();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
-    private static final String filePath = "mainJson.json";
+    private static final String filePath = "mainJson";
 
     //These two methods can be moved directly to the library class.
     public static void addBooks(String filePath) {
@@ -76,7 +76,7 @@ public class JSON {
     }
 
     public static void exportJsonFile(String fileName,ArrayList<Book> books) {
-        try (FileWriter f = new FileWriter(fileName)) {
+        try (FileWriter f = new FileWriter(fileName+".json")) {
             f.write(gson.toJson(books));
         } catch (Exception e) {
             System.out.println("An error occurred while updating JSON file!!");

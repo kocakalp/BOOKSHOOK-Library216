@@ -21,6 +21,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,8 +81,8 @@ public class UserInterface extends Application {
         HBox.setHgrow(searchBar,Priority.ALWAYS);
 
 
-        Region spacer1 = new Region();
-        spacer1.setPrefWidth(20); //Add a space 20 units wide
+        Region spacer = new Region();
+        spacer.setPrefWidth(20); //Add a space 20 units wide
 
         Button helpButton = new Button("?");
         helpButton.setStyle("-fx-background-radius: 50em; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px; -fx-background-color: #c4d5fc;");
@@ -92,9 +94,8 @@ public class UserInterface extends Application {
 
         hBox2.setAlignment(Pos.CENTER);
         HBox.setHgrow(searchBar,Priority.ALWAYS);
-        HBox.setHgrow(spacer1,Priority.ALWAYS);
         HBox.setHgrow(helpButton,Priority.ALWAYS);
-        hBox2.getChildren().addAll(searchBar,spacer1,helpButton);
+        hBox2.getChildren().addAll(searchBar,spacer,helpButton);
         hBox2.setPadding(new Insets(0, 35, 100, 35));
 
 
@@ -135,17 +136,37 @@ public class UserInterface extends Application {
         addButton.setOnAction(e -> addTab());
         addButton.setPrefSize(150,50);
 
-        spacer1 = new Region();
-        spacer1.setPrefWidth(250); //Add a space 100 units wide.
+        Region spacer1 = new Region();
+        spacer1.setPrefWidth(150); //Add a space 100 units wide.
         Region spacer2 = new Region();
-        spacer2.setPrefWidth(250); //Add a space 100 units wide.
+        spacer2.setPrefWidth(150); //Add a space 100 units wide.
 
-        hBox3.getChildren().addAll(searchButton,spacer1,searchTag,spacer2,addButton);
+
+        Region spacer3 = new Region();
+        spacer3.setPrefWidth(150);
+        Button exportButton = new Button();
+        exportButton.setText("EXPORT");
+        exportButton.setStyle("-fx-background-color: #c4d5fc"); //Set background color.
+        exportButton.setOnMouseEntered(e -> exportButton.setStyle("-fx-background-color: #a5d9be"));
+        exportButton.setOnMouseExited(e -> exportButton.setStyle("-fx-background-color: #c4d5fc"));
+        exportButton.setOnAction(e -> {
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Select Directory to save as a JSON File!");
+            File f = fc.showSaveDialog(stage);
+            try {
+                Library.exportBook(f.toPath().toString());
+                table.refresh();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        exportButton.setPrefSize(150,50);
+
+
+        hBox3.getChildren().addAll(searchButton,spacer1,searchTag,spacer2,addButton,spacer3,exportButton);
         hBox3.setAlignment(Pos.CENTER);
-
+        HBox.setHgrow(exportButton,Priority.ALWAYS);
         VBox.setVgrow(vbox1,Priority.ALWAYS);
-        HBox.setHgrow(vbox1,Priority.ALWAYS);
-
         vbox1.getChildren().addAll(hBox1,hBox2,hBox3);
 
         Scene scene = new Scene(vbox1, 1200, 800);
@@ -376,6 +397,7 @@ public class UserInterface extends Application {
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> checkCellFactory = param -> new TableCell<Book, Void>() {
             private final CheckBox checkBox = new CheckBox();
 
+
             {
                 checkBox.setOnAction(event -> {
                     Library.addExportedBook(getTableView().getItems().get(getIndex()));
@@ -393,6 +415,11 @@ public class UserInterface extends Application {
                         checkBox.setSelected(true);
                     }
                 }
+                Tooltip a =new Tooltip("To EXPORT the book, check the box");
+                a.setShowDelay(Duration.millis(3));
+                Font afont = new Font(10);
+                a.setFont(afont);
+                Tooltip.install(checkBox,a);
             }
         };
 
