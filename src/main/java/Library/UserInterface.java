@@ -376,6 +376,7 @@ public class UserInterface extends Application {
         Callback<TableColumn<Book, Void>, TableCell<Book, Void>> checkCellFactory = param -> new TableCell<Book, Void>() {
             private final CheckBox checkBox = new CheckBox();
 
+
             {
                 checkBox.setOnAction(event -> {
                     Library.addExportedBook(getTableView().getItems().get(getIndex()));
@@ -393,6 +394,11 @@ public class UserInterface extends Application {
                         checkBox.setSelected(true);
                     }
                 }
+                Tooltip a =new Tooltip("To EXPORT the book, check the box");
+                a.setShowDelay(Duration.millis(3));
+                Font afont = new Font(10);
+                a.setFont(afont);
+                Tooltip.install(checkBox,a);
             }
         };
 
