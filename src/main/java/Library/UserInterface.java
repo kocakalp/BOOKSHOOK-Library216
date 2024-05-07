@@ -822,7 +822,7 @@ public class UserInterface extends Application {
         pathField.setPrefWidth(250);
         //
         pathField.setAlignment(Pos.CENTER);
-        pathField.setPromptText("\"C:\\Users\\Bowie\\Desktop\\SpaceOddity.json\"");
+        pathField.setPromptText("C:\\Users\\Bowie\\Desktop\\SpaceOddity.json");
         Button addPathButton = new Button("ADD PATH");
         //
         addPathButton.setAlignment(Pos.CENTER);
