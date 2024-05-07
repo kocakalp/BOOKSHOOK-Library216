@@ -35,6 +35,7 @@ public class UserInterface extends Application {
     private Stage listStage = new Stage();
     private Stage addStage = new Stage();
     private Stage bookStage = new Stage();
+    private  Stage addStage2= new Stage();
     private static ObservableList<Book> data = FXCollections.observableArrayList();
     private static final ArrayList<Book> books = JSON.getBooks();
     private boolean searchAll = true;
@@ -852,14 +853,23 @@ public class UserInterface extends Application {
                     addTab();
                 }
             }else {
-                
+
                 if(Library.addBooks(pathField.getText())) {
-                    Popup popup = new Popup();
-                    Image checkMarkImage = new Image("tik işareti.png");
-                    ImageView checkMarkImageView = new ImageView(checkMarkImage);
-                    StackPane popupContent = new StackPane();
-                    popupContent.getChildren().add(checkMarkImageView);
-                    popup.getContent().add(popupContent);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Corect Path");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your path is added to libary");
+                    alert.showAndWait();
+
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Incorrect Path");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Unsuported path\n" +
+                                    "Tip: try enterting without quotation marks");
+
+                    alert.showAndWait();
                 }
                 addTab();
                // addPathButton.setAlignment(Pos.CENTER);
