@@ -183,6 +183,7 @@ public class UserInterface extends Application {
     //HelpMenu function for users to use the application without difficulty.
     public void helpMenu() {
         //V-box opened
+        helpStage.setResizable(false);
         VBox vHelp1 = new VBox();
         vHelp1.setAlignment(Pos.CENTER);
 
@@ -242,7 +243,7 @@ public class UserInterface extends Application {
         hHelp.getChildren().addAll(text);
 
         VBox.setVgrow(vHelp1,Priority.ALWAYS);
-        vHelp1.getChildren().addAll(text);
+        vHelp1.getChildren().addAll(hHelp);
 
         Scene helpScene = new Scene(vHelp1, 900, 900);
 
