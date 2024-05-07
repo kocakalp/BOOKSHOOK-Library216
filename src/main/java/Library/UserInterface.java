@@ -145,7 +145,14 @@ public class UserInterface extends Application {
         exportButton.setOnMouseEntered(e -> exportButton.setStyle("-fx-background-color: #a5d9be"));
         exportButton.setOnMouseExited(e -> exportButton.setStyle("-fx-background-color: #c4d5fc"));
         exportButton.setOnAction(e -> {
-            if (Library.getExportedBooks().isEmpty()) return;
+            if (Library.getExportedBooks().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Invalid request");
+                alert.setHeaderText(null);
+                alert.setContentText("No book selected to export.\n");
+                alert.showAndWait();
+                return;
+            }
             FileChooser fc = new FileChooser();
             fc.setTitle("Select Directory to save as a JSON File!");
             File f = fc.showSaveDialog(stage);
