@@ -211,14 +211,14 @@ public class Book implements Comparable<Book>  {
     public  boolean isValidDate(String input) {
         try{
             int i = Integer.parseInt(input);
-            return !input.isBlank() && i > 0;
+            return !input.isBlank() && i > 0 && signCheck(input);
         } catch(Exception E) {
             return false;
         }
     }
     public   boolean isValidISBN(String input) {
         try{
-            return isNumber(input) && !input.isBlank() && (input.length() == 13 || input.length() ==10);
+            return isNumber(input) && !input.isBlank() && (input.length() == 13 || input.length() ==10) && signCheck(input);
         } catch(Exception E) {
             return false;
         }
@@ -226,7 +226,7 @@ public class Book implements Comparable<Book>  {
     public  boolean isValidEdition(String input) {
         try{
             int i = Integer.parseInt(input);
-            return !input.isBlank() && i > 0;
+            return !input.isBlank() && i > 0 && signCheck(input);
         } catch(Exception E) {
             return false;
         }
@@ -241,7 +241,7 @@ public class Book implements Comparable<Book>  {
     public  boolean isValidRating(String input) {
         try {
             int i = Integer.parseInt(input);
-            return !input.isBlank() && (input.length() == 1) && (i >= 0 && i <= 5);
+            return !input.isBlank() && (input.length() == 1) && (i >= 0 && i <= 5) && signCheck(input);
         } catch (Exception E) {
             return false;
         }
@@ -278,6 +278,11 @@ public class Book implements Comparable<Book>  {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private boolean signCheck(String input) {
+        char sign = input.charAt(0);
+        return !(sign == '+' || sign == '-');
     }
 
     public String edit(){Scanner sc = new Scanner(System.in);return sc.nextLine();}
