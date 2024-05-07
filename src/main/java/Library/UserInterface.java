@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontSmoothingType;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Popup;
@@ -226,10 +227,9 @@ public class UserInterface extends Application {
                 "enter a name for the file, and save it. The exported data will be saved as a JSON file in the selected directory.\n\n"
 
         );
+        text.setFont(new Font(13));
 
-
-
-
+        HBox.setHgrow(text,Priority.ALWAYS);
         HBox.setHgrow(hHelp,Priority.ALWAYS);
         hHelp.getChildren().addAll(text);
 
@@ -471,7 +471,7 @@ public class UserInterface extends Application {
         TableColumn<Book, String> titleColumn = new TableColumn<>("Title");
         titleColumn.setPrefWidth(150);
         //titleColumn.setResizable(false);
-        titleColumn.setMaxWidth(170);
+        titleColumn.setMaxWidth(230);
         titleColumn.setMinWidth(130);
         titleColumn.setReorderable(false);
         titleColumn.setStyle("-fx-alignment: CENTER_LEFT;");
@@ -486,6 +486,9 @@ public class UserInterface extends Application {
         TableColumn<Book, String> authorColumn = new TableColumn<>("Author");
         authorColumn.setPrefWidth(110);
         authorColumn.setReorderable(false);
+        authorColumn.setStyle("-fx-alignment: CENTER_LEFT;");
+        authorColumn.setMaxWidth(130);
+        authorColumn.setMinWidth(90);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getAuthor()));
         authorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -497,6 +500,9 @@ public class UserInterface extends Application {
         TableColumn<Book, String> subtitleColumn = new TableColumn<>("Subtitle");
         subtitleColumn.setPrefWidth(105);
         subtitleColumn.setReorderable(false);
+        subtitleColumn.setStyle("-fx-alignment: CENTER_LEFT;");
+        subtitleColumn.setMaxWidth(150);
+        subtitleColumn.setMinWidth(85);
         subtitleColumn.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
         subtitleColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getSubtitle()));
         subtitleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -508,6 +514,9 @@ public class UserInterface extends Application {
         TableColumn<Book, String> publisherColumn = new TableColumn<>("Publisher");
         publisherColumn.setPrefWidth(120);
         publisherColumn.setReorderable(false);
+        publisherColumn.setStyle("-fx-alignment: CENTER_LEFT;");
+        publisherColumn.setMaxWidth(140);
+        publisherColumn.setMinWidth(100);
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         publisherColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getPublisher()));
         publisherColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -564,6 +573,9 @@ public class UserInterface extends Application {
         TableColumn<Book, String> languageColumn = new TableColumn<>("Language");
         languageColumn.setPrefWidth(110);
         languageColumn.setReorderable(false);
+        languageColumn.setStyle("-fx-alignment: CENTER_LEFT;");
+        languageColumn.setMaxWidth(130);
+        languageColumn.setMinWidth(90);
         languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
         languageColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getLanguage()));
         languageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -590,6 +602,9 @@ public class UserInterface extends Application {
         TableColumn<Book, String> tagColumn = new TableColumn<>("Tag");
         tagColumn.setPrefWidth(150);
         tagColumn.setReorderable(false);
+        tagColumn.setStyle("-fx-alignment: CENTER_LEFT;");
+        tagColumn.setMaxWidth(200);
+        tagColumn.setMinWidth(130);
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tags"));
         tagColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTagsAsString()));
         tagColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -601,6 +616,9 @@ public class UserInterface extends Application {
         TableColumn<Book, String> translatorColumn = new TableColumn<>("Translator");
         translatorColumn.setPrefWidth(100);
         translatorColumn.setReorderable(false);
+        translatorColumn.setStyle("-fx-alignment: CENTER_LEFT;");
+        translatorColumn.setMaxWidth(250);
+        translatorColumn.setMinWidth(80);
         translatorColumn.setCellValueFactory(new PropertyValueFactory<>("translators"));
         translatorColumn.setCellValueFactory(data1 -> new SimpleStringProperty(data1.getValue().getTranslatorAsString()));
         translatorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
