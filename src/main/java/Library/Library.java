@@ -88,9 +88,11 @@ public class Library {
         }
     }
     public static  void editTags(String input,Book edited) {
-        if (books.contains(edited)) {
+        if (books.contains(edited) && edited.isValidTags(input)) {
             edited.setTags(input);
             JSON.updateJsonFile();
+        } else {
+            UserInterface.showAlert();
         }
     }
     public static  void editTranslators(String input,Book edited) {

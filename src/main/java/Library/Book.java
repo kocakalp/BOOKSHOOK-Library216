@@ -165,6 +165,7 @@ public class Book implements Comparable<Book>  {
         for (String tag : tags) {
             addTag(tag);
         }
+        if (tags.isEmpty()) addTag("defaultTag");
     }
     public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
     public void removeTag(String tag) {tags.remove(tag);}
