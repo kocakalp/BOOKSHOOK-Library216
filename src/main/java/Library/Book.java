@@ -155,11 +155,8 @@ public class Book implements Comparable<Book>  {
         }
     }
     public void setCover(Image cover) {
-        Image image = new Image("default.png");
         if (isValidCover(cover)) {
             this.cover = cover;
-        } else {
-            setCover(image);
         }
     }
 

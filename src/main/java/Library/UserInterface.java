@@ -371,11 +371,13 @@ public class UserInterface extends Application {
                             fc.setTitle("Select Cover to open");
                             File f = fc.showOpenDialog(bookStage);
                             s[0] =(String.valueOf(f.toPath()));
-                            Library.editCoverPath(s[0],book);
-                            book.setCoverPath(s[0]);
-                            selectedBookView.setImage(book.getCover());
-                            Library.editCover(selectedBookView.getImage(),book);
-                            table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
+                            if (book.isValidCover(new Image(s[0]))) {
+                                Library.editCoverPath(s[0], book);
+                                book.setCoverPath(s[0]);
+                                selectedBookView.setImage(book.getCover());
+                                Library.editCover(selectedBookView.getImage(), book);
+                                table.refresh();//-----------------When the book cover changes, the thumbnail in the first column is refreshed.!!!!-------------
+                            }
                         });
                         HBox hBox2 = new HBox();
                         hBox2.setAlignment(Pos.CENTER);
