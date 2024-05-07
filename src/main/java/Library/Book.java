@@ -165,7 +165,6 @@ public class Book implements Comparable<Book>  {
         for (String tag : tags) {
             addTag(tag);
         }
-        if (this.tags.isEmpty()) addTag("defaultTag");
     }
     public void addTag(String tag) {if(isValidTags(tag) && !tags.contains(tag))tags.add(tag);}
     public void removeTag(String tag) {tags.remove(tag);}
@@ -294,7 +293,7 @@ public class Book implements Comparable<Book>  {
         return getTitle()+", "+getTagsAsString()+", "+getSubtitle()+", "+getAuthor()+", "+getPublisher()+", "+getDate()+", "+getIsbn()+", "+getEdition()+", "+getLanguage()+","+getTranslatorAsString()+", "+getRating();
     }
     public String getTagsAsString(){
-        if (tags.isEmpty()) return "";
+        if (tags.isEmpty()) addTag("defaultTag");
         StringBuilder tagsAsString = new StringBuilder();
         for (int i = 0; i < tags.size() - 1; i++) {
             tagsAsString.append(tags.get(i)).append(", ");
