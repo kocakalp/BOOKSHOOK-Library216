@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Locale;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -37,7 +38,7 @@ public class UserInterface extends Application {
     private Stage bookStage = new Stage();
     private  Stage addStage2= new Stage();
     private static ObservableList<Book> data = FXCollections.observableArrayList();
-    private static final ArrayList<Book> books = JSON.getBooks();
+    private static final LinkedList<Book> books = JSON.getBooks();
     private boolean searchAll = true;
     private boolean isWarningShown=false;
 
@@ -303,9 +304,7 @@ public class UserInterface extends Application {
             private final Button delButton = new Button();
 
             {
-                delButton.setOnAction(event -> {
-                    Library.removeBook(getTableView().getItems().remove(getIndex()));
-                });
+                delButton.setOnAction(event -> Library.removeBook(getTableView().getItems().remove(getIndex())));
             }
 
             @Override

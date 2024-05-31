@@ -4,10 +4,11 @@ package Library;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public  class SearchBar {
     private static final ObservableList<Book> data = UserInterface.getData();
-    private static final ArrayList<Book> books = JSON.getBooks();
+    private static final LinkedList<Book> books = JSON.getBooks();
 
     //şevval senin metodlar bozulmuş olabilir.
     //static ArrayList <Book> books = new ArrayList<>();

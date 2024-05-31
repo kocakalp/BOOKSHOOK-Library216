@@ -13,14 +13,15 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class JSON {
-    private static final ArrayList<Book> books = new ArrayList<>();
+    private static final LinkedList<Book> books = new LinkedList();
     private static final ObservableList<Book> data = UserInterface.getData();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Book.class,new BookAdapter()).create();
     private static final String filePath = "mainJson";
 
-    public static ArrayList<Book> getBooks() {return books;}
+    public static LinkedList<Book> getBooks() {return books;}
 
     //These two methods can be moved directly to the library class.
     public static void addBooks(String filePath) {
@@ -72,7 +73,7 @@ public class JSON {
     }
 
     public static void updateJsonFile() {exportJsonFile(filePath,books);}
-    public static void exportJsonFile(String fileName,ArrayList<Book> books) {
+    public static void exportJsonFile(String fileName,LinkedList<Book> books) {
         try (FileWriter f = new FileWriter(fileName+".json")) {
             f.write(gson.toJson(books));
         } catch (Exception e) {

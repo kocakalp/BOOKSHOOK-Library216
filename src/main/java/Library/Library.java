@@ -3,14 +3,15 @@ package Library;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Library {
-    private static final ArrayList<Book> books = JSON.getBooks();
-    private static final ArrayList<Book> exportedBooks = new ArrayList<>();
+    private static final LinkedList<Book> books = JSON.getBooks();
+    private static final LinkedList<Book> exportedBooks = new LinkedList<>();
     //Edit methods
 
 
-    public static ArrayList<Book> getExportedBooks() {
+    public static LinkedList<Book> getExportedBooks() {
         return exportedBooks;
     }
 
